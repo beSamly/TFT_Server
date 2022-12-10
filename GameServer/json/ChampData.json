@@ -1,0 +1,32 @@
+[
+    {
+        "Index": 1,
+        "DisplayName": "Rucian",
+        "Cost": 1,
+        "Amount": 50
+    },
+    {
+        "Index": 2,
+        "DisplayName": "Xaiya",
+        "Cost": 2,
+        "Amount": 40
+    },
+    {
+        "Index": 3,
+        "DisplayName": "Serapin",
+        "Cost": 3,
+        "Amount": 30
+    },
+    {
+        "Index": 4,
+        "DisplayName": "Nunu",
+        "Cost": 4,
+        "Amount": 20
+    },
+    {
+        "Index": 5,
+        "DisplayName": "Bard",
+        "Cost": 5,
+        "Amount": 10
+    }
+]

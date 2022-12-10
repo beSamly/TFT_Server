@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\System">
+      <UniqueIdentifier>{37440e80-76d5-4cad-a259-2ef69cf1b858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataSystem">
+      <UniqueIdentifier>{38f603b6-8fc8-4e0d-aa37-abf7e6b7b500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameSystem">
+      <UniqueIdentifier>{01ff9122-a870-4d0d-b159-35ee30fb2259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataSystem\JsonData">
+      <UniqueIdentifier>{27e39244-c72a-4029-a387-1f56627686ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataSystem\GameData">
+      <UniqueIdentifier>{b3b5217b-dcd2-4bfe-9596-f06b27b747da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameSystem\GameState">
+      <UniqueIdentifier>{92acc77c-d35a-4ccd-a34b-def8ffa5fa81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameSystem\InGame">
+      <UniqueIdentifier>{6f5909ea-b943-48d8-8e8d-f8ef071e1860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameSystem\InGameEvent">
+      <UniqueIdentifier>{c5d8fe8a-a1e3-490a-ac6c-ea902a37fab5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameSystem\Controller">
+      <UniqueIdentifier>{4a3f8f2a-158e-4fab-be79-66f73ed48b4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameSystem\Common">
+      <UniqueIdentifier>{ce2ea7c6-f987-4d84-a3e3-25d5c183059d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameSystem\Modifier">
+      <UniqueIdentifier>{0d385036-d7be-4656-8186-51ac4393f0e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameSystem\Command">
+      <UniqueIdentifier>{4997bb6e-1fdf-4ef2-9300-9fefa29b8838}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataSystem\Manager">
+      <UniqueIdentifier>{41a454f8-43df-42f5-bd81-4bf09b4e9ea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem">
+      <UniqueIdentifier>{d55356e4-4f4a-432a-9701-b056fee351b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\Interface">
+      <UniqueIdentifier>{c2097c82-c2cf-468a-8df3-7df420a53747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\Controller">
+      <UniqueIdentifier>{ae5c36e4-e1ba-40f6-a18e-b635d30ef5b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameSystem\Opereation">
+      <UniqueIdentifier>{63dac1f9-32a4-4e05-8f85-a06a470d1eaf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryHeader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSession.h">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketServer.h">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadSystem.h">
+      <Filter>Source Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkSystem.h">
+      <Filter>Source Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketController.h">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="TLS.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChampRelatedStruct.h">
+      <Filter>Source Files\DataSystem\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="ChampDataFactory.h">
+      <Filter>Source Files\DataSystem\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="DataSystem.h">
+      <Filter>Source Files\DataSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem.h">
+      <Filter>Source Files\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GameHost.h">
+      <Filter>Source Files\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStartedState.h">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameState.h">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="RoundStartedState.h">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="StandByState.h">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameEventHandler.h">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameMatch.h">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameMatchPool.h">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="InGamePlayer.h">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchHistory.h">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopProbability.h">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetFindUtil.h">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Bench.h">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Champion.h">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="ChampShop.h">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Field.h">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldMap.h">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="IInGameEvent.h">
+      <Filter>Source Files\GameSystem\InGameEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationController.h">
+      <Filter>Source Files\GameSystem\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillController.h">
+      <Filter>Source Files\GameSystem\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="StatController.h">
+      <Filter>Source Files\GameSystem\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="StateController.h">
+      <Filter>Source Files\GameSystem\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformController.h">
+      <Filter>Source Files\GameSystem\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Source Files\GameSystem\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="StatModifier.h">
+      <Filter>Source Files\GameSystem\Modifier</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Source Files\GameSystem\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandler.h">
+      <Filter>Source Files\GameSystem\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Source Files\DataSystem\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="IPacketHandler.h">
+      <Filter>Source Files\NetworkSystem\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IController.h">
+      <Filter>Source Files\NetworkSystem\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="GameController.h">
+      <Filter>Source Files\NetworkSystem\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerApp.h">
+      <Filter>Source Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalDamage.h">
+      <Filter>Source Files\GameSystem\Opereation</Filter>
+    </ClInclude>
+    <ClInclude Include="IOperation.h">
+      <Filter>Source Files\GameSystem\Opereation</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source Files\DataSystem\Manager</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSession.cpp">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketServer.cpp">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadSystem.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkSystem.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketController.cpp">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="TLS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChampDataFactory.cpp">
+      <Filter>Source Files\DataSystem\GameData</Filter>
+    </ClCompile>
+    <ClCompile Include="DataSystem.cpp">
+      <Filter>Source Files\DataSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem.cpp">
+      <Filter>Source Files\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GameHost.cpp">
+      <Filter>Source Files\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStartedState.cpp">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="IGameState.cpp">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="RoundStartedState.cpp">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="StandByState.cpp">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameEventHandler.cpp">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameMatch.cpp">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameMatchPool.cpp">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="InGamePlayer.cpp">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchHistory.cpp">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopProbability.cpp">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Bench.cpp">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Champion.cpp">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="ChampShop.cpp">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Field.cpp">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldMap.cpp">
+      <Filter>Source Files\GameSystem\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="IInGameEvent.cpp">
+      <Filter>Source Files\GameSystem\InGameEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="OperationController.cpp">
+      <Filter>Source Files\GameSystem\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillController.cpp">
+      <Filter>Source Files\GameSystem\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="StatController.cpp">
+      <Filter>Source Files\GameSystem\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="StateController.cpp">
+      <Filter>Source Files\GameSystem\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformController.cpp">
+      <Filter>Source Files\GameSystem\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Source Files\GameSystem\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="StatModifier.cpp">
+      <Filter>Source Files\GameSystem\Modifier</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Source Files\GameSystem\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandler.cpp">
+      <Filter>Source Files\GameSystem\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>Source Files\DataSystem\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="IPacketHandler.cpp">
+      <Filter>Source Files\NetworkSystem\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="IController.cpp">
+      <Filter>Source Files\NetworkSystem\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="GameController.cpp">
+      <Filter>Source Files\NetworkSystem\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerApp.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalDamage.cpp">
+      <Filter>Source Files\GameSystem\Opereation</Filter>
+    </ClCompile>
+    <ClCompile Include="IOperation.cpp">
+      <Filter>Source Files\GameSystem\Opereation</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\DataSystem\Manager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="json\ChampStatData.json">
+      <Filter>Source Files\DataSystem\JsonData</Filter>
+    </None>
+    <None Include="json\SkillData.json">
+      <Filter>Source Files\DataSystem\JsonData</Filter>
+    </None>
+    <None Include="json\ChampData.json">
+      <Filter>Source Files\DataSystem\JsonData</Filter>
+    </None>
+    <None Include="json\ChampSkillData.json">
+      <Filter>Source Files\DataSystem\JsonData</Filter>
+    </None>
+  </ItemGroup>
+</Project>

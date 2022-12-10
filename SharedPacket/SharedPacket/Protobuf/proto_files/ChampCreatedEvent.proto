@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package Protocol;
+
+import "ChampStat.proto";
+
+message ChampionCreatedEvent {
+  int32 championUid = 1;
+  ChampStat stat = 2;
+}

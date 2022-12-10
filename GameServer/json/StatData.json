@@ -1,0 +1,13 @@
+[
+    {
+        "Index": 1,
+        "Hp": 1,
+        "Mp": 1,
+        "PhysicalPower": 1,
+        "AbilityPower": 1,
+        "Armor": 1,
+        "MagicResistance": 1,
+        "MoveSpeed": 1,
+        "AttackSpeed": 1
+    }
+]

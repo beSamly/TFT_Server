@@ -1,0 +1,28 @@
+[
+  {
+    "Index": 1, 
+    "AniDuration": 1500, 
+
+    "SkillType": "FromChampion", 
+
+    "TriggerInfo": {
+      "Type": "Base", 
+      "Threshold": 1, 
+      "MaxTriggerCount": 1 
+    },
+    "Operations": [
+      {
+        "Type": "PhysicalDamage", 
+        "Value": 1,
+        "ExecuteTime": 400,
+        "Duration": 200, 
+
+        "TargetCondition": {
+          "Type": "EnemyWithinRange",
+          "Range": 3, 
+          "TargetNumber": 1
+        }
+      }
+    ]
+  }
+]

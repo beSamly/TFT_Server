@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Protobuf">
+      <UniqueIdentifier>{f910e9f5-8c1f-4119-9985-855f654e8753}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Protofiles">
+      <UniqueIdentifier>{cd5a422c-b0df-45a3-9f34-c3212cb8e4c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Packet">
+      <UniqueIdentifier>{bf792f4a-d834-4f7e-a6bd-dcf05a735c21}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\LoginRequest.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\LoginResponse.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\MatchRequest.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\MatchRequestResponse.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketId.cpp">
+      <Filter>Source Files\Packet</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\LoginRequest.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\LoginResponse.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\MatchRequest.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\MatchRequestResponse.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketId.h">
+      <Filter>Source Files\Packet</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

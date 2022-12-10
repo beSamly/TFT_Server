@@ -1,0 +1,30 @@
+[
+    {
+        "ChampIndex": 1,
+        "StatList": [
+            {
+                "Star": 1,
+                "AttackDamage": 10,
+                "AbilityPower": 10,
+                "Armor": 10,
+                "MagicResistence": 10,
+                "AttackSpeed": 1,
+                "MoveSpeed": 1
+            }
+        ]
+    },
+    {
+        "ChampIndex": 2,
+        "StatList": [
+            {
+                "Star": 1,
+                "AttackDamage": 10,
+                "AbilityPower": 10,
+                "Armor": 10,
+                "MagicResistence": 10,
+                "AttackSpeed": 1,
+                "MoveSpeed": 1
+            }
+        ]
+    }
+]

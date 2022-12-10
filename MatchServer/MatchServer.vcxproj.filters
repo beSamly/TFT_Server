@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\MatchSystem">
+      <UniqueIdentifier>{5bc64754-bf56-4962-9e0b-420fb0797eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem">
+      <UniqueIdentifier>{d72e41c0-4b92-4106-ac1a-bbcf9bf14366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\Controller">
+      <UniqueIdentifier>{efe708fc-5f01-4370-a3bc-607cc7abd58a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\Interface">
+      <UniqueIdentifier>{bacca576-75de-4a87-9dea-35bad83cb9c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\Network">
+      <UniqueIdentifier>{f04bfc7e-0a75-4fd1-8477-e5a7e46bc84b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ThreadSystem">
+      <UniqueIdentifier>{e57c6463-25d6-4125-bebf-708dc24ebe99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data">
+      <UniqueIdentifier>{ed48373a-32ec-4b9f-8d48-04ccb30878d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Command">
+      <UniqueIdentifier>{da9ca62d-6dc0-4d06-affd-e25e414dd974}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchSystem.cpp">
+      <Filter>Source Files\MatchSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkSystem.cpp">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchWaitPlayer.cpp">
+      <Filter>Source Files\MatchSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="PendingMatch.cpp">
+      <Filter>Source Files\MatchSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchController.cpp">
+      <Filter>Source Files\NetworkSystem\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketController.cpp">
+      <Filter>Source Files\NetworkSystem\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="IController.cpp">
+      <Filter>Source Files\NetworkSystem\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="IPacketHandler.cpp">
+      <Filter>Source Files\NetworkSystem\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketServer.cpp">
+      <Filter>Source Files\NetworkSystem\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSession.cpp">
+      <Filter>Source Files\NetworkSystem\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadSystem.cpp">
+      <Filter>Source Files\ThreadSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="TLS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandler.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MatchSystem.h">
+      <Filter>Source Files\MatchSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkSystem.h">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchWaitPlayer.h">
+      <Filter>Source Files\MatchSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="PendingMatch.h">
+      <Filter>Source Files\MatchSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchController.h">
+      <Filter>Source Files\NetworkSystem\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketController.h">
+      <Filter>Source Files\NetworkSystem\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="IPacketHandler.h">
+      <Filter>Source Files\NetworkSystem\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IController.h">
+      <Filter>Source Files\NetworkSystem\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryHeader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSession.h">
+      <Filter>Source Files\NetworkSystem\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketServer.h">
+      <Filter>Source Files\NetworkSystem\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerApp.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadSystem.h">
+      <Filter>Source Files\ThreadSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Source Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TLS.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandler.h">
+      <Filter>Source Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Source Files\Command</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".clang-format">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

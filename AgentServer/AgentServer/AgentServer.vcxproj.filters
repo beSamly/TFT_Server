@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{028feb9f-edd0-4016-b652-dbee5c5321ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{a97dda10-70a5-4135-9dac-8168156654ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Thread">
+      <UniqueIdentifier>{5885a67c-5cf9-403d-8cec-723067a32f5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem">
+      <UniqueIdentifier>{50eb5868-56e7-4a97-8540-db2092140efc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketHandler">
+      <UniqueIdentifier>{a5d79e22-71bf-457b-8413-4414e6ee9a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketHandler\Auth">
+      <UniqueIdentifier>{4a8487e6-bb9d-40cd-855f-0b3955c9967a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketHandler\Interface">
+      <UniqueIdentifier>{1d8e92e8-6427-4247-88a5-c066a5e76b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketHandler\Common">
+      <UniqueIdentifier>{1f1201b5-989d-4815-9af3-8ebbebc1a78e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\Archive">
+      <UniqueIdentifier>{6220dfa7-94c8-4142-9089-61ec9bfa1429}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Login.cpp">
+      <Filter>Source Files\NetworkSystem\PacketHandler\Auth</Filter>
+    </ClCompile>
+    <ClCompile Include="IPacketHandler.cpp">
+      <Filter>Source Files\NetworkSystem\PacketHandler\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketHandler\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadSystem.cpp">
+      <Filter>Source Files\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="TLS.cpp">
+      <Filter>Source Files\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="InputValidator.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="IController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketHandler\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="AuthController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedMutexGuard.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProxyManager.cpp">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSession.cpp">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketServerArch.cpp">
+      <Filter>Source Files\NetworkSystem\Archive</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSessionArch.cpp">
+      <Filter>Source Files\NetworkSystem\Archive</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketServer.cpp">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Login.h">
+      <Filter>Source Files\NetworkSystem\PacketHandler\Auth</Filter>
+    </ClInclude>
+    <ClInclude Include="IPacketHandler.h">
+      <Filter>Source Files\NetworkSystem\PacketHandler\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketController.h">
+      <Filter>Source Files\NetworkSystem\PacketHandler\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadSystem.h">
+      <Filter>Source Files\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="TLS.h">
+      <Filter>Source Files\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="InputValidator.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Singleton.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchController.h">
+      <Filter>Source Files\NetworkSystem\PacketHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="IController.h">
+      <Filter>Source Files\NetworkSystem\PacketHandler\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="AuthController.h">
+      <Filter>Source Files\NetworkSystem\PacketHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugController.h">
+      <Filter>Source Files\NetworkSystem\PacketHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMutexGuard.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryHeader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerApp.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProxyManager.h">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSession.h">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketServerArch.h">
+      <Filter>Source Files\NetworkSystem\Archive</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSessionArch.h">
+      <Filter>Source Files\NetworkSystem\Archive</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketServer.h">
+      <Filter>Source Files\NetworkSystem</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SocketServer.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="json1.bin" />
+    <None Include=".clang-format" />
+  </ItemGroup>
+</Project>

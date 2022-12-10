@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package Protocol;
+
+message BuyChampionReq {
+  int32 championUid = 1;
+}
