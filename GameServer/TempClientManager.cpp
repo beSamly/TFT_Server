@@ -1,0 +1,37 @@
+#include "pch.h"
+#include "TempClientManager.h"
+#include "Player.h"
+
+void TempClientManager::AddClient(sptr<AsioSession> client)
+{
+    WRITE_LOCK;
+    //client->GetPlayer()->playerId = tempPlayerId;
+    clientMap->emplace(tempPlayerId, client);
+    tempPlayerId++;
+    return;
+}
+
+void TempClientManager::RemovePlayer(int playerId) { clientMap->erase(playerId); }
+
+void TempClientManager::Update()
+{
+    /*Vector<PlayerRef> copiedPlayers;
+    {
+            WRITE_LOCK;
+            for (auto const& [accountId, player] : *_players) {
+                    copiedPlayers.push_back(player);
+            }
+    }
+
+    for (auto& player : copiedPlayers) {
+            player->Update();
+    }*/
+}
+
+TempClientManager::TempClientManager()
+{
+    /*auto job = MakeShared<Job>([this]() {
+            this->Update();
+    });
+    Scheduler::SetInterval(job);*/
+}

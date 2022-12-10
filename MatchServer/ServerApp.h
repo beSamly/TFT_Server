@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "ThreadSystem.h"
 #include "NetworkSystem.h"
+#include "DataSystem.h"
 
 class ServerApp
 {
@@ -9,12 +10,13 @@ public:
 	sptr<ThreadSystem> threadSystem;
 	sptr<MatchSystem> matchSystem;
 	sptr<NetworkSystem> networkSystem;
+    sptr<DataSystem> dataSystem;
 
-public:
+    public:
 	ServerApp();
 
 public:
-	void StartSocketServer();
+	void StartNetworkSystem();
 	void StartMatchSystem();
 	void JoinThread() { threadSystem->Join(); };
 

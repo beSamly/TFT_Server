@@ -175,6 +175,7 @@
     <ClInclude Include="StateController.h" />
     <ClInclude Include="StatModifier.h" />
     <ClInclude Include="TargetFindUtil.h" />
+    <ClInclude Include="TempClientManager.h" />
     <ClInclude Include="ThreadSystem.h" />
     <ClInclude Include="TLS.h" />
     <ClInclude Include="TransformController.h" />
@@ -221,12 +222,14 @@
     <ClCompile Include="StatController.cpp" />
     <ClCompile Include="StateController.cpp" />
     <ClCompile Include="StatModifier.cpp" />
+    <ClCompile Include="TempClientManager.cpp" />
     <ClCompile Include="ThreadSystem.cpp" />
     <ClCompile Include="TLS.cpp" />
     <ClCompile Include="TransformController.cpp" />
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".clang-format" />
     <None Include="json\ChampData.json" />
     <None Include="json\ChampSkillData.json" />
     <None Include="json\ChampStatData.json" />

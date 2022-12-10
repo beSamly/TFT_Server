@@ -31,8 +31,8 @@
     <ClCompile Include="Protobuf\MatchRequestResponse.pb.cc">
       <Filter>Source Files\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="PacketId.cpp">
-      <Filter>Source Files\Packet</Filter>
+    <ClCompile Include="ProxyPacketId.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,7 +51,20 @@
     <ClInclude Include="Protobuf\MatchRequestResponse.pb.h">
       <Filter>Source Files\Protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="PacketId.h">
+    <ClInclude Include="PacketId_CL_AG.h">
+      <Filter>Source Files\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="ProxyPacketId.h" />
+    <ClInclude Include="PacketId_AG_MT.h">
+      <Filter>Source Files\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketId_MT_GM.h">
+      <Filter>Source Files\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketId_AG_GM.h">
+      <Filter>Source Files\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketId_CL_GM.h">
       <Filter>Source Files\Packet</Filter>
     </ClInclude>
   </ItemGroup>

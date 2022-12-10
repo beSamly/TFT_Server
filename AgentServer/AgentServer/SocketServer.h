@@ -8,20 +8,10 @@ using std::shared_ptr;
 
 class SocketServer : public AsioBaseSocketServer
 {
-    public:
-        SocketServer(sptr<asio::io_context> context, int port);
+public:
+    SocketServer(sptr<asio::io_context> context, int port);
+    shared_ptr<AsioSession> CreateSession() override;
 
-    public:
-        void StartAccept();
-        void OnAccept(sptr<AsioSession> session) override;
-        sptr<AsioSession> CreateSession() override;
-        void RunIoContext();
-
-    protected:
-        sptr<asio::io_context> ioContext;
-
-    public:
-        std::function<void(sptr<ClientSession>, BYTE*, int32)> OnClientRecv;
-        std::function<void(sptr<ClientSession>)> OnClientDisconnect;
-        std::function<void(sptr<ClientSession>)> OnClientConnect;
+protected:
+    sptr<asio::io_context> ioContext;
 };

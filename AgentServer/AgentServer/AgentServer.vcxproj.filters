@@ -23,14 +23,32 @@
     <Filter Include="Source Files\NetworkSystem\PacketHandler\Auth">
       <UniqueIdentifier>{4a8487e6-bb9d-40cd-855f-0b3955c9967a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\NetworkSystem\PacketHandler\Interface">
-      <UniqueIdentifier>{1d8e92e8-6427-4247-88a5-c066a5e76b0c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\NetworkSystem\PacketHandler\Common">
       <UniqueIdentifier>{1f1201b5-989d-4815-9af3-8ebbebc1a78e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\NetworkSystem\Archive">
       <UniqueIdentifier>{6220dfa7-94c8-4142-9089-61ec9bfa1429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController">
+      <UniqueIdentifier>{ac2003c3-6565-4f6c-9f6e-47eb9bad5294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\Interface">
+      <UniqueIdentifier>{1d8e92e8-6427-4247-88a5-c066a5e76b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\PacketController">
+      <UniqueIdentifier>{9b3e3b43-5bd9-4ffd-9b20-bb274260f09f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\PacketController\Client">
+      <UniqueIdentifier>{8f084118-2c7f-4933-a2d7-289bdaf48205}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\PacketController\Client\Controller">
+      <UniqueIdentifier>{a36da698-b6c7-44e6-8ac6-4e6258488e55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataSystem">
+      <UniqueIdentifier>{3fdd86d8-9d79-4ac3-b194-5850ebe60c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\PacketController\MatchServer">
+      <UniqueIdentifier>{c2eccf39-1fdc-41b2-9e23-7ad13d21be1a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -44,10 +62,7 @@
       <Filter>Source Files\NetworkSystem\PacketHandler\Auth</Filter>
     </ClCompile>
     <ClCompile Include="IPacketHandler.cpp">
-      <Filter>Source Files\NetworkSystem\PacketHandler\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="PacketController.cpp">
-      <Filter>Source Files\NetworkSystem\PacketHandler\Common</Filter>
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
     </ClCompile>
     <ClCompile Include="PlayerManager.cpp">
       <Filter>Source Files\Game</Filter>
@@ -64,14 +79,8 @@
     <ClCompile Include="Singleton.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="MatchController.cpp">
-      <Filter>Source Files\NetworkSystem\PacketHandler</Filter>
-    </ClCompile>
     <ClCompile Include="IController.cpp">
-      <Filter>Source Files\NetworkSystem\PacketHandler\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="AuthController.cpp">
-      <Filter>Source Files\NetworkSystem\PacketHandler</Filter>
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Game</Filter>
@@ -79,17 +88,11 @@
     <ClCompile Include="NetworkSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DebugController.cpp">
-      <Filter>Source Files\NetworkSystem\PacketHandler</Filter>
-    </ClCompile>
     <ClCompile Include="SharedMutexGuard.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="ServerApp.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProxyManager.cpp">
-      <Filter>Source Files\NetworkSystem</Filter>
     </ClCompile>
     <ClCompile Include="ClientSession.cpp">
       <Filter>Source Files\NetworkSystem</Filter>
@@ -103,6 +106,27 @@
     <ClCompile Include="SocketServer.cpp">
       <Filter>Source Files\NetworkSystem</Filter>
     </ClCompile>
+    <ClCompile Include="IPacketController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientPacketController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\PacketController\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="CAuthController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\PacketController\Client\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\PacketController\Client\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="CMatchController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\PacketController\Client\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="DataSystem.cpp">
+      <Filter>Source Files\DataSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchServerPacketController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\PacketController\MatchServer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -112,10 +136,7 @@
       <Filter>Source Files\NetworkSystem\PacketHandler\Auth</Filter>
     </ClInclude>
     <ClInclude Include="IPacketHandler.h">
-      <Filter>Source Files\NetworkSystem\PacketHandler\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="PacketController.h">
-      <Filter>Source Files\NetworkSystem\PacketHandler\Common</Filter>
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
       <Filter>Source Files\Game</Filter>
@@ -133,20 +154,11 @@
     <ClInclude Include="Singleton.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="MatchController.h">
-      <Filter>Source Files\NetworkSystem\PacketHandler</Filter>
-    </ClInclude>
     <ClInclude Include="IController.h">
-      <Filter>Source Files\NetworkSystem\PacketHandler\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="AuthController.h">
-      <Filter>Source Files\NetworkSystem\PacketHandler</Filter>
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Source Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugController.h">
-      <Filter>Source Files\NetworkSystem\PacketHandler</Filter>
     </ClInclude>
     <ClInclude Include="SharedMutexGuard.h">
       <Filter>Source Files\Utils</Filter>
@@ -156,9 +168,6 @@
     </ClInclude>
     <ClInclude Include="ServerApp.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProxyManager.h">
-      <Filter>Source Files\NetworkSystem</Filter>
     </ClInclude>
     <ClInclude Include="ClientSession.h">
       <Filter>Source Files\NetworkSystem</Filter>
@@ -171,6 +180,27 @@
     </ClInclude>
     <ClInclude Include="SocketServer.h">
       <Filter>Source Files\NetworkSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="IPacketController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientPacketController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\PacketController\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="CMatchController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\PacketController\Client\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="CAuthController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\PacketController\Client\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\PacketController\Client\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="DataSystem.h">
+      <Filter>Source Files\DataSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchServerPacketController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\PacketController\MatchServer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -176,6 +176,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ProxyManager.cpp" />
     <ClCompile Include="RecvBuffer.cpp" />
     <ClCompile Include="SendBuffer.cpp" />
     <ClCompile Include="ServerCoreLibrary.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Packet.h" />
     <ClInclude Include="PacketHeader.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="ProxyManager.h" />
     <ClInclude Include="RecvBuffer.h" />
     <ClInclude Include="SendBuffer.h" />
     <ClInclude Include="Session.h" />

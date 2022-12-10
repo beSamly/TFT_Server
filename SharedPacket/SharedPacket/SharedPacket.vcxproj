@@ -158,7 +158,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="PacketId.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -169,14 +168,20 @@
     <ClCompile Include="Protobuf\LoginResponse.pb.cc" />
     <ClCompile Include="Protobuf\MatchRequest.pb.cc" />
     <ClCompile Include="Protobuf\MatchRequestResponse.pb.cc" />
+    <ClCompile Include="ProxyPacketId.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PacketId.h" />
+    <ClInclude Include="PacketId_CL_AG.h" />
+    <ClInclude Include="PacketId_AG_GM.h" />
+    <ClInclude Include="PacketId_AG_MT.h" />
+    <ClInclude Include="PacketId_CL_GM.h" />
+    <ClInclude Include="PacketId_MT_GM.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Protobuf\LoginRequest.pb.h" />
     <ClInclude Include="Protobuf\LoginResponse.pb.h" />
     <ClInclude Include="Protobuf\MatchRequest.pb.h" />
     <ClInclude Include="Protobuf\MatchRequestResponse.pb.h" />
+    <ClInclude Include="ProxyPacketId.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,17 +1,12 @@
 #pragma once
 #include "pch.h"
 #include "AsioSession.h"
-
-//#include <thread>
-//#include <cstdlib>
-//#include <iostream>
-//#include <memory>
-//#include <utility>
 #include <asio/io_context.hpp>
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
 
 #include "asio.hpp"
+#include "PacketHeader.h"
 
 AsioSession::AsioSession(shared_ptr<asio::io_context> context)
     : socket(*context), resolver(*context), recvBuffer(MAX_LENGTH)
@@ -89,7 +84,39 @@ void AsioSession::Connect(string address, int port)
                              }
                              else
                              {
-                                 std::cout << "connecting error : " << ec << std::endl;
+                                 std::cout << "[AsionSession] connection failed. error = " << ec << std::endl;
                              }
                          });
+}
+
+int AsioSession::OnRecv(BYTE* buffer, int len)
+{
+    int32 processLen = 0;
+
+    while (true)
+    {
+        int32 dataSize = len - processLen;
+        // 데이터 사이즈가 헤더 사이즈 보다 작을 순 없다
+        if (dataSize < sizeof(PacketHeader))
+            break;
+
+        PacketHeader header = *(reinterpret_cast<PacketHeader*>(&buffer[processLen]));
+        // 헤더에 기록된 패킷 크기를 파싱할 수 있어야 한다
+        if (dataSize < header.size)
+            break;
+
+        // 패킷 조립 성공
+        OnRecvCallback(shared_from_this(), &buffer[processLen], header.size);
+        processLen += header.size;
+    }
+
+    return processLen;
+}
+
+void AsioSession::OnConnect() { OnConnectCallback(shared_from_this()); }
+ 
+void AsioSession::OnDisconnect() { OnDisconnectCallback(shared_from_this()); }
+
+std::shared_ptr<AsioSession> AsioSession::GetSessionRef() {
+    return shared_from_this();
 }

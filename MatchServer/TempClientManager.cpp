@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "PlayerManager.h"
+#include "TempClientManager.h"
 #include "Player.h"
 
-void PlayerManager::AddPlayer(sptr<ClientSession> client)
+void TempClientManager::AddClient(sptr<ClientSession> client)
 {
     WRITE_LOCK;
     client->GetPlayer()->playerId = tempPlayerId;
@@ -11,9 +11,9 @@ void PlayerManager::AddPlayer(sptr<ClientSession> client)
     return;
 }
 
-void PlayerManager::RemovePlayer(int playerId) { clientMap->erase(playerId); }
+void TempClientManager::RemoveClient(int playerId) { clientMap->erase(playerId); }
 
-void PlayerManager::Update()
+void TempClientManager::Update()
 {
     /*Vector<PlayerRef> copiedPlayers;
     {
@@ -28,7 +28,7 @@ void PlayerManager::Update()
     }*/
 }
 
-PlayerManager::PlayerManager()
+TempClientManager::TempClientManager()
 {
     /*auto job = MakeShared<Job>([this]() {
             this->Update();

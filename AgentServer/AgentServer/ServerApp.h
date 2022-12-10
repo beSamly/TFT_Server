@@ -1,5 +1,5 @@
 #pragma once
-#include "PacketController.h"
+
 #include "SendBuffer.h"
 #include "SocketServer.h"
 #include "ThreadSystem.h"
@@ -11,12 +11,14 @@ class ServerApp
 public:
     sptr<ThreadSystem> threadSystem;
     sptr<NetworkSystem> networkSystem;
+    sptr<DataSystem> dataSystem;
 
 public:
     ServerApp();
+    ~ServerApp();
 
 public:
-    void StartSocketServer();
+    void StartNetworkSystem();
     void JoinThread() { threadSystem->Join(); };
 
 private:

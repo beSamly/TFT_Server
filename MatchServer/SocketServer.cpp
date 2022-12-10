@@ -2,34 +2,18 @@
 #include "SocketServer.h"
 #include "ClientSession.h"
 #include "spdlog/spdlog.h"
+#include <ProxyManager.h>
 
-SocketServer::SocketServer(sptr<asio::io_context> context, int port) : ioContext(context), AsioBaseSocketServer(context, port)
+SocketServer::SocketServer(sptr<asio::io_context> context, int port)
+    : ioContext(context), AsioBaseSocketServer(context, port)
 {
-
 }
 
-void SocketServer::StartAccept()
+shared_ptr<AsioSession> SocketServer::CreateSession()
 {
-	AsioBaseSocketServer::StartAccept();
+    //shared_ptr<Proxy> proxySession = std::make_shared<Proxy>(SERVER_TYPE::NOT_INITIALIZED, ioContext);
+    shared_ptr<ClientSession> proxySession = std::make_shared<ClientSession>(ioContext);
+    proxySession->SetOnRecvCallback(onClientRecv);
+    proxySession->SetOnDisconnectCallback(onClientDisconnect);
+    return proxySession;
 }
-
-void SocketServer::OnAccept(sptr<AsioSession> session)
-{
-	spdlog::info("[SocketServer] client connected");
-	sptr<ClientSession> clientSession = dynamic_pointer_cast<ClientSession>(session);
-	OnClientConnect(clientSession);
-}
-
-void SocketServer::RunIoContext()
-{
-	ioContext->run();
-}
-
-sptr<AsioSession> SocketServer::CreateSession()
-{
-	sptr<ClientSession> clientSession = make_shared<ClientSession>(ioContext);
-	clientSession->OnRecvCallback = OnClientRecv;
-	clientSession->OnDisconnectCallback = OnClientDisconnect;
-	return clientSession;
-}
-

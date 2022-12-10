@@ -21,30 +21,38 @@
 
 using asio::ip::tcp;
 
-AsioBaseSocketServer::AsioBaseSocketServer(shared_ptr<asio::io_context> context, int port) : acceptor(*context, tcp::endpoint(tcp::v4(), port))
+AsioBaseSocketServer::AsioBaseSocketServer(shared_ptr<asio::io_context> context, int port)
+    : acceptor(*context, tcp::endpoint(tcp::v4(), port)), ioContext(context)
 {
-	/*ioContext = make_shared<asio::io_context>();
-	acceptor = tcp::acceptor(*ioContext, );*/
+    /*ioContext = make_shared<asio::io_context>();
+    acceptor = tcp::acceptor(*ioContext, );*/
 }
 
-void AsioBaseSocketServer::StartAccept() {
-	DoAccept();
-}
+void AsioBaseSocketServer::RunIoContext() { ioContext->run(); }
+
+void AsioBaseSocketServer::StartAccept() { DoAccept(); }
 
 void AsioBaseSocketServer::DoAccept()
 {
-	shared_ptr<AsioSession> session = CreateSession();
+    shared_ptr<AsioSession> session = CreateSession();
 
-	acceptor.async_accept(session->socket,
-		[this, session](std::error_code ec)
-		{
-			if (!ec)
-			{
-				OnAccept(session);
-				session->Start();
-			}
+    acceptor.async_accept(session->socket,
+                          [this, session](std::error_code ec)
+                          {
+                              if (!ec)
+                              {
+                                  onAcceptCallback(session);
+                                  session->Start();
+                              }
 
-			DoAccept();
-		});
+                              DoAccept();
+                          });
 }
 
+shared_ptr<AsioSession> AsioBaseSocketServer::CreateSession()
+{
+    shared_ptr<AsioSession> clientSession = std::make_shared<AsioSession>(ioContext);
+    clientSession->SetOnRecvCallback(onClientRecv);
+    clientSession->SetOnDisconnectCallback(onClientDisconnect);
+    return clientSession;
+}

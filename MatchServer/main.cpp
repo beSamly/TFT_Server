@@ -6,7 +6,7 @@ int main() {
 
 	uptr<ServerApp> serverApplication = make_unique<ServerApp>();
 
-	serverApplication->StartSocketServer();
+	serverApplication->StartNetworkSystem();
 	serverApplication->StartMatchSystem();
 	serverApplication->JoinThread();
 

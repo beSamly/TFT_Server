@@ -1,23 +1,30 @@
 #pragma once
 #include "MatchSystem.h"
-#include "PacketController.h"
 #include "SocketServer.h"
+#include "ProxyManager.h"
+#include "AgentServerPacketController.h"
+#include "ClientPacketController.h"
 
 class NetworkSystem
 {
 public:
-	NetworkSystem(sptr<MatchSystem> matchSystem);
-	void StartSocketServer();
-	void RunIoContext();
+    NetworkSystem(sptr<DataSystem> dataSystem, sptr<MatchSystem> matchSystem);
+    void StartSocketServer();
+    void StartProxy();
+    void RunProxyIoContext();
+    void RunIoContext();
 
 private:
-	sptr<SocketServer> socketServer;
-	uptr<PacketController> packetController;
-	sptr<asio::io_context> context;
-
+    sptr<DataSystem> dataSystem;
+    sptr<SocketServer> socketServer;
+    sptr<ProxyManager> proxyManager;
+    uptr<AgentServerPacketController> agentServerPacketController;
+    uptr<ClientPacketController> clientPacketController;
+    sptr<asio::io_context> context;
 
 private:
-	void OnClientRecv(sptr<ClientSession> client, BYTE* buffer, int len);
-	void OnClientDisconnect(sptr<ClientSession> client);
-	void OnClientConnect(sptr<ClientSession> client);
+    void OnClientAccept(sptr<AsioSession> client);
+    void OnClientRecv(sptr<AsioSession> client, BYTE* buffer, int len);
+    void OnClientDisconnect(sptr<AsioSession> client);
+    void HandleProxyRecv(sptr<Proxy> session, BYTE* buffer, int len);
 };

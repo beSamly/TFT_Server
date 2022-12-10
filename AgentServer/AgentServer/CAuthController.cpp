@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "AuthController.h"
+#include "CAuthController.h"
 #include "PacketHeader.h"
 #include "spdlog/spdlog.h"
 #include "LoginRequest.pb.h"
@@ -7,33 +7,17 @@
 #include "Packet.h"
 #include "Player.h"
 #include "PlayerManager.h"
-#include "PacketId.h"
+#include "PacketId_CL_AG.h"
 
-AuthController::AuthController(sptr<PlayerManager> p_playerManager)
+CAuthController::CAuthController(sptr<PlayerManager> p_playerManager)
 {
     playerManager = p_playerManager;
 
-    handlers[(int)PacketId::Auth::LOGIN_REQ] = TO_LAMBDA(HandleLoginRequest);
-    handlers[(int)PacketId::Auth::LOGOUT_REQ] = TO_LAMBDA(HandleLogoutRequest);
+    AddClientHandler((int)Packet_CL_AG::Auth::LOGIN_REQ, TO_LAMBDA(HandleLoginRequest));
+    AddClientHandler((int)Packet_CL_AG::Auth::LOGOUT_REQ, TO_LAMBDA(HandleLogoutRequest));
 }
 
-
-void AuthController::HandlePacket(sptr<ClientSession>& session, BYTE* buffer, int32 len)
-{
-    PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
-    auto packetId = header->id;
-
-    if (handlers[packetId])
-    {
-        handlers[packetId](session, buffer, len);
-    }
-    else
-    {
-        spdlog::error("[AuthController] invalid packetId = {}", packetId);
-    }
-}
-
-void AuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
+void CAuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
 {
     Protocol::LoginRequest pkt;
     if (pkt.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
@@ -68,12 +52,12 @@ void AuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buff
     Protocol::LoginResponse response;
     response.set_result(true);
 
-    Packet packet((int)PacketId::Prefix::AUTH, (int)PacketId::Auth::LOGIN_RES);
+    Packet packet((int)Packet_CL_AG::Prefix::AUTH, (int)Packet_CL_AG::Auth::LOGIN_RES);
     packet.WriteData<Protocol::LoginResponse>(response);
     session->Send(packet.ToSendBuffer());
 }
 
-void AuthController::HandleLogoutRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len) {
+void CAuthController::HandleLogoutRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len) {
 
     // PlayerManager에서 제거
     int playerId = session->GetPlayer()->playerId;

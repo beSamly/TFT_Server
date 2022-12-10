@@ -9,21 +9,10 @@ SocketServer::SocketServer(sptr<asio::io_context> context, int port)
 {
 }
 
-void SocketServer::StartAccept() { AsioBaseSocketServer::StartAccept(); }
-
-void SocketServer::OnAccept(sptr<AsioSession> session)
+shared_ptr<AsioSession> SocketServer::CreateSession()
 {
-    spdlog::info("[SocketServer] client connected");
-    sptr<ClientSession> clientSession = dynamic_pointer_cast<ClientSession>(session);
-    OnClientConnect(clientSession);
-}
-
-void SocketServer::RunIoContext() { ioContext->run(); }
-
-sptr<AsioSession> SocketServer::CreateSession()
-{
-    sptr<ClientSession> clientSession = make_shared<ClientSession>(ioContext);
-    clientSession->OnRecvCallback = OnClientRecv;
-    clientSession->OnDisconnectCallback = OnClientDisconnect;
+    shared_ptr<ClientSession> clientSession = std::make_shared<ClientSession>(ioContext);
+    clientSession->SetOnRecvCallback(onClientRecv);
+    clientSession->SetOnDisconnectCallback(onClientDisconnect);
     return clientSession;
 }

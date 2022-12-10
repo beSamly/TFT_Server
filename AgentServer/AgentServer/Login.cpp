@@ -5,7 +5,7 @@
 #include "PacketHeader.h"
 #include "PlayerManager.h"
 #include "InputValidator.h"
-#include "PacketId.h"
+#include "PacketId_CL_AG.h"
 #include "Packet.h"
 
 bool PacketHandler::Login::Validate(sptr<ClientSession>& session, BYTE* buffer, int32 len)

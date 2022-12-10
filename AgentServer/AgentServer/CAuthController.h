@@ -3,16 +3,13 @@
 #include "PlayerManager.h"
 #include "ClientSession.h"
 
-class AuthController : public IController
+class CAuthController : public IController
 {
 private:
-    map<int, std::function<void(sptr<ClientSession>&, BYTE*, int32)>> handlers;
     sptr<PlayerManager> playerManager;
 
 public:
-    AuthController(sptr<PlayerManager> p_playerManager);
-
-    void HandlePacket(sptr<ClientSession>& session, BYTE* buffer, int32 len) override;
+    CAuthController(sptr<PlayerManager> p_playerManager);
 
 private:
     void HandleLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len);

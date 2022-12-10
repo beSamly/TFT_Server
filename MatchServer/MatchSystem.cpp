@@ -2,8 +2,8 @@
 #include "MatchSystem.h"
 #include "Command.h"
 #include "spdlog/spdlog.h"
-#include "PacketId.h"
 #include "Packet.h"
+#include "PacketId_AG_MT.h"
 
 namespace
 {
@@ -150,7 +150,7 @@ void MatchSystem::CreatePendingMatch()
 		// TODO 클라이언트에게 매칭 생성 됐다고 보내기 - 나중에는 매칭서버로 따로 분리해야하기 떄문에 로직 변경 필요
 		if (sptr<ClientSession> client = playerMap[playerId]->client.lock())
 		{
-			Packet packet((int)PacketId::Prefix::MATCH, (int)PacketId::Match::PENDING_MATCH_CREATED_SEND);
+			Packet packet((int)PacketId_AG_MT::Prefix::MATCH, (int)PacketId_AG_MT::Match::PENDING_MATCH_CREATED_SEND);
 			packet.WriteData();
 			client->Send(packet.ToSendBuffer());
 		}
@@ -210,7 +210,7 @@ void MatchSystem::CancelPendingMatch(sptr<PendingMatch>& match)
 		{
 			if (sptr<ClientSession> client = player->client.lock())
 			{
-				Packet packet((int)PacketId::Prefix::MATCH, (int)PacketId::Match::MATCH_CANCEL_RES);
+				Packet packet((int)PacketId_AG_MT::Prefix::MATCH, (int)PacketId_AG_MT::Match::MATCH_CANCEL_RES);
 				packet.WriteData();
 				client->Send(packet.ToSendBuffer());
 			}

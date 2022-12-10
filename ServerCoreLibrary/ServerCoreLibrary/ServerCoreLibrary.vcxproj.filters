@@ -17,6 +17,9 @@
     <Filter Include="Source Files\AsioNetwork">
       <UniqueIdentifier>{a6ba6015-e3b9-4b7f-84f5-95da030a71d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Network\Controller">
+      <UniqueIdentifier>{ad152781-7e84-4e69-97a4-d77b860ffc7a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ServerCoreLibrary.cpp">
@@ -68,6 +71,9 @@
       <Filter>Source Files\AsioNetwork</Filter>
     </ClCompile>
     <ClCompile Include="Packet.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ProxyManager.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
   </ItemGroup>
@@ -124,6 +130,9 @@
       <Filter>Source Files\AsioNetwork</Filter>
     </ClInclude>
     <ClInclude Include="Packet.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ProxyManager.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
   </ItemGroup>

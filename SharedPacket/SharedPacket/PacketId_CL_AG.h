@@ -1,13 +1,13 @@
 #pragma once
 
-namespace PacketId
+namespace Packet_CL_AG
 {
     enum Prefix : int
     {
         AUTH = 1,
-        MATCH,
-        IN_GAME,
-        DEBUG
+        MATCH
+        /*IN_GAME,
+        DEBUG*/
     };
 
     enum Auth : int

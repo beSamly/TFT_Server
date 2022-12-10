@@ -11,8 +11,6 @@ private:
 public:
     MatchController(sptr<MatchSystem> matchSystem);
 
-    void HandlePacket(sptr<ClientSession>& session, BYTE* buffer, int32 len) override;
-
 private:
     void HandleMatchRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len);
     void HandleMatchCancelRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len);

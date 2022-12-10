@@ -203,6 +203,9 @@
     <ClInclude Include="Player.h">
       <Filter>Source Files\DataSystem\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="TempClientManager.h">
+      <Filter>Source Files\DataSystem\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -337,6 +340,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\DataSystem\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="TempClientManager.cpp">
+      <Filter>Source Files\DataSystem\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="json\ChampStatData.json">
@@ -351,5 +357,6 @@
     <None Include="json\ChampSkillData.json">
       <Filter>Source Files\DataSystem\JsonData</Filter>
     </None>
+    <None Include=".clang-format" />
   </ItemGroup>
 </Project>

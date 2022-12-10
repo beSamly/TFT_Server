@@ -2,10 +2,10 @@
 #include "Player.h"
 #include "ClientSession.h"
 
-class PlayerManager
+class TempClientManager
 {
 public:
-    PlayerManager();
+    TempClientManager();
 
 private:
     USE_LOCK;
@@ -13,7 +13,7 @@ private:
     int tempPlayerId = 1;
 
 public:
-    void AddPlayer(sptr<ClientSession> client);
-    void RemovePlayer(int playerId);
+    void AddClient(sptr<ClientSession> client);
+    void RemoveClient(int playerId);
     void Update();
 };

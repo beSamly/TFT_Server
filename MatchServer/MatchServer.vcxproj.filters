@@ -15,12 +15,6 @@
     <Filter Include="Source Files\NetworkSystem">
       <UniqueIdentifier>{d72e41c0-4b92-4106-ac1a-bbcf9bf14366}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\NetworkSystem\Controller">
-      <UniqueIdentifier>{efe708fc-5f01-4370-a3bc-607cc7abd58a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\NetworkSystem\Interface">
-      <UniqueIdentifier>{bacca576-75de-4a87-9dea-35bad83cb9c3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\NetworkSystem\Network">
       <UniqueIdentifier>{f04bfc7e-0a75-4fd1-8477-e5a7e46bc84b}</UniqueIdentifier>
     </Filter>
@@ -32,6 +26,27 @@
     </Filter>
     <Filter Include="Source Files\Command">
       <UniqueIdentifier>{da9ca62d-6dc0-4d06-affd-e25e414dd974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataSystem">
+      <UniqueIdentifier>{44da1da6-0100-451a-bfc9-e75d2f8af622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController">
+      <UniqueIdentifier>{efe708fc-5f01-4370-a3bc-607cc7abd58a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\Interface">
+      <UniqueIdentifier>{283f45f0-0e22-48fc-918d-faa0681337f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\AgentServer">
+      <UniqueIdentifier>{3b71d6a0-2ead-4b55-92e4-49fd2c3aef24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\AgentServer\Controller">
+      <UniqueIdentifier>{ede585ef-4de5-4956-b514-0358730f2563}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\Client">
+      <UniqueIdentifier>{796362e1-21c7-43b0-af64-f3907ce7dd89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataSystem\Manager">
+      <UniqueIdentifier>{ab9fe7ba-3744-4cf7-87ab-7647884d7488}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -50,18 +65,6 @@
     <ClCompile Include="PendingMatch.cpp">
       <Filter>Source Files\MatchSystem</Filter>
     </ClCompile>
-    <ClCompile Include="MatchController.cpp">
-      <Filter>Source Files\NetworkSystem\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="PacketController.cpp">
-      <Filter>Source Files\NetworkSystem\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="IController.cpp">
-      <Filter>Source Files\NetworkSystem\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="IPacketHandler.cpp">
-      <Filter>Source Files\NetworkSystem\Interface</Filter>
-    </ClCompile>
     <ClCompile Include="SocketServer.cpp">
       <Filter>Source Files\NetworkSystem\Network</Filter>
     </ClCompile>
@@ -77,9 +80,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Data</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerManager.cpp">
-      <Filter>Source Files\Data</Filter>
-    </ClCompile>
     <ClCompile Include="TLS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -88,6 +88,30 @@
     </ClCompile>
     <ClCompile Include="CommandHandler.cpp">
       <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="IController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="IPacketController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentServerPacketController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\AgentServer</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\AgentServer\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="DataSystem.cpp">
+      <Filter>Source Files\DataSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientPacketController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="TempClientManager.cpp">
+      <Filter>Source Files\DataSystem\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="AuthController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\AgentServer\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,18 +126,6 @@
     </ClInclude>
     <ClInclude Include="PendingMatch.h">
       <Filter>Source Files\MatchSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="MatchController.h">
-      <Filter>Source Files\NetworkSystem\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="PacketController.h">
-      <Filter>Source Files\NetworkSystem\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="IPacketHandler.h">
-      <Filter>Source Files\NetworkSystem\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="IController.h">
-      <Filter>Source Files\NetworkSystem\Interface</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Source Files</Filter>
@@ -136,9 +148,6 @@
     <ClInclude Include="Player.h">
       <Filter>Source Files\Data</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerManager.h">
-      <Filter>Source Files\Data</Filter>
-    </ClInclude>
     <ClInclude Include="TLS.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -147,6 +156,30 @@
     </ClInclude>
     <ClInclude Include="Command.h">
       <Filter>Source Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="IPacketController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentServerPacketController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\AgentServer</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\AgentServer\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="DataSystem.h">
+      <Filter>Source Files\DataSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientPacketController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="TempClientManager.h">
+      <Filter>Source Files\DataSystem\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="AuthController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\AgentServer\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

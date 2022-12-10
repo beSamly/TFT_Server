@@ -1,56 +1,112 @@
 #include "pch.h"
 #include "NetworkSystem.h"
 #include "spdlog/spdlog.h"
-#include "PacketController.h"
-#include "PacketId.h"
 #include "Packet.h"
+#include "ProxyManager.h"
+#include "ClientPacketController.h"
 
 namespace
 {
-    int32 PORT = 7777;
+    int32 PORT = 4000;
     int32 MAX_SESSION_COUNT = 100;
 } // namespace
 
-NetworkSystem::NetworkSystem(sptr<MatchSystem> matchSystem)
+NetworkSystem::NetworkSystem(sptr<DataSystem> p_dataSystem, sptr<MatchSystem> matchSystem) : dataSystem(p_dataSystem)
 {
     context = make_shared<asio::io_context>();
     socketServer = make_shared<SocketServer>(context, PORT);
-    packetController = make_unique<PacketController>(matchSystem);
+    agentServerPacketController = make_unique<AgentServerPacketController>(matchSystem);
+    clientPacketController = make_unique<ClientPacketController>(dataSystem);
+    proxyManager = make_shared<ProxyManager>();
 }
 
 void NetworkSystem::StartSocketServer()
 {
-    //패킷 컨트롤러 초기화
-    packetController->Init();
-
     // 소켓 서버 실행
-    socketServer->OnClientRecv = [&](sptr<ClientSession> client, BYTE* buffer, int len)
-    { OnClientRecv(client, buffer, len); };
-    socketServer->OnClientDisconnect = [&](sptr<ClientSession> client) { OnClientDisconnect(client); };
-    socketServer->OnClientConnect = [&](sptr<ClientSession> client) { OnClientConnect(client); };
+    socketServer->SetOnAcceptCallback([&](sptr<AsioSession> client) { OnClientAccept(client); });
+    socketServer->SetOnClientRecv([&](sptr<AsioSession> client, BYTE* buffer, int len)
+                                  { OnClientRecv(client, buffer, len); });
+    socketServer->SetOnClientDisconnect([&](sptr<AsioSession> client) { OnClientDisconnect(client); });
+    // socketServer->setonclien OnClientConnect = [&](sptr<ClientSession> client) { OnClientConnect(client); };
     socketServer->StartAccept();
+
     spdlog::info("Server listening on {}", PORT);
 }
 
-void NetworkSystem::RunIoContext() { socketServer->RunIoContext(); }
-
-void NetworkSystem::OnClientRecv(sptr<ClientSession> client, BYTE* buffer, int len)
+void NetworkSystem::StartProxy()
 {
-    packetController->HandlePacket(client, buffer, len);
+    proxyManager->SetHandleRecv([&](sptr<Proxy> session, BYTE* buffer, int len)
+                                { HandleProxyRecv(session, buffer, len); });
+
+    proxyManager->ConnectToGameServer();
 }
 
-void NetworkSystem::OnClientDisconnect(sptr<ClientSession> client)
-{
+void NetworkSystem::RunProxyIoContext() { proxyManager->RunIoContext(); }
 
-    // 로그인 안 한 상태라면 더이상 처리할 필요 없다.
-    if (client->GetPlayer() == nullptr)
+void NetworkSystem::RunIoContext() { socketServer->RunIoContext(); }
+
+void NetworkSystem::OnClientAccept(sptr<AsioSession> client)
+{
+    spdlog::debug("[NetworkSystem] Client connected");
+
+    std::shared_ptr<ClientSession> clientSession = dynamic_pointer_cast<ClientSession>(client);
+    if (!clientSession)
     {
         return;
     }
 
-    Packet pck((int)PacketId::Prefix::AUTH, (int)PacketId::Auth::LOGOUT_REQ);
-    pck.WriteData();
-    packetController->HandlePacket(client, pck.GetByteBuffer(), pck.GetSize());
+    dataSystem->GetTempClientManager()->AddClient(clientSession);
+    return;
 }
 
-void NetworkSystem::OnClientConnect(sptr<ClientSession> client) {}
+void NetworkSystem::OnClientRecv(sptr<AsioSession> client, BYTE* buffer, int len)
+{
+    // 클라이언트란 현재 서버로 인증하지 않은 session들
+    sptr<ClientSession> clientSession = dynamic_pointer_cast<ClientSession>(client);
+
+    if (!clientSession)
+    {
+        return;
+    }
+
+    clientPacketController->HandleClientPacket(clientSession, buffer, len);
+}
+
+void NetworkSystem::OnClientDisconnect(sptr<AsioSession> client)
+{
+    // spdlog::debug("[NetworkSystem] Client disconnected");
+
+    // sptr<ClientSession> clientSession = dynamic_pointer_cast<ClientSession>(client);
+
+    // if (!clientSession)
+    //{
+    //     return;
+    // }
+
+    //// 로그인 안 한 상태라면 더이상 처리할 필요 없다.
+    // if (clientSession->GetPlayer() == nullptr)
+    //{
+    //     return;
+    // }
+
+    // Packet pck((int)PacketId::Prefix::AUTH, (int)PacketId::Auth::LOGOUT_REQ);
+    // pck.WriteData();
+    // packetController->HandlePacket(clientSession, pck.GetByteBuffer(), pck.GetSize());
+}
+
+void NetworkSystem::HandleProxyRecv(sptr<Proxy> session, BYTE* buffer, int len)
+{
+
+    switch (session->GetServerType())
+    {
+        case SERVER_TYPE::AGENT:
+            agentServerPacketController->HandleProxyPacket(session, buffer, len);
+            break;
+
+        case SERVER_TYPE::GAME:
+            break;
+        default:
+            // error
+            break;
+    }
+}
