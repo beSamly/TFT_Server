@@ -2,10 +2,9 @@
 #include "NetworkSystem.h"
 #include "DataSystem.h"
 #include "spdlog/spdlog.h"
-#include "PacketController.h"
-#include "PacketId.h"
 #include "Packet.h"
 #include "TempClientManager.h"
+#include "ClientPacketController.h"
 
 namespace
 {
@@ -13,18 +12,17 @@ namespace
     int32 MAX_SESSION_COUNT = 100;
 } // namespace
 
-NetworkSystem::NetworkSystem(sptr<DataSystem> p_dataSystem) : dataSystem(p_dataSystem)
+NetworkSystem::NetworkSystem(sptr<DataSystem> p_dataSystem, sptr<GameSystem> p_gameSystem)
+    : dataSystem(p_dataSystem), gameSystem(p_gameSystem)
 {
     context = make_shared<asio::io_context>();
     socketServer = make_shared<SocketServer>(context, PORT);
-    packetController = make_unique<PacketController>(dataSystem);
-    tempClientManager = make_shared<TempClientManager>();
+    clientPacketController = make_shared<ClientPacketController>(dataSystem);
+    matchServerPacketController = make_shared<MatchServerPacketController>(gameSystem);
 }
 
 void NetworkSystem::StartSocketServer()
 {
-    //패킷 컨트롤러 초기화
-    packetController->Init();
 
     // 소켓 서버 실행
     socketServer->SetOnAcceptCallback([&](sptr<AsioSession> client) { OnClientAccept(client); });
@@ -38,10 +36,18 @@ void NetworkSystem::StartSocketServer()
 
 void NetworkSystem::RunIoContext() { socketServer->RunIoContext(); }
 
-void NetworkSystem::OnClientAccept(sptr<AsioSession> client) {
+void NetworkSystem::OnClientAccept(sptr<AsioSession> client)
+{
     spdlog::debug("[NetworkSystem] Client connected");
-    tempClientManager->AddClient(client);
-    //dataSystem->GetPlayerManager()->AddPlayer(client);
+
+    sptr<ClientSession> clientSession = dynamic_pointer_cast<ClientSession>(client);
+
+    if (!clientSession)
+    {
+        return;
+    }
+
+    dataSystem->GetTempClientManager()->AddClient(clientSession);
 }
 
 void NetworkSystem::OnClientRecv(sptr<AsioSession> client, BYTE* buffer, int len)
@@ -52,14 +58,15 @@ void NetworkSystem::OnClientRecv(sptr<AsioSession> client, BYTE* buffer, int len
     {
         return;
     }
-    packetController->HandlePacket(clientSession, buffer, len);
+
+    clientPacketController->HandleClientPacket(clientSession, buffer, len);
 }
 
 void NetworkSystem::OnClientDisconnect(sptr<AsioSession> client)
 {
     spdlog::debug("[NetworkSystem] Client disconnected");
 
-     sptr<ClientSession> clientSession = dynamic_pointer_cast<ClientSession>(client);
+    sptr<ClientSession> clientSession = dynamic_pointer_cast<ClientSession>(client);
 
     if (!clientSession)
     {
@@ -72,7 +79,7 @@ void NetworkSystem::OnClientDisconnect(sptr<AsioSession> client)
         return;
     }
 
-    Packet pck((int)PacketId::Prefix::AUTH, (int)PacketId::Auth::LOGOUT_REQ);
+    /*Packet pck((int)PacketId::Prefix::AUTH, (int)PacketId::Auth::LOGOUT_REQ);
     pck.WriteData();
-    packetController->HandlePacket(clientSession, pck.GetByteBuffer(), pck.GetSize());
+    packetController->HandlePacket(clientSession, pck.GetByteBuffer(), pck.GetSize());*/
 }

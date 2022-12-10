@@ -2,16 +2,16 @@
 #include "TempClientManager.h"
 #include "Player.h"
 
-void TempClientManager::AddClient(sptr<AsioSession> client)
+void TempClientManager::AddClient(sptr<ClientSession> client)
 {
     WRITE_LOCK;
-    //client->GetPlayer()->playerId = tempPlayerId;
+    client->GetPlayer()->playerId = tempPlayerId;
     clientMap->emplace(tempPlayerId, client);
     tempPlayerId++;
     return;
 }
 
-void TempClientManager::RemovePlayer(int playerId) { clientMap->erase(playerId); }
+void TempClientManager::RemoveClient(int playerId) { clientMap->erase(playerId); }
 
 void TempClientManager::Update()
 {

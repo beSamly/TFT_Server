@@ -5,13 +5,10 @@
 
 class GameController : public IController
 {
-private:
-    map<int, std::function<void(sptr<ClientSession>&, BYTE*, int32)>> handlers;
-
 public:
-    GameController();
-    void HandlePacket(sptr<ClientSession>& session, BYTE* buffer, int32 len) override;
+    GameController(sptr<GameSystem> p_gameSystem);
 
 private:
-    void HandleBuy(sptr<ClientSession>& session, BYTE* buffer, int32 len);
+    sptr<GameSystem> gameSystem;
+    void HandleCreateHost(sptr<Proxy>& session, BYTE* buffer, int32 len);
 };

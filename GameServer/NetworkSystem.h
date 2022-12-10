@@ -1,26 +1,30 @@
 #pragma once
 #include "DataSystem.h"
-#include "PacketController.h"
 #include "SocketServer.h"
 #include "TempClientManager.h"
+#include "MatchServerPacketController.h"
+#include "GameSystem.h"
+#include "ClientPacketController.h"
 
 class NetworkSystem
 {
 public:
-	NetworkSystem(sptr<DataSystem> p_dataSystem);
-	void StartSocketServer();
-	void RunIoContext();
+    NetworkSystem(sptr<DataSystem> p_dataSystem, sptr<GameSystem> p_gameSystem);
+    void StartSocketServer();
+    void RunIoContext();
 
 private:
-	sptr<SocketServer> socketServer;
-	uptr<PacketController> packetController;
-	sptr<asio::io_context> context;
-	sptr<DataSystem> dataSystem;
-	sptr<TempClientManager> tempClientManager;
+    sptr<DataSystem> dataSystem;
+    sptr<GameSystem> gameSystem;
+    sptr<SocketServer> socketServer;
 
+    sptr<MatchServerPacketController> matchServerPacketController;
+    sptr<ClientPacketController> clientPacketController;
+
+    sptr<asio::io_context> context;
 
 private:
-	void OnClientAccept(sptr<AsioSession> client);
-	void OnClientRecv(sptr<AsioSession> client, BYTE* buffer, int len);
-	void OnClientDisconnect(sptr<AsioSession> client);
+    void OnClientAccept(sptr<AsioSession> client);
+    void OnClientRecv(sptr<AsioSession> client, BYTE* buffer, int len);
+    void OnClientDisconnect(sptr<AsioSession> client);
 };

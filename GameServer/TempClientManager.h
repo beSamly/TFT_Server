@@ -9,11 +9,11 @@ public:
 
 private:
     USE_LOCK;
-    uptr<map<int, sptr<AsioSession>>> clientMap = make_unique<map<int, sptr<AsioSession>>>();
+    uptr<map<int, sptr<ClientSession>>> clientMap = make_unique<map<int, sptr<ClientSession>>>();
     int tempPlayerId = 1;
 
 public:
-    void AddClient(sptr<AsioSession> client);
-    void RemovePlayer(int playerId);
+    void AddClient(sptr<ClientSession> client);
+    void RemoveClient(int playerId);
     void Update();
 };

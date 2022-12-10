@@ -51,14 +51,26 @@
     <Filter Include="Source Files\NetworkSystem">
       <UniqueIdentifier>{d55356e4-4f4a-432a-9701-b056fee351b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\NetworkSystem\Interface">
-      <UniqueIdentifier>{c2097c82-c2cf-468a-8df3-7df420a53747}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\NetworkSystem\Controller">
-      <UniqueIdentifier>{ae5c36e4-e1ba-40f6-a18e-b635d30ef5b2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\GameSystem\Opereation">
       <UniqueIdentifier>{63dac1f9-32a4-4e05-8f85-a06a470d1eaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController">
+      <UniqueIdentifier>{ee0c5d88-98b5-49da-96aa-1d160d61a0be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\Interface">
+      <UniqueIdentifier>{075aa233-108f-4c66-a6de-21b6b149022d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\Client">
+      <UniqueIdentifier>{85ea295f-5fef-4310-ad23-df2c4547faa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\Client\Controller">
+      <UniqueIdentifier>{3260f5ca-e20c-4fb5-8a85-297a67f10c88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\MatchServer">
+      <UniqueIdentifier>{ef7563c4-b1de-46c9-99e6-467f4aeed9be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\MatchServer\Controller">
+      <UniqueIdentifier>{5117a20f-b9c0-4148-a25b-abbed31d1f4f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -79,9 +91,6 @@
     </ClInclude>
     <ClInclude Include="NetworkSystem.h">
       <Filter>Source Files\System</Filter>
-    </ClInclude>
-    <ClInclude Include="PacketController.h">
-      <Filter>Source Files\NetworkSystem</Filter>
     </ClInclude>
     <ClInclude Include="TLS.h">
       <Filter>Source Files</Filter>
@@ -182,15 +191,6 @@
     <ClInclude Include="PlayerManager.h">
       <Filter>Source Files\DataSystem\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="IPacketHandler.h">
-      <Filter>Source Files\NetworkSystem\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="IController.h">
-      <Filter>Source Files\NetworkSystem\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="GameController.h">
-      <Filter>Source Files\NetworkSystem\Controller</Filter>
-    </ClInclude>
     <ClInclude Include="ServerApp.h">
       <Filter>Source Files\System</Filter>
     </ClInclude>
@@ -203,8 +203,26 @@
     <ClInclude Include="Player.h">
       <Filter>Source Files\DataSystem\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="IPacketController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientPacketController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchServerPacketController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\MatchServer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\MatchServer\Controller</Filter>
+    </ClInclude>
     <ClInclude Include="TempClientManager.h">
       <Filter>Source Files\DataSystem\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="AuthController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\Client\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -222,9 +240,6 @@
     </ClCompile>
     <ClCompile Include="NetworkSystem.cpp">
       <Filter>Source Files\System</Filter>
-    </ClCompile>
-    <ClCompile Include="PacketController.cpp">
-      <Filter>Source Files\NetworkSystem</Filter>
     </ClCompile>
     <ClCompile Include="TLS.cpp">
       <Filter>Source Files</Filter>
@@ -319,15 +334,6 @@
     <ClCompile Include="PlayerManager.cpp">
       <Filter>Source Files\DataSystem\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="IPacketHandler.cpp">
-      <Filter>Source Files\NetworkSystem\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="IController.cpp">
-      <Filter>Source Files\NetworkSystem\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="GameController.cpp">
-      <Filter>Source Files\NetworkSystem\Controller</Filter>
-    </ClCompile>
     <ClCompile Include="ServerApp.cpp">
       <Filter>Source Files\System</Filter>
     </ClCompile>
@@ -340,8 +346,26 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\DataSystem\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="IController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="IPacketController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientPacketController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchServerPacketController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\MatchServer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\MatchServer\Controller</Filter>
+    </ClCompile>
     <ClCompile Include="TempClientManager.cpp">
       <Filter>Source Files\DataSystem\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="AuthController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\Client\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,5 @@
 #pragma once
 #include "GameSystem.h"
-#include "PacketController.h"
 #include "SendBuffer.h"
 #include "SocketServer.h"
 #include "ThreadSystem.h"
@@ -13,7 +12,6 @@ class ServerApp
 public:
 	sptr<ThreadSystem> threadSystem;
 	sptr<GameSystem> gameSystem;
-	//sptr<MatchSystem> matchSystem;
 	sptr<DataSystem> dataSystem;
 	sptr<NetworkSystem> networkSystem;
 
