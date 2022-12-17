@@ -4,7 +4,7 @@ namespace PacketId_AG_MT {
 
 enum Prefix : int { AUTH = 1, MATCH };
 
-enum Auth : int { LOGIN_REQ = 1 };
+enum Auth : int { PROXY_LOGIN_REQ = 1 };
 
 enum Match : int {
   MATCH_REQ = 1,

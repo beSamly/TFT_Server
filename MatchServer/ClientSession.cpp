@@ -11,9 +11,4 @@ ClientSession::ClientSession(sptr<asio::io_context> context) : AsioSession(conte
 
 ClientSession::~ClientSession()
 {
-	spdlog::debug("[ClientSession] deconstructed");
 }
-
-sptr<Player> ClientSession::GetPlayer() { return player; }
-
-void ClientSession::SetPlayer(sptr<Player> p_player) { player = p_player; }

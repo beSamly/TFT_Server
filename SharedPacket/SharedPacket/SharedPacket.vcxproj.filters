@@ -14,6 +14,9 @@
     <Filter Include="Source Files\Packet">
       <UniqueIdentifier>{bf792f4a-d834-4f7e-a6bd-dcf05a735c21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Protobuf\Common">
+      <UniqueIdentifier>{d6e794f9-0fc5-4d29-9f90-b9e08ed6c86c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -25,14 +28,20 @@
     <ClCompile Include="Protobuf\LoginResponse.pb.cc">
       <Filter>Source Files\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="Protobuf\MatchRequest.pb.cc">
-      <Filter>Source Files\Protobuf</Filter>
+    <ClCompile Include="ProxyPacketId.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Protobuf\MatchRequestResponse.pb.cc">
       <Filter>Source Files\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="ProxyPacketId.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Protobuf\MatchRequest.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\ProxyLoginReq.pb.cc">
+      <Filter>Source Files\Protobuf\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\PlayerInfo.pb.cc">
+      <Filter>Source Files\Protobuf\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -43,12 +52,6 @@
       <Filter>Source Files\Protobuf</Filter>
     </ClInclude>
     <ClInclude Include="Protobuf\LoginResponse.pb.h">
-      <Filter>Source Files\Protobuf</Filter>
-    </ClInclude>
-    <ClInclude Include="Protobuf\MatchRequest.pb.h">
-      <Filter>Source Files\Protobuf</Filter>
-    </ClInclude>
-    <ClInclude Include="Protobuf\MatchRequestResponse.pb.h">
       <Filter>Source Files\Protobuf</Filter>
     </ClInclude>
     <ClInclude Include="PacketId_CL_AG.h">
@@ -66,6 +69,21 @@
     </ClInclude>
     <ClInclude Include="PacketId_CL_GM.h">
       <Filter>Source Files\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\MatchRequestResponse.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\MatchRequest.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketId_Common.h">
+      <Filter>Source Files\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\ProxyLoginReq.pb.h">
+      <Filter>Source Files\Protobuf\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\PlayerInfo.pb.h">
+      <Filter>Source Files\Protobuf\Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

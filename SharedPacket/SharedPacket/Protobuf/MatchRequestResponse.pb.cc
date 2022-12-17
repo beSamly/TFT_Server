@@ -24,6 +24,7 @@ namespace Protocol {
 PROTOBUF_CONSTEXPR MatchRequestResponse::MatchRequestResponse(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.result_)*/false
+  , /*decltype(_impl_.playerid_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct MatchRequestResponseDefaultTypeInternal {
   PROTOBUF_CONSTEXPR MatchRequestResponseDefaultTypeInternal()
@@ -47,6 +48,7 @@ const uint32_t TableStruct_MatchRequestResponse_2eproto::offsets[] PROTOBUF_SECT
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Protocol::MatchRequestResponse, _impl_.result_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::MatchRequestResponse, _impl_.playerid_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::MatchRequestResponse)},
@@ -57,13 +59,13 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_MatchRequestResponse_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\032MatchRequestResponse.proto\022\010Protocol\"&"
-  "\n\024MatchRequestResponse\022\016\n\006result\030\001 \001(\010b\006"
-  "proto3"
+  "\n\032MatchRequestResponse.proto\022\010Protocol\"8"
+  "\n\024MatchRequestResponse\022\016\n\006result\030\001 \001(\010\022\020"
+  "\n\010playerId\030\002 \001(\005b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_MatchRequestResponse_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_MatchRequestResponse_2eproto = {
-    false, false, 86, descriptor_table_protodef_MatchRequestResponse_2eproto,
+    false, false, 104, descriptor_table_protodef_MatchRequestResponse_2eproto,
     "MatchRequestResponse.proto",
     &descriptor_table_MatchRequestResponse_2eproto_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_MatchRequestResponse_2eproto::offsets,
@@ -95,10 +97,13 @@ MatchRequestResponse::MatchRequestResponse(const MatchRequestResponse& from)
   MatchRequestResponse* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.result_){}
+    , decltype(_impl_.playerid_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _this->_impl_.result_ = from._impl_.result_;
+  ::memcpy(&_impl_.result_, &from._impl_.result_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.playerid_) -
+    reinterpret_cast<char*>(&_impl_.result_)) + sizeof(_impl_.playerid_));
   // @@protoc_insertion_point(copy_constructor:Protocol.MatchRequestResponse)
 }
 
@@ -108,6 +113,7 @@ inline void MatchRequestResponse::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.result_){false}
+    , decltype(_impl_.playerid_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
@@ -135,7 +141,9 @@ void MatchRequestResponse::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.result_ = false;
+  ::memset(&_impl_.result_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.playerid_) -
+      reinterpret_cast<char*>(&_impl_.result_)) + sizeof(_impl_.playerid_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -149,6 +157,14 @@ const char* MatchRequestResponse::_InternalParse(const char* ptr, ::_pbi::ParseC
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
           _impl_.result_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 playerId = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.playerid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -188,6 +204,12 @@ uint8_t* MatchRequestResponse::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_result(), target);
   }
 
+  // int32 playerId = 2;
+  if (this->_internal_playerid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_playerid(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -207,6 +229,11 @@ size_t MatchRequestResponse::ByteSizeLong() const {
   // bool result = 1;
   if (this->_internal_result() != 0) {
     total_size += 1 + 1;
+  }
+
+  // int32 playerId = 2;
+  if (this->_internal_playerid() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_playerid());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -230,6 +257,9 @@ void MatchRequestResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, c
   if (from._internal_result() != 0) {
     _this->_internal_set_result(from._internal_result());
   }
+  if (from._internal_playerid() != 0) {
+    _this->_internal_set_playerid(from._internal_playerid());
+  }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -247,7 +277,12 @@ bool MatchRequestResponse::IsInitialized() const {
 void MatchRequestResponse::InternalSwap(MatchRequestResponse* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_.result_, other->_impl_.result_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(MatchRequestResponse, _impl_.playerid_)
+      + sizeof(MatchRequestResponse::_impl_.playerid_)
+      - PROTOBUF_FIELD_OFFSET(MatchRequestResponse, _impl_.result_)>(
+          reinterpret_cast<char*>(&_impl_.result_),
+          reinterpret_cast<char*>(&other->_impl_.result_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata MatchRequestResponse::GetMetadata() const {

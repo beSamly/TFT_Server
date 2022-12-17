@@ -11,6 +11,12 @@ void PlayerManager::AddPlayer(sptr<ClientSession> client)
     return;
 }
 
+sptr<ClientSession> PlayerManager::FindPlayer(int playerId)
+{
+    map<int, sptr<ClientSession>>::iterator iter = clientMap->find(playerId);
+    return iter == clientMap->end() ? nullptr : iter->second;
+}
+
 void PlayerManager::RemovePlayer(int playerId) { clientMap->erase(playerId); }
 
 void PlayerManager::Update()

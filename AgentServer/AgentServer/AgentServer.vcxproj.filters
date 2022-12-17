@@ -50,6 +50,9 @@
     <Filter Include="Source Files\NetworkSystem\PacketController\PacketController\MatchServer">
       <UniqueIdentifier>{c2eccf39-1fdc-41b2-9e23-7ad13d21be1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\PacketController\MatchServer\Controller">
+      <UniqueIdentifier>{061842ec-5959-4537-9aa8-9043253be96f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -127,6 +130,12 @@
     <ClCompile Include="MatchServerPacketController.cpp">
       <Filter>Source Files\NetworkSystem\PacketController\PacketController\MatchServer</Filter>
     </ClCompile>
+    <ClCompile Include="MTMatchController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\PacketController\MatchServer\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="TempClientManager.cpp">
+      <Filter>Source Files\DataSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -201,6 +210,12 @@
     </ClInclude>
     <ClInclude Include="MatchServerPacketController.h">
       <Filter>Source Files\NetworkSystem\PacketController\PacketController\MatchServer</Filter>
+    </ClInclude>
+    <ClInclude Include="MTMatchController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\PacketController\MatchServer\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="TempClientManager.h">
+      <Filter>Source Files\DataSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

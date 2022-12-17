@@ -4,7 +4,9 @@
 class CMatchController : public IController
 {
 public:
-    CMatchController();
+    CMatchController(sptr<ProxyManager> p_proxyManager);
+
+    sptr<ProxyManager> proxyManager;
 
 private:
     void HandleMatchRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len);

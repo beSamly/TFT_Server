@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package Protocol;
+
+message ProxyLoginReq{
+    int32 serverType = 1;
+}

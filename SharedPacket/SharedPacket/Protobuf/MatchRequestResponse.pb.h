@@ -178,6 +178,7 @@ class MatchRequestResponse final :
 
   enum : int {
     kResultFieldNumber = 1,
+    kPlayerIdFieldNumber = 2,
   };
   // bool result = 1;
   void clear_result();
@@ -186,6 +187,15 @@ class MatchRequestResponse final :
   private:
   bool _internal_result() const;
   void _internal_set_result(bool value);
+  public:
+
+  // int32 playerId = 2;
+  void clear_playerid();
+  int32_t playerid() const;
+  void set_playerid(int32_t value);
+  private:
+  int32_t _internal_playerid() const;
+  void _internal_set_playerid(int32_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.MatchRequestResponse)
@@ -197,6 +207,7 @@ class MatchRequestResponse final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     bool result_;
+    int32_t playerid_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -231,6 +242,26 @@ inline void MatchRequestResponse::_internal_set_result(bool value) {
 inline void MatchRequestResponse::set_result(bool value) {
   _internal_set_result(value);
   // @@protoc_insertion_point(field_set:Protocol.MatchRequestResponse.result)
+}
+
+// int32 playerId = 2;
+inline void MatchRequestResponse::clear_playerid() {
+  _impl_.playerid_ = 0;
+}
+inline int32_t MatchRequestResponse::_internal_playerid() const {
+  return _impl_.playerid_;
+}
+inline int32_t MatchRequestResponse::playerid() const {
+  // @@protoc_insertion_point(field_get:Protocol.MatchRequestResponse.playerId)
+  return _internal_playerid();
+}
+inline void MatchRequestResponse::_internal_set_playerid(int32_t value) {
+  
+  _impl_.playerid_ = value;
+}
+inline void MatchRequestResponse::set_playerid(int32_t value) {
+  _internal_set_playerid(value);
+  // @@protoc_insertion_point(field_set:Protocol.MatchRequestResponse.playerId)
 }
 
 #ifdef __GNUC__

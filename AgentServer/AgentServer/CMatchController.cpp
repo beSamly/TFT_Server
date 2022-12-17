@@ -5,37 +5,37 @@
 #include "spdlog/spdlog.h"
 #include "MatchRequestResponse.pb.h"
 #include "Packet.h"
+#include "PacketId_AG_MT.h"
+#include "MatchRequest.pb.h"
+#include "PlayerInfo.pb.h"
 
-CMatchController::CMatchController()
+CMatchController::CMatchController(sptr<ProxyManager> p_proxyManager) : proxyManager(p_proxyManager)
 {
-    AddClientHandler((int)Packet_CL_AG::Match::MATCH_REQ, TO_LAMBDA(HandleMatchRequest));
-    AddClientHandler((int)Packet_CL_AG::Match::MATCH_CANCEL_REQ, TO_LAMBDA(HandleMatchCancelRequest));
+    AddClientHandler((int)PacketId_CL_AG::Match::MATCH_REQ, TO_LAMBDA(HandleMatchRequest));
+    AddClientHandler((int)PacketId_CL_AG::Match::MATCH_CANCEL_REQ, TO_LAMBDA(HandleMatchCancelRequest));
 }
 
 void CMatchController::HandleMatchRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
 {
-    // 유저에게 응답
-    Protocol::MatchRequestResponse response;
-    response.set_result(true);
-
-    Packet packet((int)Packet_CL_AG::Prefix::MATCH, (int)Packet_CL_AG::Match::MATCH_REQ_RES);
-    packet.WriteData<Protocol::MatchRequestResponse>(response);
-    session->Send(packet.ToSendBuffer());
-
     // 매칭 시스템에 요청
-    /*sptr<N2M::MatchRequestCommand> command = make_shared<N2M::MatchRequestCommand>(session);
-    matchSystem->PushCommand(command);*/
+    Protocol::PlayerInfo req;
+    req.set_playerid(session->GetPlayer()->playerId);
+
+    Packet packet((int)PacketId_AG_MT::Prefix::MATCH, (int)PacketId_AG_MT::Match::MATCH_REQ);
+    packet.WriteData<Protocol::PlayerInfo>(req);
+
+    proxyManager->SendToMatchServer(packet.GetSendBuffer());
 }
 
 void CMatchController::HandleMatchCancelRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
 {
-    // 유저에게 응답
-    //Packet packet((int)Packet_CL_AG::Prefix::MATCH, (int)Packet_CL_AG::Match::MATCH_CANCEL_RES);
-    //packet.WriteData();
-    //session->Send(packet.ToSendBuffer());
+    // 매칭 시스템에 요청
+    Protocol::PlayerInfo req;
+    req.set_playerid(session->GetPlayer()->playerId);
 
-    //// 매칭 시스템에 요청
-    //sptr<N2M::MatchCancelCommand> command = make_shared<N2M::MatchCancelCommand>(session);
-    //command->playerId = session->GetPlayer()->playerId;
-    //matchSystem->PushCommand(command);
+    Packet packet((int)PacketId_AG_MT::Prefix::MATCH, (int)PacketId_AG_MT::Match::MATCH_CANCEL_REQ);
+    packet.WriteData<Protocol::PlayerInfo>(req);
+
+    proxyManager->SendToMatchServer(packet.GetSendBuffer());
+
 }

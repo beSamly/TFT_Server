@@ -168,6 +168,8 @@
     <ClCompile Include="Protobuf\LoginResponse.pb.cc" />
     <ClCompile Include="Protobuf\MatchRequest.pb.cc" />
     <ClCompile Include="Protobuf\MatchRequestResponse.pb.cc" />
+    <ClCompile Include="Protobuf\PlayerInfo.pb.cc" />
+    <ClCompile Include="Protobuf\ProxyLoginReq.pb.cc" />
     <ClCompile Include="ProxyPacketId.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -175,12 +177,15 @@
     <ClInclude Include="PacketId_AG_GM.h" />
     <ClInclude Include="PacketId_AG_MT.h" />
     <ClInclude Include="PacketId_CL_GM.h" />
+    <ClInclude Include="PacketId_Common.h" />
     <ClInclude Include="PacketId_MT_GM.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Protobuf\LoginRequest.pb.h" />
     <ClInclude Include="Protobuf\LoginResponse.pb.h" />
     <ClInclude Include="Protobuf\MatchRequest.pb.h" />
     <ClInclude Include="Protobuf\MatchRequestResponse.pb.h" />
+    <ClInclude Include="Protobuf\PlayerInfo.pb.h" />
+    <ClInclude Include="Protobuf\ProxyLoginReq.pb.h" />
     <ClInclude Include="ProxyPacketId.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

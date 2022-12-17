@@ -1,20 +1,20 @@
 #pragma once
-#include "ClientSession.h"
+#include "ProxyManager.h"
 
 namespace Command
 {
     class ICommand
     {
     public:
-        wptr<ClientSession> client;
+        wptr<Proxy> proxy;
         int commandId;
+        int playerId;
 
     public:
         ICommand() {};
-        ICommand(wptr<ClientSession> p_client) : client(p_client) {};
+        ICommand(wptr<Proxy> p_proxy, int p_playerId) : playerId(p_playerId), proxy(p_proxy){};
         virtual int GetCommandId() { return commandId; };
     };
-
 
     /*-----------------------------------
         NetworkSystem To MatchSystem
@@ -32,9 +32,10 @@ namespace Command
         {
         public:
             int matchType;
+            int playerId;
 
         public:
-            MatchRequestCommand(wptr<ClientSession> p_client) : ICommand(p_client)
+            MatchRequestCommand(wptr<Proxy> p_proxy, int p_playerId) : ICommand(p_proxy, p_playerId)
             {
                 ICommand::commandId = CommandId::MATCH_REQUEST;
             };
@@ -44,10 +45,9 @@ namespace Command
         {
         public:
             int matchType;
-            int playerId;
 
         public:
-            MatchCancelCommand(wptr<ClientSession> p_client) : ICommand(p_client)
+            MatchCancelCommand(wptr<Proxy> p_proxy, int p_playerId) : ICommand(p_proxy, p_playerId)
             {
                 ICommand::commandId = CommandId::MATCH_CANCEL;
             };
@@ -59,7 +59,7 @@ namespace Command
             int matchType;
 
         public:
-            MatchAcceptCommand(wptr<ClientSession> p_client) : ICommand(p_client)
+            MatchAcceptCommand(wptr<Proxy> p_proxy, int p_playerId) : ICommand(p_proxy, p_playerId)
             {
                 ICommand::commandId = CommandId::MATCH_ACCEPT;
             };
@@ -71,83 +71,12 @@ namespace Command
             int matchType;
 
         public:
-            MatchDeclineCommand(wptr<ClientSession> p_client) : ICommand(p_client)
+            MatchDeclineCommand(wptr<Proxy> p_proxy, int p_playerId) : ICommand(p_proxy, p_playerId)
             {
                 ICommand::commandId = CommandId::MATCH_DECLINE;
             };
         };
         /* Match related - End */
-    }
-
-    /*-----------------------------------
-        NetworkSystem To GameSystem
-    -------------------------------------*/
-    namespace N2G {
-        enum CommandId {
-            BUY_COMMAND = 1,
-        };
-
-        class BuyCommand : public ICommand
-        {
-        public:
-            BuyCommand(wptr<ClientSession> p_client, int p_champUid) : champUid(p_champUid), ICommand(p_client)
-            {
-                ICommand::commandId = CommandId::BUY_COMMAND;
-            };
-
-        public:
-            int champUid;
-        };
-
-        class LocateToFieldCommand : public ICommand
-        {
-        public:
-            int fieldIndex;
-
-        public:
-            LocateToFieldCommand(wptr<ClientSession> p_client, int p_fieldIndex)
-                : fieldIndex(p_fieldIndex), ICommand(p_client) {};
-        };
-
-        class LocateToBenchCommand : public ICommand
-        {
-        public:
-            int benchIndex;
-
-        public:
-            LocateToBenchCommand(wptr<ClientSession> p_client, int p_benchIndex)
-                : benchIndex(p_benchIndex), ICommand(p_client) {};
-        };
-
-        class CreateDebugModeHostCommand : public ICommand
-        {
-
-        public:
-            CreateDebugModeHostCommand(wptr<ClientSession> p_client) : ICommand(p_client) {};
-        };
-    }
-
-    /*-----------------------------------
-        MatchSystem To GameSystem
-    -------------------------------------*/
-    namespace M2G {
-        enum CommandId {
-            CREATE_HOST,
-            CREATE_DEBUG_MODE_HOST,
-        };
-
-
-        class CreateHostCommand : public ICommand
-        {
-        public:
-            vector<wptr<ClientSession>> clientVec;
-
-        public:
-            CreateHostCommand(vector<wptr<ClientSession>> p_clientVec) : clientVec(p_clientVec)
-            {
-                ICommand::commandId = CommandId::CREATE_HOST;
-            };
-        };
     }
 
     /* Match related - Begin */

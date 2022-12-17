@@ -29,4 +29,5 @@ private:
     void OnClientRecv(sptr<AsioSession> client, BYTE* buffer, int len);
     void OnClientDisconnect(sptr<AsioSession> client);
     void HandleProxyRecv(sptr<Proxy> client, BYTE* buffer, int len);
+    void OnProxyConnect(sptr<Proxy> proxy, SERVER_TYPE type);
 };

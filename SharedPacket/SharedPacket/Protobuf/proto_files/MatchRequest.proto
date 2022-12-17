@@ -3,5 +3,5 @@ syntax = "proto3";
 package Protocol;
 
 message MatchRequest{
-
+    int32 playerId = 1;
 }

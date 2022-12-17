@@ -12,6 +12,7 @@ class AsioSession : public std::enable_shared_from_this<AsioSession>
 {
 public:
     AsioSession(shared_ptr<asio::io_context> context);
+    AsioSession(tcp::socket p_socket);
     virtual ~AsioSession();
     tcp::socket socket;
 
@@ -45,7 +46,7 @@ private:
     USE_LOCK;
 
     /* Asio Library */
-    tcp::resolver resolver;
+    //tcp::resolver resolver;
 
     /* 수신 관련 */
     RecvBuffer recvBuffer;

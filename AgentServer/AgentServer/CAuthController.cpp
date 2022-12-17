@@ -13,8 +13,8 @@ CAuthController::CAuthController(sptr<PlayerManager> p_playerManager)
 {
     playerManager = p_playerManager;
 
-    AddClientHandler((int)Packet_CL_AG::Auth::LOGIN_REQ, TO_LAMBDA(HandleLoginRequest));
-    AddClientHandler((int)Packet_CL_AG::Auth::LOGOUT_REQ, TO_LAMBDA(HandleLogoutRequest));
+    AddClientHandler((int)PacketId_CL_AG::Auth::LOGIN_REQ, TO_LAMBDA(HandleLoginRequest));
+    AddClientHandler((int)PacketId_CL_AG::Auth::LOGOUT_REQ, TO_LAMBDA(HandleLogoutRequest));
 }
 
 void CAuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
@@ -52,9 +52,9 @@ void CAuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buf
     Protocol::LoginResponse response;
     response.set_result(true);
 
-    Packet packet((int)Packet_CL_AG::Prefix::AUTH, (int)Packet_CL_AG::Auth::LOGIN_RES);
+    Packet packet((int)PacketId_CL_AG::Prefix::AUTH, (int)PacketId_CL_AG::Auth::LOGIN_RES);
     packet.WriteData<Protocol::LoginResponse>(response);
-    session->Send(packet.ToSendBuffer());
+    session->Send(packet.GetSendBuffer());
 }
 
 void CAuthController::HandleLogoutRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len) {

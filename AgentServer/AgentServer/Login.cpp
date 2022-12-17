@@ -58,7 +58,7 @@ void PacketHandler::Login::HandlePacket(sptr<ClientSession>& session, BYTE* buff
 
 	//Packet packet((int)PacketId::LOGIN_RES);
 	//packet.WriteData<Protocol::LoginResponse>(response);
-	//session->Send(packet.ToSendBuffer());
+	//session->Send(packet.GetSendBuffer());
 }
 
 void PacketHandler::Login::HandleFail(sptr<ClientSession>& session, string reason) {

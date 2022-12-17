@@ -4,4 +4,5 @@ package Protocol;
 
 message MatchRequestResponse{
     bool result = 1;
+    int32 playerId = 2;
 }

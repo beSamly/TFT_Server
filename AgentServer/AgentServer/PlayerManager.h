@@ -14,6 +14,7 @@ private:
 
 public:
     void AddPlayer(sptr<ClientSession> client);
+    sptr<ClientSession> FindPlayer(int playerId);
     void RemovePlayer(int playerId);
     void Update();
 };

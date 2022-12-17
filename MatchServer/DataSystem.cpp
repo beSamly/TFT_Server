@@ -3,5 +3,4 @@
 
 DataSystem::DataSystem() { tempClientManager = make_shared<TempClientManager>();
 
-
 }

@@ -7,15 +7,13 @@
 #include "PlayerManager.h"
 #include "CMatchController.h"
 #include "CAuthController.h"
-#include "PacketId_CL_AG.h"
 #include "IPacketController.h"
+#include "MTMatchController.h"
+#include "PacketId_AG_MT.h"
 
-MatchServerPacketController::MatchServerPacketController()
+MatchServerPacketController::MatchServerPacketController(sptr<PlayerManager> playerManager)
 {
-    /*   IPacketController::AddController((int)Packet_CL_AG::Prefix::AUTH, make_shared<CAuthController>());
-       IPacketController::AddController((int)Packet_CL_AG::Prefix::MATCH, make_shared<CMatchController>());*/
-
-    
+    IPacketController::AddController((int)PacketId_AG_MT::Prefix::MATCH, make_shared<MTMatchController>(playerManager));
 }
 
 MatchServerPacketController::~MatchServerPacketController() {}

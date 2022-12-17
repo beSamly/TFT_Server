@@ -18,7 +18,7 @@ public:
 	void WriteData();
 	int GetSize() { return send_buffer->WriteSize(); }
 
-	std::shared_ptr<SendBuffer> ToSendBuffer() { return send_buffer; };
+	std::shared_ptr<SendBuffer> GetSendBuffer() { return send_buffer; };
 	BYTE* GetByteBuffer() { return send_buffer->GetBuffer(); }
 };
 

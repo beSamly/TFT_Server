@@ -23,7 +23,6 @@
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/arena.h>
 #include <google/protobuf/arenastring.h>
-#include <google/protobuf/generated_message_bases.h>
 #include <google/protobuf/generated_message_util.h>
 #include <google/protobuf/metadata_lite.h>
 #include <google/protobuf/generated_message_reflection.h>
@@ -58,9 +57,10 @@ namespace Protocol {
 // ===================================================================
 
 class MatchRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:Protocol.MatchRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.MatchRequest) */ {
  public:
   inline MatchRequest() : MatchRequest(nullptr) {}
+  ~MatchRequest() override;
   explicit PROTOBUF_CONSTEXPR MatchRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
   MatchRequest(const MatchRequest& from);
@@ -133,15 +133,29 @@ class MatchRequest final :
   MatchRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<MatchRequest>(arena);
   }
-  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyFrom;
-  inline void CopyFrom(const MatchRequest& from) {
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const MatchRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const MatchRequest& from) {
+    MatchRequest::MergeImpl(*this, from);
   }
-  using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeFrom;
-  void MergeFrom(const MatchRequest& from) {
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl(*this, from);
-  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
   public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(MatchRequest* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
@@ -162,6 +176,18 @@ class MatchRequest final :
 
   // accessors -------------------------------------------------------
 
+  enum : int {
+    kPlayerIdFieldNumber = 1,
+  };
+  // int32 playerId = 1;
+  void clear_playerid();
+  int32_t playerid() const;
+  void set_playerid(int32_t value);
+  private:
+  int32_t _internal_playerid() const;
+  void _internal_set_playerid(int32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.MatchRequest)
  private:
   class _Internal;
@@ -170,7 +196,10 @@ class MatchRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    int32_t playerid_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_MatchRequest_2eproto;
 };
 // ===================================================================
@@ -183,6 +212,26 @@ class MatchRequest final :
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // MatchRequest
+
+// int32 playerId = 1;
+inline void MatchRequest::clear_playerid() {
+  _impl_.playerid_ = 0;
+}
+inline int32_t MatchRequest::_internal_playerid() const {
+  return _impl_.playerid_;
+}
+inline int32_t MatchRequest::playerid() const {
+  // @@protoc_insertion_point(field_get:Protocol.MatchRequest.playerId)
+  return _internal_playerid();
+}
+inline void MatchRequest::_internal_set_playerid(int32_t value) {
+  
+  _impl_.playerid_ = value;
+}
+inline void MatchRequest::set_playerid(int32_t value) {
+  _internal_set_playerid(value);
+  // @@protoc_insertion_point(field_set:Protocol.MatchRequest.playerId)
+}
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop

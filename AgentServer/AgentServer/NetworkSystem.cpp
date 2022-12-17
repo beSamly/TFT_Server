@@ -7,6 +7,8 @@
 #include "ProxyManager.h"
 #include "ClientPacketController.h"
 #include "MatchServerPacketController.h"
+#include "PacketId_Common.h"
+#include "ProxyLoginReq.pb.h"
 
 namespace
 {
@@ -18,11 +20,11 @@ NetworkSystem::NetworkSystem(sptr<DataSystem> p_dataSystem) : dataSystem(p_dataS
 {
     context = make_shared<asio::io_context>();
     socketServer = make_shared<SocketServer>(context, PORT);
-    proxyManager = make_shared<ProxyManager>();
+    proxyManager = make_shared<ProxyManager>(SERVER_TYPE::AGENT);
     // packetController = make_unique<PacketController>();
 
-    clientPacketController = make_unique<ClientPacketController>(dataSystem);
-    matchServerPacketController = make_unique<MatchServerPacketController>();
+    clientPacketController = make_unique<ClientPacketController>(dataSystem, proxyManager);
+    matchServerPacketController = make_unique<MatchServerPacketController>(dataSystem->GetPlayerManager());
 }
 
 void NetworkSystem::StartSocketServer()
@@ -41,7 +43,7 @@ void NetworkSystem::StartProxy()
 {
     proxyManager->SetHandleRecv([&](sptr<Proxy> session, BYTE* buffer, int len)
                                 { HandleProxyRecv(session, buffer, len); });
-
+    proxyManager->SetOnConnect([&](sptr<Proxy> proxy, SERVER_TYPE type) { OnProxyConnect(proxy, type); });
     proxyManager->ConnectToMatchServer();
 }
 
@@ -51,13 +53,14 @@ void NetworkSystem::RunIoContext() { socketServer->RunIoContext(); }
 
 void NetworkSystem::OnClientAccept(sptr<AsioSession> client)
 {
+    spdlog::info("[NetworkSystem] Client connected");
     sptr<ClientSession> clientSession = dynamic_pointer_cast<ClientSession>(client);
     if (!clientSession)
     {
         return;
     }
 
-    dataSystem->GetPlayerManager()->AddPlayer(clientSession);
+    dataSystem->GetTempClientManager()->AddClient(clientSession);
 }
 
 void NetworkSystem::OnClientRecv(sptr<AsioSession> client, BYTE* buffer, int len)
@@ -74,6 +77,7 @@ void NetworkSystem::OnClientRecv(sptr<AsioSession> client, BYTE* buffer, int len
 
 void NetworkSystem::OnClientDisconnect(sptr<AsioSession> client)
 {
+    spdlog::info("[NetworkSystem] Client disconnected");
     sptr<ClientSession> clientSession = dynamic_pointer_cast<ClientSession>(client);
 
     if (!clientSession)
@@ -87,7 +91,7 @@ void NetworkSystem::OnClientDisconnect(sptr<AsioSession> client)
         return;
     }
 
-    Packet pck((int)Packet_CL_AG::Prefix::AUTH, (int)Packet_CL_AG::Auth::LOGOUT_REQ);
+    Packet pck((int)PacketId_CL_AG::Prefix::AUTH, (int)PacketId_CL_AG::Auth::LOGOUT_REQ);
     pck.WriteData();
     clientPacketController->HandleClientPacket(clientSession, pck.GetByteBuffer(), pck.GetSize());
 }
@@ -106,4 +110,17 @@ void NetworkSystem::HandleProxyRecv(sptr<Proxy> client, BYTE* buffer, int len)
             // error
             break;
     }
+}
+
+void NetworkSystem::OnProxyConnect(sptr<Proxy> proxy, SERVER_TYPE type) {
+
+    spdlog::debug("[NetworkSystem] proxy client connected type = {}", (int)type);
+
+    // 서버 로그인
+    Protocol::ProxyLoginReq req;
+    req.set_servertype((int)SERVER_TYPE::AGENT);
+
+    Packet packet((int)PacketId_Common::Prefix::AUTH, (int)PacketId_Common::Auth::PROXY_LOGIN_REQ);
+    packet.WriteData<Protocol::ProxyLoginReq>(req);
+    proxy->Send(packet.GetSendBuffer());
 }

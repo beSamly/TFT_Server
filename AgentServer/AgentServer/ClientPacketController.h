@@ -7,6 +7,7 @@
 #include "PlayerManager.h"
 #include "IPacketController.h"
 #include "DataSystem.h"
+#include "ProxyManager.h"
 
 using std::function;
 using std::map;
@@ -14,6 +15,6 @@ using std::map;
 class ClientPacketController : public IPacketController
 {
 public:
-    ClientPacketController(sptr<DataSystem> dataSystem);
+    ClientPacketController(sptr<DataSystem> dataSystem, sptr<ProxyManager> proxyManager);
     ~ClientPacketController();
 };

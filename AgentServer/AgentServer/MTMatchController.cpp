@@ -1,0 +1,82 @@
+#include "pch.h"
+#include "MTMatchController.h"
+#include "PacketId_CL_AG.h"
+#include "PacketHeader.h"
+#include "spdlog/spdlog.h"
+#include "MatchRequestResponse.pb.h"
+#include "Packet.h"
+#include "PacketId_AG_MT.h"
+#include "MatchRequest.pb.h"
+#include "PlayerInfo.pb.h"
+
+MTMatchController::MTMatchController(sptr<PlayerManager> p_playerManager)
+    : playerManager(p_playerManager)
+{
+    AddProxyHandler((int)PacketId_AG_MT::Match::MATCH_REQ_RES, TO_LAMBDA_FOR_PROXY(HandleMatchRes));
+    AddProxyHandler((int)PacketId_AG_MT::Match::PENDING_MATCH_CREATED_SEND, TO_LAMBDA_FOR_PROXY(HandleMatchRes));
+    AddProxyHandler((int)PacketId_AG_MT::Match::PENDING_MATCH_CANCELED_SEND, TO_LAMBDA_FOR_PROXY(HandleMatchRes));
+    AddProxyHandler((int)PacketId_AG_MT::Match::MATCH_CREATED_SEND, TO_LAMBDA_FOR_PROXY(HandleMatchRes));
+}
+
+void MTMatchController::HandleMatchRes(sptr<Proxy>& session, BYTE* buffer, int32 len)
+{
+    Protocol::MatchRequestResponse res;
+    if (res.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
+        return;
+
+    // 유저 찾기
+    int playerId = res.playerid();
+    sptr<ClientSession> client = playerManager->FindPlayer(playerId);
+    if (!client)
+        return;
+
+    // 유저에게 응답
+    Packet packet((int)PacketId_CL_AG::Prefix::MATCH, (int)PacketId_CL_AG::Match::MATCH_REQ_RES);
+    packet.WriteData<Protocol::MatchRequestResponse>(res);
+    client->Send(packet.GetSendBuffer());
+}
+
+void MTMatchController::HandlePendingMatchCreatedSend(sptr<Proxy>& session, BYTE* buffer, int32 len) {
+    Protocol::PlayerInfo res;
+    if (res.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
+        return;
+
+    int playerId = res.playerid();
+
+    if (sptr<ClientSession> client = playerManager->FindPlayer(playerId))
+    {
+        Packet packet((int)PacketId_CL_AG::Prefix::MATCH, (int)PacketId_CL_AG::Match::PENDING_MATCH_CREATED_SEND);
+        packet.WriteData();
+        client->Send(packet.GetSendBuffer());
+    }
+}
+
+void MTMatchController::HandlePendingMatchCanceledSend(sptr<Proxy>& session, BYTE* buffer, int32 len) {
+    Protocol::PlayerInfo res;
+    if (res.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
+        return;
+
+    int playerId = res.playerid();
+
+    if (sptr<ClientSession> client = playerManager->FindPlayer(playerId))
+    {
+        Packet packet((int)PacketId_CL_AG::Prefix::MATCH, (int)PacketId_CL_AG::Match::PENDING_MATCH_CANCELED_SEND);
+        packet.WriteData();
+        client->Send(packet.GetSendBuffer());
+    }
+}
+
+void MTMatchController::HandleMatchCreatedSend(sptr<Proxy>& session, BYTE* buffer, int32 len) {
+    Protocol::PlayerInfo res;
+    if (res.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
+        return;
+
+    int playerId = res.playerid();
+
+    if (sptr<ClientSession> client = playerManager->FindPlayer(playerId))
+    {
+        Packet packet((int)PacketId_CL_AG::Prefix::MATCH, (int)PacketId_CL_AG::Match::MATCH_CREATED_SEND);
+        packet.WriteData();
+        client->Send(packet.GetSendBuffer());
+    }
+}

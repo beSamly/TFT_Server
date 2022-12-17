@@ -16,8 +16,8 @@ NetworkSystem::NetworkSystem(sptr<DataSystem> p_dataSystem, sptr<MatchSystem> ma
     context = make_shared<asio::io_context>();
     socketServer = make_shared<SocketServer>(context, PORT);
     agentServerPacketController = make_unique<AgentServerPacketController>(matchSystem);
-    clientPacketController = make_unique<ClientPacketController>(dataSystem);
-    proxyManager = make_shared<ProxyManager>();
+    proxyManager = make_shared<ProxyManager>(SERVER_TYPE::MATCH);
+    clientPacketController = make_unique<ClientPacketController>(dataSystem, proxyManager);
 }
 
 void NetworkSystem::StartSocketServer()
@@ -74,7 +74,7 @@ void NetworkSystem::OnClientRecv(sptr<AsioSession> client, BYTE* buffer, int len
 
 void NetworkSystem::OnClientDisconnect(sptr<AsioSession> client)
 {
-    // spdlog::debug("[NetworkSystem] Client disconnected");
+    spdlog::debug("[NetworkSystem] Client disconnected");
 
     // sptr<ClientSession> clientSession = dynamic_pointer_cast<ClientSession>(client);
 
@@ -96,7 +96,6 @@ void NetworkSystem::OnClientDisconnect(sptr<AsioSession> client)
 
 void NetworkSystem::HandleProxyRecv(sptr<Proxy> session, BYTE* buffer, int len)
 {
-
     switch (session->GetServerType())
     {
         case SERVER_TYPE::AGENT:

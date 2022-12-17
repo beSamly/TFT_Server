@@ -9,9 +9,11 @@
 #include "PacketHeader.h"
 
 AsioSession::AsioSession(shared_ptr<asio::io_context> context)
-    : socket(*context), resolver(*context), recvBuffer(MAX_LENGTH)
+    : socket(*context), /*resolver(*context),*/ recvBuffer(MAX_LENGTH)
 {
 }
+
+AsioSession::AsioSession(tcp::socket p_socket) : socket(std::move(p_socket)), recvBuffer(MAX_LENGTH) {}
 
 AsioSession::~AsioSession() {}
 

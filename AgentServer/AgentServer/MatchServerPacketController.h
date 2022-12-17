@@ -13,6 +13,6 @@ using std::map;
 class MatchServerPacketController : public IPacketController
 {
 public:
-    MatchServerPacketController();
+    MatchServerPacketController(sptr<PlayerManager> playerManager);
     ~MatchServerPacketController();
 };

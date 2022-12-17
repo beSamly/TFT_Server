@@ -5,9 +5,9 @@
 void TempClientManager::AddClient(sptr<ClientSession> client)
 {
     WRITE_LOCK;
-    client->GetPlayer()->playerId = tempPlayerId;
-    clientMap->emplace(tempPlayerId, client);
-    tempPlayerId++;
+    int proxyId = tempProxyId;
+    clientMap->emplace(proxyId, client);
+    tempProxyId++;
     return;
 }
 

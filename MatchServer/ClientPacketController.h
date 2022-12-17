@@ -12,6 +12,6 @@ using std::map;
 class ClientPacketController : public IPacketController
 {
 public:
-    ClientPacketController(sptr<DataSystem> dataSystem);
+    ClientPacketController(sptr<DataSystem> dataSystem, sptr<ProxyManager> proxyMangaer);
     ~ClientPacketController();
 };

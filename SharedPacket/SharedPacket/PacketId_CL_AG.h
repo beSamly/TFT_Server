@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Packet_CL_AG
+namespace PacketId_CL_AG
 {
     enum Prefix : int
     {
@@ -14,7 +14,7 @@ namespace Packet_CL_AG
     {
         LOGIN_REQ = 1,
         LOGIN_RES,
-        LOGOUT_REQ,
+        LOGOUT_REQ
     };
 
     enum Match : int
