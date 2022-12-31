@@ -11,4 +11,5 @@ public:
 private:
     void HandleMatchRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len);
     void HandleMatchCancelRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len);
+    void HandleMatchAcceptRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len);
 };

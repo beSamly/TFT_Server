@@ -43,6 +43,9 @@
     <ClCompile Include="Protobuf\PlayerInfo.pb.cc">
       <Filter>Source Files\Protobuf\Common</Filter>
     </ClCompile>
+    <ClCompile Include="Protobuf\MatchCancelResponse.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -84,6 +87,9 @@
     </ClInclude>
     <ClInclude Include="Protobuf\PlayerInfo.pb.h">
       <Filter>Source Files\Protobuf\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\MatchCancelResponse.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

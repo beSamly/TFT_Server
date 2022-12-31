@@ -166,6 +166,7 @@
     </ClCompile>
     <ClCompile Include="Protobuf\LoginRequest.pb.cc" />
     <ClCompile Include="Protobuf\LoginResponse.pb.cc" />
+    <ClCompile Include="Protobuf\MatchCancelResponse.pb.cc" />
     <ClCompile Include="Protobuf\MatchRequest.pb.cc" />
     <ClCompile Include="Protobuf\MatchRequestResponse.pb.cc" />
     <ClCompile Include="Protobuf\PlayerInfo.pb.cc" />
@@ -182,6 +183,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Protobuf\LoginRequest.pb.h" />
     <ClInclude Include="Protobuf\LoginResponse.pb.h" />
+    <ClInclude Include="Protobuf\MatchCancelResponse.pb.h" />
     <ClInclude Include="Protobuf\MatchRequest.pb.h" />
     <ClInclude Include="Protobuf\MatchRequestResponse.pb.h" />
     <ClInclude Include="Protobuf\PlayerInfo.pb.h" />

@@ -10,7 +10,6 @@ enum Prefix : int {
 enum Auth : int {
   LOGIN_REQ = 1,
   LOGIN_RES,
-  LOGOUT_REQ,
 };
 
 enum Game : int { CREATE_HOST_REQ = 1 };

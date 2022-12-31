@@ -17,6 +17,11 @@ enum SERVER_TYPE : int
 
 class Proxy : public AsioSession
 {
+private:
+    int serverType;
+    string address;
+    int port;
+
 public:
     // Proxy(shared_ptr<asio::io_context> ioContext) : serverType(SERVER_TYPE::NOT_INITIALIZED),
     // AsioSession(ioContext){};
@@ -41,17 +46,34 @@ public:
     bool IsAgentServer() { return serverType == (int)SERVER_TYPE::AGENT; }
     bool IsMatchServer() { return serverType == (int)SERVER_TYPE::MATCH; }
     bool IsGameServer() { return serverType == (int)SERVER_TYPE::GAME; }
+    void SetConnectionInfo(string p_address, int p_port)
+    {
+        port = p_port;
+        address = p_address;
+    }
+    string GetAddress() { return address; }
+    int GetPort() { return port; }
 
-private:
-    int serverType;
+    void Connect() { AsioSession::Connect(address, port); }
+
+    bool operator==(shared_ptr<Proxy> other) { return other->address == this->address; }
 };
 
 class ProxyManager
 {
+private:
+    USE_LOCK;
+    shared_ptr<asio::io_context> ioContext;
+    std::map<int, vector<shared_ptr<Proxy>>> proxyMap;
+    vector<shared_ptr<Proxy>> reconnectVec;
+    function<void(shared_ptr<Proxy>, BYTE*, int32)> HandleRecv;
+    function<void(shared_ptr<Proxy>, SERVER_TYPE)> OnConnectCallback;
+    SERVER_TYPE serverType;
+
 public:
     ProxyManager(SERVER_TYPE type);
 
-    void RunIoContext() { ioContext->run(); }
+    void RunIoContext();
     void AddProxy(int type, shared_ptr<Proxy> session);
 
     void ConnectToMatchServer();
@@ -65,12 +87,7 @@ public:
     void SetHandleRecv(function<void(shared_ptr<Proxy>, BYTE*, int32)> callback) { HandleRecv = callback; };
     void SetOnConnect(function<void(shared_ptr<Proxy>, SERVER_TYPE)> callback) { OnConnectCallback = callback; };
 
-private:
-    shared_ptr<asio::io_context> ioContext;
-    std::map<int, vector<shared_ptr<Proxy>>> proxyMap;
-    function<void(shared_ptr<Proxy>, BYTE*, int32)> HandleRecv;
-    function<void(shared_ptr<Proxy>, SERVER_TYPE)> OnConnectCallback;
-    SERVER_TYPE serverType;
+    void DoReconnect();
 
 private:
     void OnConnect(shared_ptr<AsioSession> session);

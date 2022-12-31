@@ -5,10 +5,10 @@
 class Packet
 {
 public:
-	Packet(int p_prefix, int packetId) : prefix(p_prefix), packet_id(packetId) {}
+    Packet(int p_prefix, int p_packetId) : prefix(p_prefix), packetId(p_packetId) {}
 
 private:
-	int packet_id;
+	int packetId;
 	int prefix;
 	std::shared_ptr<SendBuffer> send_buffer;
 
@@ -33,7 +33,7 @@ inline void Packet::WriteData(T& pkt)
 
 	header->size = packetSize;
 	header->prefix = prefix;
-	header->id = packet_id;
+	header->id = packetId;
 
 	ASSERT_CRASH(pkt.SerializeToArray(&header[1], dataSize));
 	send_buffer->Close(packetSize);

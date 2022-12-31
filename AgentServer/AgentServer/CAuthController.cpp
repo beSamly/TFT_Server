@@ -8,11 +8,12 @@
 #include "Player.h"
 #include "PlayerManager.h"
 #include "PacketId_CL_AG.h"
+#include "PacketId_AG_MT.h"
+#include "PlayerInfo.pb.h"
 
-CAuthController::CAuthController(sptr<PlayerManager> p_playerManager)
+CAuthController::CAuthController(sptr<PlayerManager> p_playerManager, sptr<ProxyManager> p_proxyMangear)
+    : playerManager(p_playerManager), proxyManager(p_proxyMangear)
 {
-    playerManager = p_playerManager;
-
     AddClientHandler((int)PacketId_CL_AG::Auth::LOGIN_REQ, TO_LAMBDA(HandleLoginRequest));
     AddClientHandler((int)PacketId_CL_AG::Auth::LOGOUT_REQ, TO_LAMBDA(HandleLogoutRequest));
 }
@@ -57,14 +58,18 @@ void CAuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buf
     session->Send(packet.GetSendBuffer());
 }
 
-void CAuthController::HandleLogoutRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len) {
-
+void CAuthController::HandleLogoutRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
+{
     // PlayerManager에서 제거
     int playerId = session->GetPlayer()->playerId;
     playerManager->RemovePlayer(playerId);
 
-    // TODO 매칭 상태라면 MatchSystem에 MatchCancel 요청
-    /*sptr<N2M::MatchCancelCommand> command = make_shared<N2M::MatchCancelCommand>(session);
-    command->playerId = playerId;
-    matchSystem->PushCommand(command);*/
+    // 매칭 상태라면 MatchSystem에 MatchCancel 요청
+    Protocol::PlayerInfo req;
+    req.set_playerid(session->GetPlayer()->playerId);
+
+    Packet packet((int)PacketId_AG_MT::Prefix::MATCH, (int)PacketId_AG_MT::Match::MATCH_CANCEL_REQ);
+    packet.WriteData<Protocol::PlayerInfo>(req);
+
+    proxyManager->SendToMatchServer(packet.GetSendBuffer());
 }

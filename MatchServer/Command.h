@@ -32,7 +32,6 @@ namespace Command
         {
         public:
             int matchType;
-            int playerId;
 
         public:
             MatchRequestCommand(wptr<Proxy> p_proxy, int p_playerId) : ICommand(p_proxy, p_playerId)

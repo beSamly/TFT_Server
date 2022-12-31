@@ -13,6 +13,7 @@ void PlayerManager::AddPlayer(sptr<ClientSession> client)
 
 sptr<ClientSession> PlayerManager::FindPlayer(int playerId)
 {
+    WRITE_LOCK;
     map<int, sptr<ClientSession>>::iterator iter = clientMap->find(playerId);
     return iter == clientMap->end() ? nullptr : iter->second;
 }

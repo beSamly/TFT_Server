@@ -13,6 +13,7 @@ public:
     void StartProxy();
     void RunProxyIoContext();
     void RunIoContext();
+    void Run();
 
 private:
     sptr<SocketServer> socketServer;

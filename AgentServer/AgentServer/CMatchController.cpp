@@ -13,11 +13,11 @@ CMatchController::CMatchController(sptr<ProxyManager> p_proxyManager) : proxyMan
 {
     AddClientHandler((int)PacketId_CL_AG::Match::MATCH_REQ, TO_LAMBDA(HandleMatchRequest));
     AddClientHandler((int)PacketId_CL_AG::Match::MATCH_CANCEL_REQ, TO_LAMBDA(HandleMatchCancelRequest));
+    AddClientHandler((int)PacketId_CL_AG::Match::MATCH_ACCEPT_REQ, TO_LAMBDA(HandleMatchAcceptRequest));
 }
 
 void CMatchController::HandleMatchRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
 {
-    // 매칭 시스템에 요청
     Protocol::PlayerInfo req;
     req.set_playerid(session->GetPlayer()->playerId);
 
@@ -29,7 +29,6 @@ void CMatchController::HandleMatchRequest(sptr<ClientSession>& session, BYTE* bu
 
 void CMatchController::HandleMatchCancelRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
 {
-    // 매칭 시스템에 요청
     Protocol::PlayerInfo req;
     req.set_playerid(session->GetPlayer()->playerId);
 
@@ -37,5 +36,14 @@ void CMatchController::HandleMatchCancelRequest(sptr<ClientSession>& session, BY
     packet.WriteData<Protocol::PlayerInfo>(req);
 
     proxyManager->SendToMatchServer(packet.GetSendBuffer());
+}
 
+void CMatchController::HandleMatchAcceptRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len) {
+    Protocol::PlayerInfo req;
+    req.set_playerid(session->GetPlayer()->playerId);
+
+    Packet packet((int)PacketId_AG_MT::Prefix::MATCH, (int)PacketId_AG_MT::Match::MATCH_ACCEPT_REQ);
+    packet.WriteData<Protocol::PlayerInfo>(req);
+
+    proxyManager->SendToMatchServer(packet.GetSendBuffer());
 }

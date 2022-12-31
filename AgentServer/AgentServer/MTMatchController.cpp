@@ -8,14 +8,17 @@
 #include "PacketId_AG_MT.h"
 #include "MatchRequest.pb.h"
 #include "PlayerInfo.pb.h"
+#include "MatchCancelResponse.pb.h"
 
-MTMatchController::MTMatchController(sptr<PlayerManager> p_playerManager)
-    : playerManager(p_playerManager)
+MTMatchController::MTMatchController(sptr<PlayerManager> p_playerManager) : playerManager(p_playerManager)
 {
     AddProxyHandler((int)PacketId_AG_MT::Match::MATCH_REQ_RES, TO_LAMBDA_FOR_PROXY(HandleMatchRes));
-    AddProxyHandler((int)PacketId_AG_MT::Match::PENDING_MATCH_CREATED_SEND, TO_LAMBDA_FOR_PROXY(HandleMatchRes));
-    AddProxyHandler((int)PacketId_AG_MT::Match::PENDING_MATCH_CANCELED_SEND, TO_LAMBDA_FOR_PROXY(HandleMatchRes));
-    AddProxyHandler((int)PacketId_AG_MT::Match::MATCH_CREATED_SEND, TO_LAMBDA_FOR_PROXY(HandleMatchRes));
+    AddProxyHandler((int)PacketId_AG_MT::Match::MATCH_CANCEL_RES, TO_LAMBDA_FOR_PROXY(HandleMatchCancelRes));
+    AddProxyHandler((int)PacketId_AG_MT::Match::PENDING_MATCH_CREATED_SEND,
+                    TO_LAMBDA_FOR_PROXY(HandlePendingMatchCreatedSend));
+    AddProxyHandler((int)PacketId_AG_MT::Match::PENDING_MATCH_CANCELED_SEND,
+                    TO_LAMBDA_FOR_PROXY(HandlePendingMatchCanceledSend));
+    AddProxyHandler((int)PacketId_AG_MT::Match::MATCH_CREATED_SEND, TO_LAMBDA_FOR_PROXY(HandleMatchCreatedSend));
 }
 
 void MTMatchController::HandleMatchRes(sptr<Proxy>& session, BYTE* buffer, int32 len)
@@ -36,7 +39,8 @@ void MTMatchController::HandleMatchRes(sptr<Proxy>& session, BYTE* buffer, int32
     client->Send(packet.GetSendBuffer());
 }
 
-void MTMatchController::HandlePendingMatchCreatedSend(sptr<Proxy>& session, BYTE* buffer, int32 len) {
+void MTMatchController::HandlePendingMatchCreatedSend(sptr<Proxy>& session, BYTE* buffer, int32 len)
+{
     Protocol::PlayerInfo res;
     if (res.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
         return;
@@ -51,7 +55,8 @@ void MTMatchController::HandlePendingMatchCreatedSend(sptr<Proxy>& session, BYTE
     }
 }
 
-void MTMatchController::HandlePendingMatchCanceledSend(sptr<Proxy>& session, BYTE* buffer, int32 len) {
+void MTMatchController::HandlePendingMatchCanceledSend(sptr<Proxy>& session, BYTE* buffer, int32 len)
+{
     Protocol::PlayerInfo res;
     if (res.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
         return;
@@ -66,7 +71,8 @@ void MTMatchController::HandlePendingMatchCanceledSend(sptr<Proxy>& session, BYT
     }
 }
 
-void MTMatchController::HandleMatchCreatedSend(sptr<Proxy>& session, BYTE* buffer, int32 len) {
+void MTMatchController::HandleMatchCreatedSend(sptr<Proxy>& session, BYTE* buffer, int32 len)
+{
     Protocol::PlayerInfo res;
     if (res.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
         return;
@@ -77,6 +83,26 @@ void MTMatchController::HandleMatchCreatedSend(sptr<Proxy>& session, BYTE* buffe
     {
         Packet packet((int)PacketId_CL_AG::Prefix::MATCH, (int)PacketId_CL_AG::Match::MATCH_CREATED_SEND);
         packet.WriteData();
+        client->Send(packet.GetSendBuffer());
+    }
+}
+
+void MTMatchController::HandleMatchCancelRes(sptr<Proxy>& session, BYTE* buffer, int32 len)
+{
+    Protocol::MatchCancelResponse resFromMatchServer;
+    if (resFromMatchServer.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
+        return;
+
+    int playerId = resFromMatchServer.playerid();
+    bool result = resFromMatchServer.result();
+
+    if (sptr<ClientSession> client = playerManager->FindPlayer(playerId))
+    {
+        Protocol::MatchCancelResponse res;
+        res.set_result(result);
+        res.set_playerid(playerId);
+        Packet packet((int)PacketId_CL_AG::Prefix::MATCH, (int)PacketId_CL_AG::Match::MATCH_CANCEL_RES);
+        packet.WriteData<Protocol::MatchCancelResponse>(res);
         client->Send(packet.GetSendBuffer());
     }
 }

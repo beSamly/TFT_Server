@@ -11,6 +11,7 @@ public:
     MatchController(sptr<MatchSystem> matchSystem);
 
 private:
-    void HandleMatchReq(sptr<Proxy>& session, BYTE* buffer, int32 len);
-    void HandleMatchCancelReq(sptr<Proxy>& session, BYTE* buffer, int32 len);
+    void HandleMatchReq(sptr<Proxy>& proxy, BYTE* buffer, int32 len);
+    void HandleMatchCancelReq(sptr<Proxy>& proxy, BYTE* buffer, int32 len);
+    void HandleMatchAcceptReq(sptr<Proxy>& proxy, BYTE* buffer, int32 len);
 };

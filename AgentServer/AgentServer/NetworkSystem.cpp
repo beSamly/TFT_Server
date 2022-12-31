@@ -86,14 +86,14 @@ void NetworkSystem::OnClientDisconnect(sptr<AsioSession> client)
     }
 
     // 로그인 안 한 상태라면 더이상 처리할 필요 없다.
-    if (clientSession->GetPlayer() == nullptr)
+    sptr<Player> player = clientSession->GetPlayer();
+    int playerId = player ? player->playerId : 0;
+    if (dataSystem->GetPlayerManager()->FindPlayer(playerId))
     {
-        return;
+        Packet pck((int)PacketId_CL_AG::Prefix::AUTH, (int)PacketId_CL_AG::Auth::LOGOUT_REQ);
+        pck.WriteData();
+        clientPacketController->HandleClientPacket(clientSession, pck.GetByteBuffer(), pck.GetSize());
     }
-
-    Packet pck((int)PacketId_CL_AG::Prefix::AUTH, (int)PacketId_CL_AG::Auth::LOGOUT_REQ);
-    pck.WriteData();
-    clientPacketController->HandleClientPacket(clientSession, pck.GetByteBuffer(), pck.GetSize());
 }
 
 void NetworkSystem::HandleProxyRecv(sptr<Proxy> client, BYTE* buffer, int len)
@@ -112,7 +112,8 @@ void NetworkSystem::HandleProxyRecv(sptr<Proxy> client, BYTE* buffer, int len)
     }
 }
 
-void NetworkSystem::OnProxyConnect(sptr<Proxy> proxy, SERVER_TYPE type) {
+void NetworkSystem::OnProxyConnect(sptr<Proxy> proxy, SERVER_TYPE type)
+{
 
     spdlog::debug("[NetworkSystem] proxy client connected type = {}", (int)type);
 
@@ -123,4 +124,9 @@ void NetworkSystem::OnProxyConnect(sptr<Proxy> proxy, SERVER_TYPE type) {
     Packet packet((int)PacketId_Common::Prefix::AUTH, (int)PacketId_Common::Auth::PROXY_LOGIN_REQ);
     packet.WriteData<Protocol::ProxyLoginReq>(req);
     proxy->Send(packet.GetSendBuffer());
+}
+
+void NetworkSystem::Run()
+{
+   
 }

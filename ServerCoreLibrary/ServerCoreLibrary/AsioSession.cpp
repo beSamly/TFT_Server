@@ -86,6 +86,7 @@ void AsioSession::Connect(string address, int port)
                              }
                              else
                              {
+                                 OnDisconnect();
                                  std::cout << "[AsionSession] connection failed. error = " << ec << std::endl;
                              }
                          });

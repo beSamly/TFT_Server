@@ -12,7 +12,7 @@
 
 ClientPacketController::ClientPacketController(sptr<DataSystem> dataSystem, sptr<ProxyManager> proxyManager)
 {
-    IPacketController::AddController((int)PacketId_CL_AG::Prefix::AUTH, make_shared<CAuthController>(dataSystem->GetPlayerManager()));
+    IPacketController::AddController((int)PacketId_CL_AG::Prefix::AUTH, make_shared<CAuthController>(dataSystem->GetPlayerManager(), proxyManager));
     IPacketController::AddController((int)PacketId_CL_AG::Prefix::MATCH, make_shared<CMatchController>(proxyManager));
 
     // PacketController::AddController((int)PacketId_CL_AG::Prefix::IN_GAME, make_shared<CGameController>(matchSystem))

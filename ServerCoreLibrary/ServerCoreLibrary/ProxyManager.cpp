@@ -2,8 +2,36 @@
 #include "ProxyManager.h"
 #include "spdlog/spdlog.h"
 #include "Packet.h"
+#include <chrono>
 
 ProxyManager::ProxyManager(SERVER_TYPE type) : serverType(type) { ioContext = make_shared<asio::io_context>(); }
+
+void ProxyManager::RunIoContext()
+{
+        std::chrono::time_point<std::chrono::system_clock> targetTime = std::chrono::system_clock::now();
+        targetTime += std::chrono::seconds(10);
+        ioContext->run();
+
+        DWORD intervalTick = 5000;
+        DWORD nextTickTime = GetTickCount() + intervalTick;
+        DWORD prevTickTime = GetTickCount();
+
+        while (true)
+        {
+            DWORD currentTime = GetTickCount();
+
+            if (currentTime > nextTickTime)
+            {
+                float deltaTime = currentTime - prevTickTime;
+                prevTickTime = currentTime;
+                nextTickTime = currentTime + intervalTick;
+                float deltaTimeInSec = deltaTime / 1000;
+                ioContext->stop();
+                DoReconnect();
+                ioContext->run();
+            }
+        }
+}
 
 void ProxyManager::ConnectToMatchServer() { Connect("127.0.0.1", 4000, SERVER_TYPE::MATCH); }
 void ProxyManager::ConnectToGameServer() { Connect("127.0.0.1", 5000, SERVER_TYPE::GAME); }
@@ -36,7 +64,8 @@ void ProxyManager::Connect(string address, int port, SERVER_TYPE type)
                                { OnRecv(client, buffer, len); });
 
     session->SetOnDisconnectCallback([&](shared_ptr<AsioSession> client) { OnDisconnect(client); });
-    session->Connect(address, port);
+    session->SetConnectionInfo(address, port);
+    session->Connect();
     AddProxy((int)type, session);
 }
 
@@ -60,6 +89,8 @@ void ProxyManager::OnRecv(shared_ptr<AsioSession> session, BYTE* buffer, int len
 
 void ProxyManager::OnConnect(shared_ptr<AsioSession> session)
 {
+    WRITE_LOCK;
+
     shared_ptr<Proxy> proxySession = dynamic_pointer_cast<Proxy>(session);
     if (!session)
     {
@@ -71,13 +102,45 @@ void ProxyManager::OnConnect(shared_ptr<AsioSession> session)
 
 void ProxyManager::OnDisconnect(shared_ptr<AsioSession> session)
 {
+    WRITE_LOCK;
+
     shared_ptr<Proxy> proxySession = dynamic_pointer_cast<Proxy>(session);
     if (!proxySession)
     {
         return;
     }
 
+    int serverType = (int)proxySession->GetServerType();
+    if (!proxyMap.count(serverType))
+    {
+        return;
+    }
+
     // proxyMap 에서 삭제
+    vector<shared_ptr<Proxy>>& proxyVec = proxyMap[serverType];
+    vector<shared_ptr<Proxy>>::iterator iter = proxyVec.begin();
+    while (iter != proxyVec.end())
+    {
+        if (proxySession == *iter)
+        {
+            reconnectVec.push_back(proxySession);
+            proxySession->socket.close();
+            iter = proxyVec.erase(iter);
+        }
+    }
 
     return;
+}
+
+void ProxyManager::DoReconnect()
+{
+    for (shared_ptr<Proxy> proxy : reconnectVec)
+    {
+        string address = proxy->GetAddress();
+        SERVER_TYPE type = proxy->GetServerType();
+        int port = proxy->GetPort();
+        Connect(address, port, type);
+    }
+
+    reconnectVec.clear();
 }

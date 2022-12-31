@@ -4,6 +4,8 @@
 #include "Packet.h"
 #include "ProxyManager.h"
 #include "ClientPacketController.h"
+#include "ProxyLoginReq.pb.h"
+#include "PacketId_Common.h"
 
 namespace
 {
@@ -37,7 +39,7 @@ void NetworkSystem::StartProxy()
 {
     proxyManager->SetHandleRecv([&](sptr<Proxy> session, BYTE* buffer, int len)
                                 { HandleProxyRecv(session, buffer, len); });
-
+    proxyManager->SetOnConnect([&](sptr<Proxy> proxy, SERVER_TYPE type) { OnProxyConnect(proxy, type); });
     proxyManager->ConnectToGameServer();
 }
 
@@ -92,6 +94,19 @@ void NetworkSystem::OnClientDisconnect(sptr<AsioSession> client)
     // Packet pck((int)PacketId::Prefix::AUTH, (int)PacketId::Auth::LOGOUT_REQ);
     // pck.WriteData();
     // packetController->HandlePacket(clientSession, pck.GetByteBuffer(), pck.GetSize());
+}
+
+void NetworkSystem::OnProxyConnect(sptr<Proxy> proxy, SERVER_TYPE type)
+{
+    spdlog::debug("[NetworkSystem] proxy client connected type = {}", (int)type);
+
+    // 서버 로그인
+    Protocol::ProxyLoginReq req;
+    req.set_servertype((int)SERVER_TYPE::MATCH);
+
+    Packet packet((int)PacketId_Common::Prefix::AUTH, (int)PacketId_Common::Auth::PROXY_LOGIN_REQ);
+    packet.WriteData<Protocol::ProxyLoginReq>(req);
+    proxy->Send(packet.GetSendBuffer());
 }
 
 void NetworkSystem::HandleProxyRecv(sptr<Proxy> session, BYTE* buffer, int len)

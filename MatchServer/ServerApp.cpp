@@ -11,9 +11,10 @@ int WORKER_TICK = 64;
 ServerApp::ServerApp()
 {
     threadSystem = make_shared<ThreadSystem>();
-    matchSystem = make_shared<MatchSystem>();
     dataSystem = make_shared<DataSystem>();
     networkSystem = make_shared<NetworkSystem>(dataSystem, matchSystem);
+    matchSystem = make_shared<MatchSystem>();
+    matchSystem->SetProxyManager(networkSystem->GetProxyManager());
 }
 
 void ServerApp::StartNetworkSystem()
@@ -46,3 +47,5 @@ void ServerApp::StartMatchSystem()
 {
     threadSystem->Launch([&]() { matchSystem->Run(); });
 }
+
+

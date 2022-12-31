@@ -19,6 +19,7 @@ public:
 	void StartNetworkSystem();
 	void StartMatchSystem();
 	void JoinThread() { threadSystem->Join(); };
+    void Run();
 
 private:
 };

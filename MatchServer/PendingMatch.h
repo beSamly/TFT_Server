@@ -10,6 +10,7 @@ private:
     int count = 0;
     int maxCount = 0;
     bool isCanceled = false;
+    bool isWaitingForHostCreated = false;
     int maxElapsedTime = 15;
     int elapsedTime = 0;
 
@@ -25,6 +26,8 @@ public:
     bool IsReady();
     bool IsCanceled() { return isCanceled; };
     bool IsExpired() { return elapsedTime >= maxElapsedTime; };
+    bool IsWaitingForHost() { return isWaitingForHostCreated; };
+    void SetWaitingForHost() {isWaitingForHostCreated = true; };
     int GetMatchId();
     void Update(float deltaTime);
 };

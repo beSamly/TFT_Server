@@ -10,7 +10,7 @@ void Packet::WriteData() {
 
     header->size = packetSize;
     header->prefix = prefix;
-    header->id = packet_id;
+    header->id = packetId;
 
     send_buffer->Close(packetSize);
 }

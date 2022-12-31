@@ -15,4 +15,5 @@ private:
     void HandlePendingMatchCreatedSend(sptr<Proxy>& session, BYTE* buffer, int32 len);
     void HandlePendingMatchCanceledSend(sptr<Proxy>& session, BYTE* buffer, int32 len);
     void HandleMatchCreatedSend(sptr<Proxy>& session, BYTE* buffer, int32 len);
+    void HandleMatchCancelRes(sptr<Proxy>& session, BYTE* buffer, int32 len);
 };

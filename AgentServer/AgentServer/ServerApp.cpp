@@ -50,6 +50,6 @@ void ServerApp::StartNetworkSystem()
     }
 
     networkSystem->StartProxy();
-    networkSystem->RunProxyIoContext();
-    //threadSystem->Launch([&]() { networkSystem->RunProxyIoContext(); });
+    threadSystem->Launch([&]() { networkSystem->RunProxyIoContext(); });
+    threadSystem->Launch([&]() { networkSystem->Run(); });
 }

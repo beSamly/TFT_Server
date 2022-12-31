@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package Protocol;
+
+message MatchCancelResponse{
+    bool result = 1;
+    int32 playerId = 2;
+}
