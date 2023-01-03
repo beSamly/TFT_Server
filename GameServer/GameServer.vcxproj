@@ -141,7 +141,7 @@
     <ClInclude Include="ClientPacketController.h" />
     <ClInclude Include="ClientSession.h" />
     <ClInclude Include="Command.h" />
-    <ClInclude Include="CommandHandler.h" />
+    <ClInclude Include="InGameCommandHandler.h" />
     <ClInclude Include="DataSystem.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="FieldMap.h" />
@@ -149,6 +149,7 @@
     <ClInclude Include="GameHost.h" />
     <ClInclude Include="GameStartedState.h" />
     <ClInclude Include="GameSystem.h" />
+    <ClInclude Include="HostController.h" />
     <ClInclude Include="IController.h" />
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="IInGameEvent.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="PhysicalDamage.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />
+    <ClInclude Include="PlayerPacketController.h" />
     <ClInclude Include="RoundStartedState.h" />
     <ClInclude Include="ServerApp.h" />
     <ClInclude Include="ShopProbability.h" />
@@ -192,7 +194,7 @@
     <ClCompile Include="ClientPacketController.cpp" />
     <ClCompile Include="ClientSession.cpp" />
     <ClCompile Include="Command.cpp" />
-    <ClCompile Include="CommandHandler.cpp" />
+    <ClCompile Include="InGameCommandHandler.cpp" />
     <ClCompile Include="DataSystem.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="FieldMap.cpp" />
@@ -200,6 +202,7 @@
     <ClCompile Include="GameHost.cpp" />
     <ClCompile Include="GameStartedState.cpp" />
     <ClCompile Include="GameSystem.cpp" />
+    <ClCompile Include="HostController.cpp" />
     <ClCompile Include="IController.cpp" />
     <ClCompile Include="IGameState.cpp" />
     <ClCompile Include="IInGameEvent.cpp" />
@@ -217,6 +220,7 @@
     <ClCompile Include="PhysicalDamage.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
+    <ClCompile Include="PlayerPacketController.cpp" />
     <ClCompile Include="RoundStartedState.cpp" />
     <ClCompile Include="ServerApp.cpp" />
     <ClCompile Include="ShopProbability.cpp" />

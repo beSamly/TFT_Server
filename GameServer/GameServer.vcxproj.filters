@@ -72,6 +72,12 @@
     <Filter Include="Source Files\NetworkSystem\PacketController\MatchServer\Controller">
       <UniqueIdentifier>{5117a20f-b9c0-4148-a25b-abbed31d1f4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\Player">
+      <UniqueIdentifier>{cc639720-504e-4bd4-b28b-e82c802a5296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\Player\Controller">
+      <UniqueIdentifier>{b46f8fbb-86eb-45b4-8e9a-7cf56729087d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -185,7 +191,7 @@
     <ClInclude Include="Command.h">
       <Filter>Source Files\GameSystem\Command</Filter>
     </ClInclude>
-    <ClInclude Include="CommandHandler.h">
+    <ClInclude Include="InGameCommandHandler.h">
       <Filter>Source Files\GameSystem\Command</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
@@ -215,14 +221,20 @@
     <ClInclude Include="MatchServerPacketController.h">
       <Filter>Source Files\NetworkSystem\PacketController\MatchServer</Filter>
     </ClInclude>
-    <ClInclude Include="GameController.h">
-      <Filter>Source Files\NetworkSystem\PacketController\MatchServer\Controller</Filter>
-    </ClInclude>
     <ClInclude Include="TempClientManager.h">
       <Filter>Source Files\DataSystem\Manager</Filter>
     </ClInclude>
     <ClInclude Include="AuthController.h">
       <Filter>Source Files\NetworkSystem\PacketController\Client\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="HostController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\MatchServer\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="GameController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\Player\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPacketController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -328,7 +340,7 @@
     <ClCompile Include="Command.cpp">
       <Filter>Source Files\GameSystem\Command</Filter>
     </ClCompile>
-    <ClCompile Include="CommandHandler.cpp">
+    <ClCompile Include="InGameCommandHandler.cpp">
       <Filter>Source Files\GameSystem\Command</Filter>
     </ClCompile>
     <ClCompile Include="PlayerManager.cpp">
@@ -358,14 +370,20 @@
     <ClCompile Include="MatchServerPacketController.cpp">
       <Filter>Source Files\NetworkSystem\PacketController\MatchServer</Filter>
     </ClCompile>
-    <ClCompile Include="GameController.cpp">
-      <Filter>Source Files\NetworkSystem\PacketController\MatchServer\Controller</Filter>
-    </ClCompile>
     <ClCompile Include="TempClientManager.cpp">
       <Filter>Source Files\DataSystem\Manager</Filter>
     </ClCompile>
     <ClCompile Include="AuthController.cpp">
       <Filter>Source Files\NetworkSystem\PacketController\Client\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="HostController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\MatchServer\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="GameController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\Player\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerPacketController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

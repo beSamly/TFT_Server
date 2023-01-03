@@ -10,36 +10,34 @@
 #include "TempClientManager.h"
 #include "PacketId_MT_GM.h"
 #include "PacketId_CL_GM.h"
+#include "PacketId_Common.h"
 
-CAuthController::CAuthController(sptr<TempClientManager> p_tempClientManager) : tempClientManager(p_tempClientManager)
+AuthController::AuthController(sptr<TempClientManager> p_tempClientManager) : tempClientManager(p_tempClientManager)
 {
-    AddClientHandler((int)PacketId_CL_GM::Auth::LOGIN_REQ, TO_LAMBDA(HandleLoginRequest));
+	AddClientHandler((int)PacketId_Common::Auth::CLIENT_GAME_SERVER_LOGIN_REQ, TO_LAMBDA(HandleLoginRequest));
+	AddClientHandler((int)PacketId_Common::Auth::PROXY_GAME_SERVER_LOGIN_REQ, TO_LAMBDA(HandleProxyLoginRequest));
 }
 
-void CAuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
+void AuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
 {
-    Protocol::LoginRequest pkt;
-    if (pkt.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
-        return;
+	//Protocol::LoginRequest pkt;
+	//if (pkt.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
+	//	return;
 
-    auto email = pkt.email();
-    auto password = pkt.password();
-    auto w_email = wstring(email.begin(), email.end());
+	//auto email = pkt.email();
+	//auto password = pkt.password();
+	//auto w_email = wstring(email.begin(), email.end());
+
+	session->isAuthenticated = true;
 }
 
-ProxyAuthController::ProxyAuthController(sptr<TempClientManager> p_tempClientManager)
-    : tempClientManager(p_tempClientManager)
+void AuthController::HandleProxyLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
 {
-    AddClientHandler((int)PacketId_MT_GM::Auth::LOGIN_REQ, TO_LAMBDA(HandleLoginRequest));
-}
+	/*Protocol::LoginRequest pkt;
+	if (pkt.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
+		return;
 
-void ProxyAuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
-{
-    Protocol::LoginRequest pkt;
-    if (pkt.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
-        return;
-
-    auto email = pkt.email();
-    auto password = pkt.password();
-    auto w_email = wstring(email.begin(), email.end());
+	auto email = pkt.email();
+	auto password = pkt.password();
+	auto w_email = wstring(email.begin(), email.end());*/
 }

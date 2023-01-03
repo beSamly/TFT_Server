@@ -164,6 +164,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Protobuf\BuyChamReq.pb.cc" />
+    <ClCompile Include="Protobuf\ChampCreatedEvent.pb.cc" />
+    <ClCompile Include="Protobuf\ChampRemovedEvent.pb.cc" />
+    <ClCompile Include="Protobuf\ChampRemovedFromShop.pb.cc" />
+    <ClCompile Include="Protobuf\ChampStat.pb.cc" />
+    <ClCompile Include="Protobuf\CreateHostRequest.pb.cc" />
+    <ClCompile Include="Protobuf\CreateHostResponse.pb.cc" />
+    <ClCompile Include="Protobuf\GoldUpdatedEvent.pb.cc" />
+    <ClCompile Include="Protobuf\LocatedOnBenchEvent.pb.cc" />
+    <ClCompile Include="Protobuf\LocatedOnFieldEvent.pb.cc" />
     <ClCompile Include="Protobuf\LoginRequest.pb.cc" />
     <ClCompile Include="Protobuf\LoginResponse.pb.cc" />
     <ClCompile Include="Protobuf\MatchCancelResponse.pb.cc" />
@@ -181,6 +191,16 @@
     <ClInclude Include="PacketId_Common.h" />
     <ClInclude Include="PacketId_MT_GM.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Protobuf\BuyChamReq.pb.h" />
+    <ClInclude Include="Protobuf\ChampCreatedEvent.pb.h" />
+    <ClInclude Include="Protobuf\ChampRemovedEvent.pb.h" />
+    <ClInclude Include="Protobuf\ChampRemovedFromShop.pb.h" />
+    <ClInclude Include="Protobuf\ChampStat.pb.h" />
+    <ClInclude Include="Protobuf\CreateHostRequest.pb.h" />
+    <ClInclude Include="Protobuf\CreateHostResponse.pb.h" />
+    <ClInclude Include="Protobuf\GoldUpdatedEvent.pb.h" />
+    <ClInclude Include="Protobuf\LocatedOnBenchEvent.pb.h" />
+    <ClInclude Include="Protobuf\LocatedOnFieldEvent.pb.h" />
     <ClInclude Include="Protobuf\LoginRequest.pb.h" />
     <ClInclude Include="Protobuf\LoginResponse.pb.h" />
     <ClInclude Include="Protobuf\MatchCancelResponse.pb.h" />

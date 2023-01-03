@@ -48,6 +48,12 @@
     <Filter Include="Source Files\DataSystem\Manager">
       <UniqueIdentifier>{ab9fe7ba-3744-4cf7-87ab-7647884d7488}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\GameServer">
+      <UniqueIdentifier>{7b7b2147-05f7-4d73-9042-a03c97c36556}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NetworkSystem\PacketController\GameServer\Controller">
+      <UniqueIdentifier>{120e6745-6d83-4ef8-8427-c950c605b6b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -112,6 +118,12 @@
     </ClCompile>
     <ClCompile Include="AuthController.cpp">
       <Filter>Source Files\NetworkSystem\PacketController\AgentServer\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="GameServerPacketController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\GameServer</Filter>
+    </ClCompile>
+    <ClCompile Include="HostController.cpp">
+      <Filter>Source Files\NetworkSystem\PacketController\GameServer\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +192,12 @@
     </ClInclude>
     <ClInclude Include="AuthController.h">
       <Filter>Source Files\NetworkSystem\PacketController\AgentServer\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="GameServerPacketController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\GameServer</Filter>
+    </ClInclude>
+    <ClInclude Include="HostController.h">
+      <Filter>Source Files\NetworkSystem\PacketController\GameServer\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

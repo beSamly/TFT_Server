@@ -6,13 +6,14 @@
 #include "pch.h"
 
 /*-----------------
-                ClientSession
+				ClientSession
 ------------------*/
 
 class ClientSession : public AsioSession
 {
-    public:
-        ClientSession(sptr<asio::io_context> context);
-        virtual ~ClientSession();
-        int proxyId;
+public:
+	ClientSession(sptr<asio::io_context> context);
+	virtual ~ClientSession();
+	int proxyId;
+
 };

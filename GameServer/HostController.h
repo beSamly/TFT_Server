@@ -3,10 +3,10 @@
 #include "GameSystem.h"
 #include "IController.h"
 
-class GameController : public IController
+class HostController : public IController
 {
 public:
-	GameController(sptr<GameSystem> paramGameSystem);
+	HostController(sptr<GameSystem> p_gameSystem);
 
 private:
 	sptr<GameSystem> gameSystem;

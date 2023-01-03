@@ -139,6 +139,8 @@
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandHandler.cpp" />
     <ClCompile Include="DataSystem.cpp" />
+    <ClCompile Include="GameServerPacketController.cpp" />
+    <ClCompile Include="HostController.cpp" />
     <ClCompile Include="IController.cpp" />
     <ClCompile Include="IPacketController.cpp" />
     <ClCompile Include="main.cpp" />
@@ -162,6 +164,8 @@
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandHandler.h" />
     <ClInclude Include="DataSystem.h" />
+    <ClInclude Include="GameServerPacketController.h" />
+    <ClInclude Include="HostController.h" />
     <ClInclude Include="IController.h" />
     <ClInclude Include="IPacketController.h" />
     <ClInclude Include="LibraryHeader.h" />

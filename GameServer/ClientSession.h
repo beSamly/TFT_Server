@@ -18,6 +18,7 @@ private:
 	sptr<Player> player;
 
 public:
+	bool isAuthenticated = false;
 	sptr<Player> GetPlayer();
 	void SetPlayer(sptr<Player> player);
 };

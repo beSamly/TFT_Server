@@ -3,27 +3,15 @@
 #include "ClientSession.h"
 #include "TempClientManager.h"
 
-class CAuthController : public IController
+class AuthController : public IController
 {
 private:
-    sptr<TempClientManager> tempClientManager;
+	sptr<TempClientManager> tempClientManager;
 
 public:
-    CAuthController(sptr<TempClientManager> p_tempClientManager);
+	AuthController(sptr<TempClientManager> p_tempClientManager);
 
 private:
-    void HandleLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len);
-};
-
-
-class ProxyAuthController : public IController
-{
-private:
-    sptr<TempClientManager> tempClientManager;
-
-public:
-    ProxyAuthController(sptr<TempClientManager> p_tempClientManager);
-
-private:
-    void HandleLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len);
+	void HandleLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len);
+	void HandleProxyLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len);
 };

@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "CommandHandler.h"
+#include "InGameCommandHandler.h"
 #include "Command.h"
 
 using namespace Command;
@@ -9,22 +9,26 @@ namespace
 #define TO_LAMBDA(FUNC) [&](GameHost& host, sptr<ICommand> command) { FUNC(host, command); }
 } // namespace
 
-CommandHandler::CommandHandler()
+InGameCommandHandler::InGameCommandHandler()
 {
-    //commandHandler.emplace((int)CommandId::BUY_COMMAND, TO_LAMBDA(HandleBuyCommand));
+	commandHandler.emplace((int)CommandId::CREATE_HOST, TO_LAMBDA(HandleCreateHostCommand));
 }
 
-void CommandHandler::ProcessCommand(GameHost& host, sptr<ICommand> command)
+void InGameCommandHandler::ProcessCommand(GameHost& host, sptr<ICommand> command)
 {
-    int commandId = command->GetCommandId();
+	int commandId = command->GetCommandId();
 
-    if (commandHandler.count(commandId)) {
-        commandHandler[commandId](host, command);
-    }
+	if (commandHandler.count(commandId)) {
+		commandHandler[commandId](host, command);
+	}
 }
 
-//
-//void CommandHandler::HandleBuyCommand(GameHost& host, sptr<ICommand> command)
+void InGameCommandHandler::HandleCreateHostCommand(GameHost& host, sptr<ICommand> command)
+{
+
+}
+
+//void InGameCommandHandler::HandleBuyCommand(GameHost& host, sptr<ICommand> command)
 //{
 //    sptr<BuyCommand> buyCommand = dynamic_pointer_cast<BuyCommand>(command);
 //
@@ -82,7 +86,7 @@ void CommandHandler::ProcessCommand(GameHost& host, sptr<ICommand> command)
 //    // TODO 골드 차감
 //}
 //
-//void CommandHandler::HandleSellCommand(GameHost& host, sptr<ICommand> command)
+//void InGameCommandHandler::HandleSellCommand(GameHost& host, sptr<ICommand> command)
 //{
 //
 //    // 판매하는 champ 의 star 계산해서 champPool로 반환시켜주기

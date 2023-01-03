@@ -9,22 +9,29 @@
 class NetworkSystem
 {
 public:
-    NetworkSystem(sptr<DataSystem> p_dataSystem, sptr<GameSystem> p_gameSystem);
-    void StartSocketServer();
-    void RunIoContext();
+	NetworkSystem(sptr<DataSystem> p_dataSystem, sptr<GameSystem> p_gameSystem);
+	void StartSocketServer();
+	void StartProxy();
+	void RunProxyIoContext();
+	void RunIoContext();
+	sptr<ProxyManager> GetProxyManager() { return proxyManager; }
 
 private:
-    sptr<DataSystem> dataSystem;
-    sptr<GameSystem> gameSystem;
-    sptr<SocketServer> socketServer;
+	sptr<DataSystem> dataSystem;
+	sptr<GameSystem> gameSystem;
+	sptr<SocketServer> socketServer;
+	sptr<ProxyManager> proxyManager;
 
-    sptr<MatchServerPacketController> matchServerPacketController;
-    sptr<ClientPacketController> clientPacketController;
+	sptr<MatchServerPacketController> matchServerPacketController;
+	sptr<ClientPacketController> clientPacketController;
+	sptr<PlayerPacketController> playerPacketController;
 
-    sptr<asio::io_context> context;
+	sptr<asio::io_context> context;
 
 private:
-    void OnClientAccept(sptr<AsioSession> client);
-    void OnClientRecv(sptr<AsioSession> client, BYTE* buffer, int len);
-    void OnClientDisconnect(sptr<AsioSession> client);
+	void OnClientAccept(sptr<AsioSession> client);
+	void OnClientRecv(sptr<AsioSession> client, BYTE* buffer, int len);
+	void OnClientDisconnect(sptr<AsioSession> client);
+	void OnProxyConnect(sptr<Proxy> proxy, SERVER_TYPE type);
+	void HandleProxyRecv(sptr<Proxy> session, BYTE* buffer, int len);
 };

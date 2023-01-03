@@ -10,8 +10,7 @@
 
 ClientPacketController::ClientPacketController(sptr<DataSystem> dataSystem)
 {
-    IPacketController::AddController((int)PacketId_CL_GM::Prefix::AUTH, make_shared<CAuthController>(dataSystem->GetTempClientManager()));
-    IPacketController::AddController((int)PacketId_MT_GM::Prefix::AUTH, make_shared<ProxyAuthController>(dataSystem->GetTempClientManager()));
+	IPacketController::AddController((int)PacketId_Common::Prefix::AUTH, make_shared<AuthController>(dataSystem->GetTempClientManager()));
 }
 
 ClientPacketController::~ClientPacketController() {}

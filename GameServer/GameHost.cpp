@@ -13,7 +13,7 @@ namespace
 #define SET_CURRENT_STATE_TO_LAMBDA(FUNC) [&](sptr<IGameState> newState) { FUNC(newState); }
 } // namespace
 
-GameHost::GameHost(sptr<ChampDataFactory> p_champDataFactory) : champDataFactory(p_champDataFactory)
+GameHost::GameHost(sptr<ChampDataFactory> p_champDataFactory, int paramMatchId, vector<int> paramVecPlayerId) : champDataFactory(p_champDataFactory), matchId(paramMatchId), vecPlayerId(paramVecPlayerId)
 {
 }
 

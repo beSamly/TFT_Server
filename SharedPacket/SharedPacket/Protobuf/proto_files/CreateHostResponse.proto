@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package Protocol;
+
+message CreateHostResponse{
+    bool result = 1;
+    int32 matchId = 2;
+}

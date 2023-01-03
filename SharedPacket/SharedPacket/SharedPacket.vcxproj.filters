@@ -22,20 +22,8 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Protobuf\LoginRequest.pb.cc">
-      <Filter>Source Files\Protobuf</Filter>
-    </ClCompile>
-    <ClCompile Include="Protobuf\LoginResponse.pb.cc">
-      <Filter>Source Files\Protobuf</Filter>
-    </ClCompile>
     <ClCompile Include="ProxyPacketId.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Protobuf\MatchRequestResponse.pb.cc">
-      <Filter>Source Files\Protobuf</Filter>
-    </ClCompile>
-    <ClCompile Include="Protobuf\MatchRequest.pb.cc">
-      <Filter>Source Files\Protobuf</Filter>
     </ClCompile>
     <ClCompile Include="Protobuf\ProxyLoginReq.pb.cc">
       <Filter>Source Files\Protobuf\Common</Filter>
@@ -43,19 +31,55 @@
     <ClCompile Include="Protobuf\PlayerInfo.pb.cc">
       <Filter>Source Files\Protobuf\Common</Filter>
     </ClCompile>
+    <ClCompile Include="Protobuf\BuyChamReq.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\ChampCreatedEvent.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\ChampRemovedEvent.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\ChampRemovedFromShop.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\ChampStat.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\GoldUpdatedEvent.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\LocatedOnBenchEvent.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\LocatedOnFieldEvent.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\LoginRequest.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\LoginResponse.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
     <ClCompile Include="Protobuf\MatchCancelResponse.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\MatchRequest.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\MatchRequestResponse.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\CreateHostRequest.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\CreateHostResponse.pb.cc">
       <Filter>Source Files\Protobuf</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Protobuf\LoginRequest.pb.h">
-      <Filter>Source Files\Protobuf</Filter>
-    </ClInclude>
-    <ClInclude Include="Protobuf\LoginResponse.pb.h">
-      <Filter>Source Files\Protobuf</Filter>
     </ClInclude>
     <ClInclude Include="PacketId_CL_AG.h">
       <Filter>Source Files\Packet</Filter>
@@ -73,12 +97,6 @@
     <ClInclude Include="PacketId_CL_GM.h">
       <Filter>Source Files\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="Protobuf\MatchRequestResponse.pb.h">
-      <Filter>Source Files\Protobuf</Filter>
-    </ClInclude>
-    <ClInclude Include="Protobuf\MatchRequest.pb.h">
-      <Filter>Source Files\Protobuf</Filter>
-    </ClInclude>
     <ClInclude Include="PacketId_Common.h">
       <Filter>Source Files\Packet</Filter>
     </ClInclude>
@@ -88,7 +106,49 @@
     <ClInclude Include="Protobuf\PlayerInfo.pb.h">
       <Filter>Source Files\Protobuf\Common</Filter>
     </ClInclude>
+    <ClInclude Include="Protobuf\BuyChamReq.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\MatchRequestResponse.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\ChampCreatedEvent.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\ChampRemovedEvent.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\ChampRemovedFromShop.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\ChampStat.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\GoldUpdatedEvent.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\LocatedOnBenchEvent.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\LocatedOnFieldEvent.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\LoginRequest.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\LoginResponse.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
     <ClInclude Include="Protobuf\MatchCancelResponse.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\MatchRequest.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\CreateHostRequest.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\CreateHostResponse.pb.h">
       <Filter>Source Files\Protobuf</Filter>
     </ClInclude>
   </ItemGroup>

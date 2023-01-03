@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package Protocol;
+
+message CreateHostRequest{
+    int32 matchId = 1;
+    repeated int32 playerId = 2;
+}
