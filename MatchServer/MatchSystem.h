@@ -32,7 +32,7 @@ private:
 	void ProcessCommand();
 	void DoMatching();
 	void UpdatePendingMatch(float deltaTime);
-	void CancelPendingMatch(sptr<PendingMatch>& match);
+	void CancelPendingMatch(const sptr<PendingMatch>& match);
 	void OnPendingMatchCreated(const sptr<PendingMatch>& pendingMatch); // 임시 매칭이 성공 됐을 때
 	void OnPendingMatchReady(const sptr<PendingMatch>& pendingMatch); // 모두 매칭을 수락했을 때
 
@@ -41,4 +41,5 @@ private:
 	void HandleMatchCancelCommand(sptr<ICommand> command);
 	void HandleMatchAcceptCommand(sptr<ICommand> command);
 	void HandleMatchDeclineCommand(sptr<ICommand> command);
+	void HandleHostCreatedCommand(sptr<ICommand> command);
 };

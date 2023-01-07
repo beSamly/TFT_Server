@@ -17,5 +17,5 @@ public:
 	void ProcessCommand(GameHost& host, sptr<ICommand> command);
 private:
 	/*  void HandleBuyCommand(GameHost& host, sptr<ICommand> command);*/
-	void HandleCreateHostCommand(GameHost& host, sptr<ICommand> command);
+	void HandleHostCreateCommand(GameHost& host, sptr<ICommand> command);
 };

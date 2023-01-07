@@ -9,6 +9,7 @@
 #include "MatchRequest.pb.h"
 #include "PlayerInfo.pb.h"
 #include "MatchCancelResponse.pb.h"
+#include "MatchCreatedSend.pb.h"
 
 MTMatchController::MTMatchController(sptr<PlayerManager> p_playerManager) : playerManager(p_playerManager)
 {
@@ -73,16 +74,17 @@ void MTMatchController::HandlePendingMatchCanceledSend(sptr<Proxy>& session, BYT
 
 void MTMatchController::HandleMatchCreatedSend(sptr<Proxy>& session, BYTE* buffer, int32 len)
 {
-    Protocol::PlayerInfo res;
+    Protocol::MatchCreatedSend res;
     if (res.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
         return;
 
+    bool result = res.result();
     int playerId = res.playerid();
 
     if (sptr<ClientSession> client = playerManager->FindPlayer(playerId))
     {
         Packet packet((int)PacketId_CL_AG::Prefix::MATCH, (int)PacketId_CL_AG::Match::MATCH_CREATED_SEND);
-        packet.WriteData();
+        packet.WriteData<Protocol::MatchCreatedSend>(res);
         client->Send(packet.GetSendBuffer());
     }
 }

@@ -65,7 +65,7 @@ private:
 	USE_LOCK;
 	shared_ptr<asio::io_context> ioContext;
 	std::map<int, vector<shared_ptr<Proxy>>> proxyMap;
-	vector<shared_ptr<Proxy>> reconnectVec;
+	vector<shared_ptr<Proxy>> vecDisconnectedProxy;
 	function<void(shared_ptr<Proxy>, BYTE*, int32)> HandleRecv;
 	function<void(shared_ptr<Proxy>, SERVER_TYPE)> OnConnectCallback;
 	SERVER_TYPE serverType;

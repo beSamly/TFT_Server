@@ -2,7 +2,9 @@ syntax = "proto3";
 
 package Protocol;
 
-message CreateHostResponse{
+message HostCreateResponse{
     bool result = 1;
     int32 matchId = 2;
+    string address = 3;
+    int32 port = 4;
 }

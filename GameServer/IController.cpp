@@ -25,7 +25,7 @@ void IController::HandleClientPacket(sptr<ClientSession>& session, BYTE* buffer,
     }
     else
     {
-        spdlog::error("[CAuthController] invalid packetId = {}", packetId);
+        spdlog::error("[IController] invalid packetId = {}", packetId);
     }
 }
 
@@ -40,6 +40,6 @@ void IController::HandleProxyPacket(sptr<Proxy>& session, BYTE* buffer, int32 le
     }
     else
     {
-        spdlog::error("[CAuthController] invalid packetId = {}", packetId);
+        spdlog::error("[IController] invalid packetId = {}", packetId);
     }
 }

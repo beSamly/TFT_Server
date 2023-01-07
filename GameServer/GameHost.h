@@ -19,7 +19,7 @@ private:
 	sptr<IGameState> currentState;
 	queue<sptr<ICommand>> commandQueue;
 	queue<sptr<IInGameEvent>> eventQueue;;
-	InGameCommandHandler commandHandler;
+	InGameCommandHandler inGameCommandHandler;
 	InGameEventHandler eventHandler;
 	int matchId = 0;
 	vector<int> vecPlayerId;
@@ -37,7 +37,7 @@ public:
 	GameHost(sptr<ChampDataFactory> p_champDataFactory, int matchId, vector<int> paramVecPlayerId);
 	void Start();
 
-	void EnterClient(sptr<ClientSession> client);
+	bool EnterClient(sptr<ClientSession> client);
 	void PushCommand(sptr<ICommand> command);
 	void PushEvent(sptr<IInGameEvent> event) { eventQueue.push(event); };
 	void Update(float deltaTime);

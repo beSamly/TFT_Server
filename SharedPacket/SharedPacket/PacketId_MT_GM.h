@@ -14,8 +14,8 @@ namespace PacketId_MT_GM {
 	};
 
 	enum Host : int {
-		CREATE_HOST_REQ = 1,
-		CREATE_HOST_RES
+		HOST_CREATE_REQ = 1,
+		HOST_CREATE_RES
 	};
 	enum Game : int { TEST = 1 };
 

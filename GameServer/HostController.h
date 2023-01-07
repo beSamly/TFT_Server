@@ -10,5 +10,5 @@ public:
 
 private:
 	sptr<GameSystem> gameSystem;
-	void HandleCreateHost(sptr<Proxy>& session, BYTE* buffer, int32 len);
+	void HandleHostCreate(sptr<Proxy>& session, BYTE* buffer, int32 len);
 };

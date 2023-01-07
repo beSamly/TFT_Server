@@ -4,8 +4,11 @@ class GameHost;
 
 class Player
 {
+private:
+    wptr<GameHost> currentGame;
+
 public:
     int playerId;
     // Player(){};
-    wptr<GameHost> currentGame;
+    void SetCurrentGameHost(wptr<GameHost> gameHost) { currentGame = gameHost; }
 };

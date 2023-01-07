@@ -1,11 +1,11 @@
 #pragma once
 #include "pch.h"
-#include "ClientSession.h"
 #include "Champion.h"
 #include "ShopProbability.h"
 #include "ChampShop.h"
 #include "Field.h"
 #include "Bench.h"
+#include "ClientSession.h"
 
 class InGamePlayer
 {
@@ -14,6 +14,7 @@ private:
 
 public:
     InGamePlayer();
+    int playerId;
 
     ShopProbability shopProb;
     ChampShop champShop;

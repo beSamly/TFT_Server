@@ -70,10 +70,13 @@
     <ClCompile Include="Protobuf\MatchRequestResponse.pb.cc">
       <Filter>Source Files\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="Protobuf\CreateHostRequest.pb.cc">
+    <ClCompile Include="Protobuf\HostCreateRequest.pb.cc">
       <Filter>Source Files\Protobuf</Filter>
     </ClCompile>
-    <ClCompile Include="Protobuf\CreateHostResponse.pb.cc">
+    <ClCompile Include="Protobuf\HostCreateResponse.pb.cc">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Protobuf\MatchCreatedSend.pb.cc">
       <Filter>Source Files\Protobuf</Filter>
     </ClCompile>
   </ItemGroup>
@@ -145,10 +148,13 @@
     <ClInclude Include="Protobuf\MatchRequest.pb.h">
       <Filter>Source Files\Protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="Protobuf\CreateHostRequest.pb.h">
+    <ClInclude Include="Protobuf\HostCreateRequest.pb.h">
       <Filter>Source Files\Protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="Protobuf\CreateHostResponse.pb.h">
+    <ClInclude Include="Protobuf\HostCreateResponse.pb.h">
+      <Filter>Source Files\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Protobuf\MatchCreatedSend.pb.h">
       <Filter>Source Files\Protobuf</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,10 +7,13 @@
 #include "AuthController.h"
 #include "PacketId_MT_GM.h"
 #include "PacketId_CL_GM.h"
+#include "PacketId_Common.h"
+#include "GameSystem.h"
 
-ClientPacketController::ClientPacketController(sptr<DataSystem> dataSystem)
+ClientPacketController::ClientPacketController(sptr<DataSystem> dataSystem, sptr<GameSystem> gameSystem)
 {
-	IPacketController::AddController((int)PacketId_Common::Prefix::AUTH, make_shared<AuthController>(dataSystem->GetTempClientManager()));
+    IPacketController::AddController((int)PacketId_Common::Prefix::AUTH,
+                                     make_shared<AuthController>(gameSystem, dataSystem->GetTempClientManager()));
 }
 
 ClientPacketController::~ClientPacketController() {}

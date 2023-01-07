@@ -8,7 +8,7 @@
 
 GameController::GameController(sptr<GameSystem> paramGameSystem) : gameSystem(paramGameSystem)
 {
-	//AddProxyHandler((int)PacketId_CL_GM::Game::CREATE_HOST_REQ, TO_LAMBDA_FOR_PROXY(HandleCreateHost));
+	//AddProxyHandler((int)PacketId_CL_GM::Game::HOST_CREATE_REQ, TO_LAMBDA_FOR_PROXY(HandleHostCreate));
 };
 
-void GameController::HandleCreateHost(sptr<Proxy>& session, BYTE* buffer, int32 len) {}
+void GameController::HandleExample(sptr<Proxy>& session, BYTE* buffer, int32 len) {}

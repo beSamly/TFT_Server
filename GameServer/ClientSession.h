@@ -5,20 +5,20 @@
 #include <asio/io_context.hpp>
 
 /*-----------------
-		ClientSession
+                ClientSession
 ------------------*/
 
 class ClientSession : public AsioSession
 {
 public:
-	ClientSession(sptr<asio::io_context> context);
-	virtual ~ClientSession();
+    ClientSession(sptr<asio::io_context> context);
+    virtual ~ClientSession();
 
 private:
-	sptr<Player> player;
+    sptr<Player> player;
 
 public:
-	bool isAuthenticated = false;
-	sptr<Player> GetPlayer();
-	void SetPlayer(sptr<Player> player);
+    bool isAuthenticated = false;
+    sptr<Player> GetPlayer();
+    void SetPlayer(sptr<Player> player);
 };

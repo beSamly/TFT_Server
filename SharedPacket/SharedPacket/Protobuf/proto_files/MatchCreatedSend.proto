@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package Protocol;
+
+message MatchCreatedSend{
+    bool result = 1;
+    int32 playerId = 2;
+    string address = 3;
+    int32 port = 4;
+}

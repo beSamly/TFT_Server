@@ -5,11 +5,12 @@
 #include "MatchServerPacketController.h"
 #include "GameSystem.h"
 #include "ClientPacketController.h"
+#include "PlayerPacketController.h"
 
 class NetworkSystem
 {
 public:
-	NetworkSystem(sptr<DataSystem> p_dataSystem, sptr<GameSystem> p_gameSystem);
+	NetworkSystem(sptr<DataSystem> paramDataSystem, sptr<GameSystem> paramGameSystem);
 	void StartSocketServer();
 	void StartProxy();
 	void RunProxyIoContext();

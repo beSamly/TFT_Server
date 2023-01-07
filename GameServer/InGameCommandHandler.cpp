@@ -11,7 +11,7 @@ namespace
 
 InGameCommandHandler::InGameCommandHandler()
 {
-	commandHandler.emplace((int)CommandId::CREATE_HOST, TO_LAMBDA(HandleCreateHostCommand));
+	commandHandler.emplace((int)N2G::CommandId::CREATE_HOST, TO_LAMBDA(HandleHostCreateCommand));
 }
 
 void InGameCommandHandler::ProcessCommand(GameHost& host, sptr<ICommand> command)
@@ -23,7 +23,7 @@ void InGameCommandHandler::ProcessCommand(GameHost& host, sptr<ICommand> command
 	}
 }
 
-void InGameCommandHandler::HandleCreateHostCommand(GameHost& host, sptr<ICommand> command)
+void InGameCommandHandler::HandleHostCreateCommand(GameHost& host, sptr<ICommand> command)
 {
 
 }
