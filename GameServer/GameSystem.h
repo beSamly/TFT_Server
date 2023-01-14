@@ -13,7 +13,7 @@ public:
 public:
     void Run();
     void PushCommand(sptr<ICommand> command);
-    sptr<GameHost> GetGameHostForPlayer(int playerId);
+    sptr<GameHost> GetGameHostByPlayerId(int playerId);
 
 private:
     USE_LOCK;

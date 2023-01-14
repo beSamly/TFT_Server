@@ -11,6 +11,7 @@
 
 PlayerPacketController::PlayerPacketController(sptr<GameSystem> gameSystem)
 {
+	IPacketController::AddController((int)PacketId_CL_GM::Prefix::DEBUG, make_shared<GameController>(gameSystem));
 	IPacketController::AddController((int)PacketId_CL_GM::Prefix::GAME, make_shared<GameController>(gameSystem));
 }
 

@@ -57,10 +57,15 @@ void GameSystem::Update(float deltaTime)
     // GameSystem이 처리해야할 패킷 먼저 처리
     ProcessCommand();
     // Host들 업데이트
-    /*for (GameHost* gameHost : gameHostList)
+    for (auto& [matchId, gameHost] : gameHostMap)
     {
-                    gameHost->Update(deltaTime);
-    }*/
+        if(!gameHost->IsStarted())
+        {
+            continue;
+        }
+
+        gameHost->Update(deltaTime);
+    }
 }
 
 queue<sptr<ICommand>> GameSystem::FlushQueue()
@@ -92,7 +97,7 @@ void GameSystem::PushCommand(sptr<ICommand> command)
     commandQueue.push(command);
 }
 
-sptr<GameHost> GameSystem::GetGameHostForPlayer(int playerId)
+sptr<GameHost> GameSystem::GetGameHostByPlayerId(int playerId)
 {
     if (!mapPlayerIdToMatchId.count(playerId))
     {

@@ -37,7 +37,7 @@ void AuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buff
     session->isAuthenticated = true;
 
     // 해당 플레이어가 현재 매칭이 잡힌 유저인지 체크
-    if (sptr<GameHost> gameHost = gameSystem->GetGameHostForPlayer(playerId))
+    if (sptr<GameHost> gameHost = gameSystem->GetGameHostByPlayerId(playerId))
     {
         // TODO 나중에 지워라 래퍼런스로 받은 shared_ptr을 다른 함수에서 논 레퍼런스로 받으면 카운트 증가되나?
         int refCountBefore = session.use_count();
@@ -52,6 +52,10 @@ void AuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buff
 
          // TempClientManager에서 삭제
         tempClientManager->RemoveClient(session->tempClientId);
+    }
+    else
+    {
+        spdlog::error("[AuthController] GameHost not found for player = {}", playerId);
     }
 }
 
