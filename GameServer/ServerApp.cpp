@@ -22,6 +22,7 @@ void ServerApp::StartSocketServer()
     spdlog::set_level(spdlog::level::debug); // Set global log level to debug
 
     networkSystem->StartSocketServer();
+    networkSystem->StartProxy();
 
     // IOCP WorkThread 생성 : 이 프로젝트에서는 IOCP WorkThread가 IOCP 이벤트
     // 처리 후 패킷처리까지 담당

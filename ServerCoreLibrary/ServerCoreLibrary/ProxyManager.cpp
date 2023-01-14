@@ -12,7 +12,7 @@ void ProxyManager::RunIoContext()
     targetTime += std::chrono::seconds(10);
     ioContext->run();
 
-    DWORD intervalTick = 2000;
+    DWORD intervalTick = 5000;
     DWORD nextTickTime = GetTickCount() + intervalTick;
     DWORD prevTickTime = GetTickCount();
 
@@ -26,9 +26,11 @@ void ProxyManager::RunIoContext()
             prevTickTime = currentTime;
             nextTickTime = currentTime + intervalTick;
             float deltaTimeInSec = deltaTime / 1000;
-            ioContext->stop();
-            DoReconnect();
-            ioContext->run();
+            if(DoReconnect())
+            {
+                ioContext->restart();
+                ioContext->run();
+            }
         }
     }
 }
@@ -108,8 +110,6 @@ void ProxyManager::OnConnect(shared_ptr<AsioSession> session)
 
 void ProxyManager::OnDisconnect(shared_ptr<AsioSession> session)
 {
-
-
     WRITE_LOCK;
 
     shared_ptr<Proxy> proxySession = dynamic_pointer_cast<Proxy>(session);
@@ -142,8 +142,13 @@ void ProxyManager::OnDisconnect(shared_ptr<AsioSession> session)
     return;
 }
 
-void ProxyManager::DoReconnect()
+bool ProxyManager::DoReconnect()
 {
+    if(!vecDisconnectedProxy.size())
+    {
+        return false;
+    }
+
     for (shared_ptr<Proxy> proxy : vecDisconnectedProxy)
     {
         string address = proxy->GetAddress();
@@ -153,4 +158,6 @@ void ProxyManager::DoReconnect()
     }
 
     vecDisconnectedProxy.clear();
+
+    return true;
 }

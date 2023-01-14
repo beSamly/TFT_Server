@@ -15,8 +15,8 @@
 #include "PlayerInfo.pb.h"
 #include "GameSystem.h"
 
-AuthController::AuthController(sptr<GameSystem> paramGameSystem, sptr<TempClientManager> paramTempClientManager)
-    : gameSystem(paramGameSystem), tempClientManager(paramTempClientManager)
+AuthController::AuthController(sptr<GameSystem> paramGameSystem, sptr<TempClientManager> paramTempClientManager, sptr<ProxyManager> paramProxyManager)
+    : gameSystem(paramGameSystem), tempClientManager(paramTempClientManager), proxyManager(paramProxyManager)
 {
     AddClientHandler((int)PacketId_Common::Auth::PROXY_LOGIN_REQ, TO_LAMBDA(HandleProxyLoginRequest));
     AddClientHandler((int)PacketId_Common::Auth::CLIENT_GAME_SERVER_LOGIN_REQ, TO_LAMBDA(HandleLoginRequest));
@@ -49,18 +49,30 @@ void AuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buff
             spdlog::error("[AuthController] can not find game host for playerId = {}", playerId);
         }
         int refCountAfter = session.use_count();
+
+         // TempClientManager에서 삭제
+        tempClientManager->RemoveClient(session->tempClientId);
     }
 }
 
 void AuthController::HandleProxyLoginRequest(sptr<ClientSession>& session, BYTE* buffer, int32 len)
 {
-
     Protocol::ProxyLoginReq req;
     if (req.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
         return;
 
     int serverType = req.servertype();
-    req.set_servertype((int)SERVER_TYPE::MATCH);
+
+    // ClientSession => Proxy로 변환 후 ProxyManager에 추가
+    sptr<Proxy> proxy = make_shared<Proxy>(serverType, std::move(session->socket));
+    proxy->Start();
+
+    proxyManager->AddProxy(serverType, proxy);
+
+    session->socket.close();
+
+    // TempClientManager에서 삭제
+    tempClientManager->RemoveClient(session->tempClientId);
 
     // TODO 서버 간의 로그인 로직 필요. 현재는 바이패스
     spdlog::info("[AuthController] Proxy login success for server type {}", serverType);

@@ -9,6 +9,7 @@
 #include "PacketId_MT_GM.h"
 #include "HostCreateRequest.pb.h"
 #include "MatchCreatedSend.pb.h"
+#include "MatchRequestResponse.pb.h"
 
 namespace
 {
@@ -126,6 +127,7 @@ void MatchSystem::DoMatching()
         if (pendingMatch->IsFull())
         {
             OnPendingMatchCreated(pendingMatch);
+            pendingMatchCreated.push_back(pendingMatch);
         }
         else
         {
@@ -134,18 +136,19 @@ void MatchSystem::DoMatching()
         }
     }
 
-    for (const auto& [playerId, player] : playerMap)
-    {
-        player->SetUnmatched();
-    }
-
     for (sptr<PendingMatch>& pendingMatch : pendingMatchCreated)
     {
         for (int playerId : pendingMatch->GetPlayerId())
         {
-            spdlog::debug("[MatchSystem] pendingMatchCreated for playerId = {}", playerId);
+            spdlog::debug("[MatchSystem] PendingMatchCreated for playerId = {}", playerId);
             playerMap.erase(playerId);
         }
+    }
+    
+    // 매칭된 유저들을 playerMap에서 삭제시킨뒤 플래그값 off
+    for (const auto& [playerId, player] : playerMap)
+    {
+        player->SetUnmatched();
     }
 }
 
@@ -189,6 +192,8 @@ void MatchSystem::UpdatePendingMatch(float deltaTime)
 
 void MatchSystem::CancelPendingMatch(const sptr<PendingMatch>& match)
 {
+    vector<int> acceptedPlayerIds;
+    vector<int> notAcceptedPlayerIds;
     for (const auto& [playerId, player] : match->GetPlayerMap())
     {
         playerToPendingMatchMap.erase(playerId);
@@ -196,9 +201,9 @@ void MatchSystem::CancelPendingMatch(const sptr<PendingMatch>& match)
         // 매칭 수락한 유저들은 다시 매칭 잡히도록 풀에 넣어준다.
         if (match->IsPlayerAccepted(playerId))
         {
-            spdlog::debug("[MatchSystem] pendingMatchCanceled for playerId = {}", playerId);
-            playerMap.emplace(playerId, player);
+            acceptedPlayerIds.push_back(playerId);
 
+            playerMap.emplace(playerId, player);
             if (sptr<Proxy> proxy = player->fromProxy.lock())
             {
                 Protocol::PlayerInfo pkt;
@@ -214,12 +219,12 @@ void MatchSystem::CancelPendingMatch(const sptr<PendingMatch>& match)
         // 매칭 수락한 안한 유저들은 매칭 취소로 간주.
         else
         {
-            spdlog::debug("[MatchSystem] playerId {} did not accept pending match", playerId);
+            notAcceptedPlayerIds.push_back(playerId);
             if (sptr<Proxy> proxy = player->fromProxy.lock())
             {
                 Protocol::MatchCancelResponse pkt;
                 pkt.set_result(true);
-                pkt.set_playerid(player->playerId);
+                pkt.set_playerid(playerId);
 
                 Packet packet((int)PacketId_AG_MT::Prefix::MATCH, (int)PacketId_AG_MT::Match::MATCH_CANCEL_RES);
                 packet.WriteData<Protocol::MatchCancelResponse>(pkt);
@@ -227,6 +232,20 @@ void MatchSystem::CancelPendingMatch(const sptr<PendingMatch>& match)
             }
         }
     };
+
+    string acceptedPlayerStr;
+    for (int playerId : acceptedPlayerIds)
+    {
+        acceptedPlayerStr += std::to_string(playerId) + ", ";
+    }
+
+    string notAcceptedPlayerStr;
+    for (int playerId : notAcceptedPlayerIds)
+    {
+        notAcceptedPlayerStr += std::to_string(playerId) + ", ";
+    }
+
+    spdlog::debug("[MatchSystem] PendingMatchCanceled AcceptedPlayerId = {} NotAcceptedPlayerId = {}", acceptedPlayerStr, notAcceptedPlayerStr);
     pendingMatchPool.erase(match->GetMatchId());
 }
 
@@ -238,7 +257,7 @@ void MatchSystem::OnPendingMatchCreated(const sptr<PendingMatch>& pendingMatch)
 
     for (int playerId : playerIds)
     {
-        // 일단 삭제하지 않는다.
+        // 일단 loop돌고있기 떄문에 playerMap에서 삭제하지 않고 플래그 값만 세팅.
         playerMap[playerId]->SetMatched();
         playerToPendingMatchMap.emplace(playerId, matchId);
     }
@@ -270,7 +289,7 @@ void MatchSystem::OnPendingMatchReady(const sptr<PendingMatch>& pendingMatch)
         req.add_playerid(playerId);
     }
 
-    Packet packet((int)PacketId_MT_GM::Prefix::GAME, (int)PacketId_MT_GM::Host::HOST_CREATE_REQ);
+    Packet packet((int)PacketId_MT_GM::Prefix::HOST, (int)PacketId_MT_GM::Host::HOST_CREATE_REQ);
     packet.WriteData<Protocol::HostCreateRequest>(req);
 
     // TODO 게임서버로 보내기 실패했다면 예외처리 필요
@@ -301,13 +320,28 @@ void MatchSystem::HandleMatchRequestCommand(sptr<ICommand> p_command)
         return;
     }
 
+    int playerId = command->playerId;
+    if(playerMap.count(playerId))
+    {
+        spdlog::error("[MatchSystem] Player has already requested for match playerId = {}", playerId);
+        return;
+    }
+
+    sptr<MatchWaitPlayer> player = make_shared<MatchWaitPlayer>();
+    player->fromProxy = command->proxy;
+    player->playerId = playerId;
+    playerMap.emplace(playerId, player);
+
+    // 유저에게 응답
     if (sptr<Proxy> proxy = command->proxy.lock())
     {
-        int playerId = command->playerId;
-        sptr<MatchWaitPlayer> player = make_shared<MatchWaitPlayer>();
-        player->fromProxy = proxy;
-        player->playerId = playerId;
-        playerMap.emplace(playerId, player);
+        Protocol::MatchRequestResponse response;
+        response.set_result(true);
+        response.set_playerid(playerId);
+
+        Packet packet((int)PacketId_AG_MT::Prefix::MATCH, (int)PacketId_AG_MT::Match::MATCH_REQ_RES);
+        packet.WriteData<Protocol::MatchRequestResponse>(response);
+        proxy->Send(packet.GetSendBuffer());
     }
 }
 
@@ -320,6 +354,12 @@ void MatchSystem::HandleMatchCancelCommand(sptr<ICommand> p_command)
 
     // 매칭 기다리는 상태였을 수 있으니 Waiting list 에서 삭제
     int playerId = command->playerId;
+
+    if (!playerMap.count(playerId)) {
+        spdlog::error("[MatchSystem] Player info not found for canceling match playerId = {}", playerId);
+    };
+
+    spdlog::debug("Player Left matching pool playerId = {}", playerId);
     playerMap.erase(playerId);
 
     // Pending 매칭이 잡힌 상태였다면
@@ -330,6 +370,18 @@ void MatchSystem::HandleMatchCancelCommand(sptr<ICommand> p_command)
         {
             pendingMatchPool[pendingMatchId]->PlayerCancel(playerId);
         }
+    }
+
+    // 요청 보내온 에이전트서버에 응답
+    Protocol::MatchCancelResponse res;
+    res.set_result(true);
+    res.set_playerid(playerId);
+
+    Packet packet((int)PacketId_AG_MT::Prefix::MATCH, (int)PacketId_AG_MT::Match::MATCH_CANCEL_RES);
+    packet.WriteData<Protocol::MatchCancelResponse>(res);
+    if (sptr<Proxy> proxy = command->proxy.lock())
+    {
+        proxy->Send(packet.GetSendBuffer());
     }
 }
 
@@ -381,7 +433,7 @@ void MatchSystem::HandleHostCreatedCommand(sptr<ICommand> paramCommand)
     {
         return;
     }
-    
+
     int matchId = command->matchId;
     spdlog::debug("[MatchSystem] Host created for matchId = {}", matchId);
 

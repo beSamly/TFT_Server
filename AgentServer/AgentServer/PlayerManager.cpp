@@ -5,7 +5,6 @@
 void PlayerManager::AddPlayer(sptr<ClientSession> client)
 {
     WRITE_LOCK;
-    client->GetPlayer()->playerId = tempPlayerId;
     clientMap->emplace(tempPlayerId, client);
     tempPlayerId++;
     return;

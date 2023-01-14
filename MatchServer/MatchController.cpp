@@ -26,15 +26,6 @@ void MatchController::HandleMatchReq(sptr<Proxy>& proxy, BYTE* buffer, int32 len
 
     int playerId = pkt.playerid();
 
-    // 유저에게 응답
-    Protocol::MatchRequestResponse response;
-    response.set_result(true);
-    response.set_playerid(playerId);
-
-    Packet packet((int)PacketId_AG_MT::Prefix::MATCH, (int)PacketId_AG_MT::Match::MATCH_REQ_RES);
-    packet.WriteData<Protocol::MatchRequestResponse>(response);
-    proxy->Send(packet.GetSendBuffer());
-
     // 매칭 시스템에 요청
     sptr<N2M::MatchRequestCommand> command = make_shared<N2M::MatchRequestCommand>(proxy, playerId);
     matchSystem->PushCommand(command);
@@ -51,15 +42,6 @@ void MatchController::HandleMatchCancelReq(sptr<Proxy>& proxy, BYTE* buffer, int
     // 매칭 시스템에 요청
     sptr<N2M::MatchCancelCommand> command = make_shared<N2M::MatchCancelCommand>(proxy, playerId);
     matchSystem->PushCommand(command);
-
-     // 유저에게 응답 todo MatchSystem에서 완전히 삭제된 후에 응답을 줘야할 것 같다.
-    Protocol::MatchCancelResponse res;
-    res.set_result(true);
-    res.set_playerid(playerId);
-
-    Packet packet((int)PacketId_AG_MT::Prefix::MATCH, (int)PacketId_AG_MT::Match::MATCH_CANCEL_RES);
-    packet.WriteData<Protocol::MatchCancelResponse>(res);
-    proxy->Send(packet.GetSendBuffer());
 }
 
 void MatchController::HandleMatchAcceptReq(sptr<Proxy>& proxy, BYTE* buffer, int32 len) {

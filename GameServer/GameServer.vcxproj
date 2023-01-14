@@ -141,7 +141,7 @@
     <ClInclude Include="ClientPacketController.h" />
     <ClInclude Include="ClientSession.h" />
     <ClInclude Include="Command.h" />
-    <ClInclude Include="InGameCommandHandler.h" />
+    <ClInclude Include="GameHostCommandHandler.h" />
     <ClInclude Include="DataSystem.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="FieldMap.h" />
@@ -194,7 +194,7 @@
     <ClCompile Include="ClientPacketController.cpp" />
     <ClCompile Include="ClientSession.cpp" />
     <ClCompile Include="Command.cpp" />
-    <ClCompile Include="InGameCommandHandler.cpp" />
+    <ClCompile Include="GameHostCommandHandler.cpp" />
     <ClCompile Include="DataSystem.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="FieldMap.cpp" />

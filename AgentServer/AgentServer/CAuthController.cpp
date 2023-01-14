@@ -24,7 +24,7 @@ void CAuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buf
     if (pkt.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
         return;
 
-    auto email = pkt.email();
+    string email = pkt.email();
     auto password = pkt.password();
     auto w_email = wstring(email.begin(), email.end());
 
@@ -42,16 +42,26 @@ void CAuthController::HandleLoginRequest(sptr<ClientSession>& session, BYTE* buf
     // auto accountId = account->GetAccountId();
     // PlayerRef player = MakeShared<Player>(accountId);
 
-    // Player 세팅
+    bool result = [&](void) -> bool
+    {
+        std::hash<std::string> hasher;
+        size_t hashed = hasher(email);
+        int playerId = hashed;
 
-    sptr<Player> player = std::make_shared<Player>();
-    session->SetPlayer(player);
+        if (playerManager->FindPlayer(playerId))
+        {
+            return false;
+        }
 
-    playerManager->AddPlayer(session);
+        sptr<Player> player = std::make_shared<Player>();
+        player->playerId = playerId;
+        session->SetPlayer(player);
+        playerManager->AddPlayer(session);
+    }();
 
     // Response 보내기
     Protocol::LoginResponse response;
-    response.set_result(true);
+    response.set_result(result);
 
     Packet packet((int)PacketId_CL_AG::Prefix::AUTH, (int)PacketId_CL_AG::Auth::LOGIN_RES);
     packet.WriteData<Protocol::LoginResponse>(response);

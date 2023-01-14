@@ -63,7 +63,7 @@ void GameHost::ProcessCommand()
     {
         sptr<ICommand> command = copiedCommandQueue.front();
 
-        inGameCommandHandler.ProcessCommand(*this, command);
+        gameHostCommandHandler.ProcessCommand(*this, command);
 
         copiedCommandQueue.pop();
     }

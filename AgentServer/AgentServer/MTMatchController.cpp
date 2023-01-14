@@ -54,6 +54,10 @@ void MTMatchController::HandlePendingMatchCreatedSend(sptr<Proxy>& session, BYTE
         packet.WriteData();
         client->Send(packet.GetSendBuffer());
     }
+    else
+    {
+        spdlog::debug("[MTMatchController] HandlePendingMatchCreatedSend playerId {} not found", playerId);
+    }
 }
 
 void MTMatchController::HandlePendingMatchCanceledSend(sptr<Proxy>& session, BYTE* buffer, int32 len)
@@ -69,6 +73,10 @@ void MTMatchController::HandlePendingMatchCanceledSend(sptr<Proxy>& session, BYT
         Packet packet((int)PacketId_CL_AG::Prefix::MATCH, (int)PacketId_CL_AG::Match::PENDING_MATCH_CANCELED_SEND);
         packet.WriteData();
         client->Send(packet.GetSendBuffer());
+    }
+    else
+    {
+        spdlog::debug("[MTMatchController] HandlePendingMatchCanceledSend playerId {} not found", playerId);
     }
 }
 
@@ -86,6 +94,10 @@ void MTMatchController::HandleMatchCreatedSend(sptr<Proxy>& session, BYTE* buffe
         Packet packet((int)PacketId_CL_AG::Prefix::MATCH, (int)PacketId_CL_AG::Match::MATCH_CREATED_SEND);
         packet.WriteData<Protocol::MatchCreatedSend>(res);
         client->Send(packet.GetSendBuffer());
+    }
+    else
+    {
+        spdlog::debug("[MTMatchController] HandleMatchCreatedSend playerId {} not found", playerId);
     }
 }
 
@@ -106,5 +118,10 @@ void MTMatchController::HandleMatchCancelRes(sptr<Proxy>& session, BYTE* buffer,
         Packet packet((int)PacketId_CL_AG::Prefix::MATCH, (int)PacketId_CL_AG::Match::MATCH_CANCEL_RES);
         packet.WriteData<Protocol::MatchCancelResponse>(res);
         client->Send(packet.GetSendBuffer());
+        spdlog::debug("HandleMatchCancelRes!! sent reply to client");
+    }
+    else
+    {
+        spdlog::debug("[MTMatchController] HandleMatchCancelRes playerId {} not found", playerId);
     }
 }

@@ -13,6 +13,6 @@ using std::map;
 class ClientPacketController : public IPacketController
 {
 public:
-    ClientPacketController(sptr<DataSystem> dataSystem, sptr<GameSystem> gameSystem);
+    ClientPacketController(sptr<DataSystem> dataSystem, sptr<GameSystem> gameSystem, sptr<ProxyManager> proxyManager);
     ~ClientPacketController();
 };

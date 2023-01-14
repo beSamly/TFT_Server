@@ -8,7 +8,7 @@
 #include "InGameMatchPool.h"
 #include "IInGameEvent.h"
 #include "InGameEventHandler.h"
-#include "InGameCommandHandler.h"
+#include "GameHostCommandHandler.h"
 
 using Command::ICommand;
 
@@ -19,7 +19,7 @@ private:
 	sptr<IGameState> currentState;
 	queue<sptr<ICommand>> commandQueue;
 	queue<sptr<IInGameEvent>> eventQueue;;
-	InGameCommandHandler inGameCommandHandler;
+	GameHostCommandHandler gameHostCommandHandler;
 	InGameEventHandler eventHandler;
 	int matchId = 0;
 	vector<int> vecPlayerId;

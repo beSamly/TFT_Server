@@ -191,7 +191,7 @@
     <ClInclude Include="Command.h">
       <Filter>Source Files\GameSystem\Command</Filter>
     </ClInclude>
-    <ClInclude Include="InGameCommandHandler.h">
+    <ClInclude Include="GameHostCommandHandler.h">
       <Filter>Source Files\GameSystem\Command</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
@@ -340,7 +340,7 @@
     <ClCompile Include="Command.cpp">
       <Filter>Source Files\GameSystem\Command</Filter>
     </ClCompile>
-    <ClCompile Include="InGameCommandHandler.cpp">
+    <ClCompile Include="GameHostCommandHandler.cpp">
       <Filter>Source Files\GameSystem\Command</Filter>
     </ClCompile>
     <ClCompile Include="PlayerManager.cpp">

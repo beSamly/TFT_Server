@@ -19,6 +19,7 @@ private:
 
 public:
     bool isAuthenticated = false;
+    int tempClientId = 0;
     sptr<Player> GetPlayer();
     void SetPlayer(sptr<Player> player);
 };

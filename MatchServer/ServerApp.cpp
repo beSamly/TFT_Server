@@ -12,8 +12,8 @@ ServerApp::ServerApp()
 {
     threadSystem = make_shared<ThreadSystem>();
     dataSystem = make_shared<DataSystem>();
-    networkSystem = make_shared<NetworkSystem>(dataSystem, matchSystem);
     matchSystem = make_shared<MatchSystem>();
+    networkSystem = make_shared<NetworkSystem>(dataSystem, matchSystem);
     matchSystem->SetProxyManager(networkSystem->GetProxyManager());
 }
 
@@ -39,13 +39,15 @@ void ServerApp::StartNetworkSystem()
             });
     }
 
-    networkSystem->StartProxy();
-    threadSystem->Launch([&]() { networkSystem->RunProxyIoContext(); });
+    threadSystem->Launch(
+        [&]()
+        {
+            networkSystem->StartProxy();
+            networkSystem->RunProxyIoContext();
+        });
 }
 
 void ServerApp::StartMatchSystem()
 {
     threadSystem->Launch([&]() { matchSystem->Run(); });
 }
-
-

@@ -87,7 +87,7 @@ public:
 	void SetHandleRecv(function<void(shared_ptr<Proxy>, BYTE*, int32)> callback) { HandleRecv = callback; };
 	void SetOnConnect(function<void(shared_ptr<Proxy>, SERVER_TYPE)> callback) { OnConnectCallback = callback; };
 
-	void DoReconnect();
+	bool DoReconnect();
 
 private:
 	void OnConnect(shared_ptr<AsioSession> session);

@@ -49,7 +49,10 @@ void ServerApp::StartNetworkSystem()
             });
     }
 
-    networkSystem->StartProxy();
-    threadSystem->Launch([&]() { networkSystem->RunProxyIoContext(); });
-    threadSystem->Launch([&]() { networkSystem->Run(); });
+    threadSystem->Launch(
+        [&]()
+        {
+            networkSystem->StartProxy();
+            networkSystem->RunProxyIoContext();
+        });
 }

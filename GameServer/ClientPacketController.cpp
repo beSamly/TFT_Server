@@ -10,10 +10,10 @@
 #include "PacketId_Common.h"
 #include "GameSystem.h"
 
-ClientPacketController::ClientPacketController(sptr<DataSystem> dataSystem, sptr<GameSystem> gameSystem)
+ClientPacketController::ClientPacketController(sptr<DataSystem> dataSystem, sptr<GameSystem> gameSystem, sptr<ProxyManager> proxyManager)
 {
     IPacketController::AddController((int)PacketId_Common::Prefix::AUTH,
-                                     make_shared<AuthController>(gameSystem, dataSystem->GetTempClientManager()));
+                                     make_shared<AuthController>(gameSystem, dataSystem->GetTempClientManager(), proxyManager));
 }
 
 ClientPacketController::~ClientPacketController() {}

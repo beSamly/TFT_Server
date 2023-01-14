@@ -20,8 +20,9 @@ NetworkSystem::NetworkSystem(sptr<DataSystem> paramDataSystem, sptr<GameSystem> 
     context = make_shared<asio::io_context>();
     socketServer = make_shared<SocketServer>(context, PORT);
     proxyManager = make_shared<ProxyManager>(SERVER_TYPE::GAME);
-    clientPacketController = make_unique<ClientPacketController>(dataSystem, gameSystem);
+    clientPacketController = make_unique<ClientPacketController>(dataSystem, gameSystem, proxyManager);
     playerPacketController = make_unique<PlayerPacketController>(gameSystem);
+    matchServerPacketController = make_unique<MatchServerPacketController>(gameSystem);
 }
 
 void NetworkSystem::StartSocketServer()
@@ -42,7 +43,6 @@ void NetworkSystem::StartProxy()
     proxyManager->SetHandleRecv([&](sptr<Proxy> session, BYTE* buffer, int len)
                                 { HandleProxyRecv(session, buffer, len); });
     proxyManager->SetOnConnect([&](sptr<Proxy> proxy, SERVER_TYPE type) { OnProxyConnect(proxy, type); });
-    proxyManager->ConnectToGameServer();
 }
 
 void NetworkSystem::RunProxyIoContext() { proxyManager->RunIoContext(); }

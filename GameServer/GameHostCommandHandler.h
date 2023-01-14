@@ -5,15 +5,15 @@ class GameHost;
 
 using namespace Command;
 
-class InGameCommandHandler
+class GameHostCommandHandler
 {
 private:
 	map<int, function<void(GameHost& host, sptr<ICommand>)>> commandHandler;
 
-	//map<int, sptr<IInGameEvent>> InGameCommandHandlerMap;
+	//map<int, sptr<IInGameEvent>> GameHostCommandHandlerMap;
 
 public:
-	InGameCommandHandler();
+	GameHostCommandHandler();
 	void ProcessCommand(GameHost& host, sptr<ICommand> command);
 private:
 	/*  void HandleBuyCommand(GameHost& host, sptr<ICommand> command);*/
