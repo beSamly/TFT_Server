@@ -4,12 +4,14 @@
 class ChampShop
 {
 private:
-    map<int, ChampData> champMap;
+	map<int, ChampData> mapChampData;
 
 public:
-    ChampShop();
-    void AddChamp(int uid, ChampData data);
-    void Remove(int uid);
-    void Empty();
-    bool Exist(int uid);
+	ChampShop();
+	void AddChamp(int uid, ChampData data);
+	void Remove(int uid);
+	void Clear();
+	bool Exist(int uid);
+	ChampData Find(int uid);
+	map<int, ChampData>& GetChampData() { return mapChampData; }
 };

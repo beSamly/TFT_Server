@@ -78,6 +78,9 @@
     <Filter Include="Source Files\NetworkSystem\PacketController\Player\Controller">
       <UniqueIdentifier>{b46f8fbb-86eb-45b4-8e9a-7cf56729087d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameSystem\Debug">
+      <UniqueIdentifier>{edd49489-39ec-4129-b966-11e695da3165}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -239,6 +242,18 @@
     <ClInclude Include="DebugController.h">
       <Filter>Source Files\NetworkSystem\PacketController\Player\Controller</Filter>
     </ClInclude>
+    <ClInclude Include="DebugInputHandler.h">
+      <Filter>Source Files\GameSystem\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="PreRoundStartState.h">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="PreStandByState.h">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="RoundEndedState.h">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -390,6 +405,15 @@
     </ClCompile>
     <ClCompile Include="DebugController.cpp">
       <Filter>Source Files\NetworkSystem\PacketController\Player\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="PreRoundStartState.cpp">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="PreStandByState.cpp">
+      <Filter>Source Files\GameSystem\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="RoundEndedState.cpp">
+      <Filter>Source Files\GameSystem\GameState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -3,10 +3,15 @@
 
 ChampShop::ChampShop() {}
 
-void ChampShop::AddChamp(int uid, ChampData data) { champMap.emplace(uid, data); }
+void ChampShop::AddChamp(int uid, ChampData data) { mapChampData.emplace(uid, data); }
 
-void ChampShop::Remove(int uid) { champMap.erase(uid); }
+void ChampShop::Remove(int uid) { mapChampData.erase(uid); }
 
-void ChampShop::Empty() { champMap.clear(); }
+void ChampShop::Clear() { mapChampData.clear(); }
 
-bool ChampShop::Exist(int uid) { return champMap.count(uid); }
+bool ChampShop::Exist(int uid) { return mapChampData.count(uid); }
+
+ChampData ChampShop::Find(int uid)
+{
+	return mapChampData[uid];
+}

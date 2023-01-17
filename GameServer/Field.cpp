@@ -3,30 +3,56 @@
 
 Field::Field()
 {
-    // field data 세팅
-    int rowCount = 4;
-    int indexCount = 8;
+	// field data 세팅
+	int rowCount = 4;
+	int indexCount = 8;
 
-    for (int i = 1; i <= rowCount; i++)
-    {
-        for (int j = 1; j <= indexCount; j++)
-        {
-            fieldMap.emplace((i * 10) + j, nullptr);
-        }
-    }
+	for (int i = 1; i <= rowCount; i++)
+	{
+		for (int j = 1; j <= indexCount; j++)
+		{
+			mapFieldData.emplace((i * 10) + j, nullptr);
+		}
+	}
 }
 
 void Field::Locate(int fieldIndex, sptr<Champion> champ)
 {
 
-    if (fieldMap[fieldIndex] != nullptr)
-    {
-        // Swap
-    }
-    else
-    {
-        fieldMap[fieldIndex] = champ;
-    }
+	if (mapFieldData[fieldIndex] != nullptr)
+	{
+		// Swap
+	}
+	else
+	{
+		mapFieldData[fieldIndex] = champ;
+	}
 }
 
-void Field::Remove(int fieldIndex) { fieldMap[fieldIndex] = nullptr; }
+void Field::Remove(int fieldIndex) { mapFieldData[fieldIndex] = nullptr; }
+
+void Field::Remove(sptr<Champion> champion)
+{
+	for (const auto& [fieldIndex, champ] : mapFieldData)
+	{
+		if (champ->GetUid() == champion->GetUid())
+		{
+			mapFieldData.erase(fieldIndex);
+
+		}
+	}
+}
+
+sptr<Champion> Field::FindChampionByUid(int champUid)
+{
+	for (const auto& [fieldIndex, champ] : mapFieldData)
+	{
+		if (champ->GetUid() == champUid)
+		{
+			return champ;
+		}
+
+	}
+
+	return nullptr;
+}

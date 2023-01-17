@@ -8,21 +8,27 @@
 class Champion
 {
 public:
-    Champion(){};
-    int star;
-    int uid;
-    void Update(float deltaTime); // Champion 클래스에서 update하기엔 맵데이터도 다른 champ데이터도 없다..
+	Champion() {};
+
+private:
+	int star;
+	int uid;
 
 public:
-    /* 데이터 세팅 */
-    void SetBaseStat(ChampStatData statData) { stat.SetBaseStat(statData); };
-    void SetBaseAttackSkill(vector<SkillData> p_skill) { skill.SetBaseAttackSkill(p_skill); }
-    void SetSkills(vector<SkillData> p_skill) { skill.SetSkills(p_skill); }
+	int GetUid() { return uid; }
+	int GetStar() { return star; }
+	void Update(float deltaTime); // Champion 클래스에서 update하기엔 맵데이터도 다른 champ데이터도 없다..
 
 public:
-    TransformController transform;
-    StatController stat;
-    StateController state;
-    SkillController skill;
-    OperationController operation;
+	/* 데이터 세팅 */
+	void SetBaseStat(ChampStatData statData) { stat.SetBaseStat(statData); };
+	void SetBaseAttackSkill(vector<SkillData> p_skill) { skill.SetBaseAttackSkill(p_skill); }
+	void SetSkills(vector<SkillData> p_skill) { skill.SetSkills(p_skill); }
+
+public:
+	TransformController transform;
+	StatController stat;
+	StateController state;
+	SkillController skill;
+	OperationController operation;
 };

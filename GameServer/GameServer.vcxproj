@@ -142,6 +142,7 @@
     <ClInclude Include="ClientSession.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="DebugController.h" />
+    <ClInclude Include="DebugInputHandler.h" />
     <ClInclude Include="GameHostCommandHandler.h" />
     <ClInclude Include="DataSystem.h" />
     <ClInclude Include="Field.h" />
@@ -170,6 +171,9 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="PlayerPacketController.h" />
+    <ClInclude Include="PreRoundStartState.h" />
+    <ClInclude Include="PreStandByState.h" />
+    <ClInclude Include="RoundEndedState.h" />
     <ClInclude Include="RoundStartedState.h" />
     <ClInclude Include="ServerApp.h" />
     <ClInclude Include="ShopProbability.h" />
@@ -223,6 +227,9 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="PlayerPacketController.cpp" />
+    <ClCompile Include="PreRoundStartState.cpp" />
+    <ClCompile Include="PreStandByState.cpp" />
+    <ClCompile Include="RoundEndedState.cpp" />
     <ClCompile Include="RoundStartedState.cpp" />
     <ClCompile Include="ServerApp.cpp" />
     <ClCompile Include="ShopProbability.cpp" />

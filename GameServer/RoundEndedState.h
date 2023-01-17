@@ -1,7 +1,7 @@
 #pragma once
 #include "IGameState.h"
 
-class RoundStartedState : public IGameState
+class RoundEndedState : public IGameState
 {
 
 public:
@@ -9,8 +9,8 @@ public:
 	virtual void Update(GameHost& gameHost, float deltaTime) override;
 
 private:
-	int MAX_DURATION = 100000;
-	bool isMatchCreated = false;
+	int DURATION = 2000;
+	bool isMatchReset = false;
 
 private:
 	void CreateMatch(GameHost& gameHost);

@@ -4,11 +4,13 @@
 class Field
 {
 private:
-    map<int, sptr<Champion>> fieldMap;
+	map<int, sptr<Champion>> mapFieldData;
 
 public:
-    Field();
-    void Locate(int fieldIndex, sptr<Champion> champ);
-    void Remove(int fieldIndex);
-    map<int, sptr<Champion>> GetFieldData() { return fieldMap; };
+	Field();
+	map<int, sptr<Champion>>& GetFieldData() { return mapFieldData; }
+	void Locate(int fieldIndex, sptr<Champion> champ);
+	void Remove(int fieldIndex);
+	void Remove(sptr<Champion> champion);
+	sptr<Champion> FindChampionByUid(int champUid);
 };
